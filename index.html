@@ -2,7 +2,8 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 <title>@NCB_STUDIO</title>
 
 <style>
@@ -13,15 +14,23 @@
     font-family:Arial,sans-serif;
 }
 
-body{
+html,body{
     background:#080808;
     color:#fff;
-    min-height:100vh;
+    min-height:100%;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+button,input{
+    font-family:Arial,sans-serif;
 }
 
 button{
     border:0;
-    outline:0;
+    outline:none;
 }
 
 .header{
@@ -56,7 +65,7 @@ button{
     outline:none;
     border-radius:22px;
     background:#222;
-    color:white;
+    color:#fff;
     padding:0 18px;
     font-size:15px;
 }
@@ -67,8 +76,8 @@ button{
     border-radius:50%;
     background:#242424;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     font-size:21px;
 }
 
@@ -128,6 +137,39 @@ button{
     font-weight:bold;
 }
 
+/* ================= LIVE ================= */
+
+.live-box{
+    width:100%;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:15px;
+    padding:12px;
+    overflow:hidden;
+}
+
+.live-title{
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:11px;
+}
+
+.live-video{
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.live-video iframe{
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+/* ================= CATEGORY ================= */
+
 .category-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -140,8 +182,8 @@ button{
     border:1px solid #292929;
     border-radius:14px;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     text-align:center;
     cursor:pointer;
     transition:.2s;
@@ -160,6 +202,8 @@ button{
     font-size:13px;
     margin-top:6px;
 }
+
+/* ================= MOVIES ================= */
 
 .movie-grid{
     display:grid;
@@ -185,7 +229,7 @@ button{
     aspect-ratio:16/9;
     object-fit:cover;
     display:block;
-    background:#222;
+    background:#000;
 }
 
 .movie-info{
@@ -203,7 +247,28 @@ button{
     font-size:13px;
 }
 
-/* PAGE */
+/* ================= UPDATE ================= */
+
+.update-poster{
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#777;
+    font-size:18px;
+    font-weight:bold;
+    letter-spacing:1px;
+}
+
+.update-poster span{
+    border:1px solid #444;
+    padding:8px 15px;
+    border-radius:8px;
+}
+
+/* ================= PAGES ================= */
 
 #animationPage,
 #age18Page{
@@ -241,20 +306,20 @@ button{
     cursor:pointer;
 }
 
-/* 18 PAGE */
+/* ================= 18 ================= */
 
 .age-badge{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
     width:70px;
     height:70px;
     border-radius:50%;
-    background:#1b1b1b;
+    background:#151515;
     border:2px solid #555;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:0 auto 10px;
     font-size:25px;
     font-weight:bold;
-    margin-bottom:10px;
 }
 
 .vtk-card{
@@ -265,14 +330,14 @@ button{
     position:absolute;
     top:8px;
     left:8px;
-    background:rgba(0,0,0,.85);
+    background:rgba(0,0,0,.9);
     border-radius:7px;
     padding:5px 8px;
     font-size:12px;
     z-index:2;
 }
 
-/* VIDEO MODAL */
+/* ================= PLAYER ================= */
 
 #movieModal{
     display:none;
@@ -312,12 +377,6 @@ button{
     border:0;
 }
 
-.video-frame video{
-    width:100%;
-    height:100%;
-    background:#000;
-}
-
 .close-player{
     position:fixed;
     top:15px;
@@ -339,6 +398,7 @@ button{
 }
 
 @media(max-width:600px){
+
     .header{
         padding:0 9px;
         gap:7px;
@@ -378,11 +438,14 @@ button{
     .category{
         min-height:85px;
     }
+
 }
 </style>
 </head>
 
 <body>
+
+<!-- ================= HEADER ================= -->
 
 <header class="header">
 
@@ -402,11 +465,15 @@ button{
 </header>
 
 
-<!-- ================= MAIN PAGE ================= -->
+<!-- ========================================================= -->
+<!-- ======================= TRANG CHỦ ======================= -->
+<!-- ========================================================= -->
 
 <main id="mainPage">
 
 <div class="container">
+
+    <!-- HERO -->
 
     <section class="hero">
 
@@ -416,43 +483,103 @@ button{
         >
 
         <div class="hero-info">
+
             <h1>ONE PIECE (TẬP 997)</h1>
+
             <p>Phim mới cập nhật</p>
+
         </div>
 
     </section>
 
 
-    <h2 class="section-title">Danh mục</h2>
+    <!-- ================= PHÁT TRỰC TIẾP ================= -->
+
+    <h2 class="section-title">
+        PHÁT TRỰC TIẾP
+    </h2>
+
+    <section class="live-box">
+
+        <div class="live-title">
+            🔴 PHÁT TRỰC TIẾP
+        </div>
+
+        <div class="live-video">
+
+            <iframe
+                src="https://www.youtube.com/embed/6C9w2xfZBjY?autoplay=0"
+                title="Phát trực tiếp"
+                allow="autoplay; encrypted-media; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= DANH MỤC ================= -->
+
+    <h2 class="section-title">
+        Danh mục
+    </h2>
 
     <div class="category-grid">
 
-        <div class="category" onclick="openAnimationPage()">
+        <div
+            class="category"
+            onclick="openAnimationPage()"
+        >
+
             <div>
+
                 <h3>🎨 PHIM HOẠT HÌNH</h3>
-                <p>SDF-1 → SDF-3</p>
+
+                <p>
+                    SDF-1 → SDF-3
+                </p>
+
             </div>
+
         </div>
 
 
-        <div class="category" onclick="open18Page()">
+        <div
+            class="category"
+            onclick="open18Page()"
+        >
+
             <div>
+
                 <h3>18</h3>
-                <p>Phim võ thuật VTK-1 → VTK-4</p>
+
+                <p>
+                    VTK-1 → VTK-4
+                </p>
+
             </div>
+
         </div>
 
     </div>
 
 
-    <h2 class="section-title">Phim mới cập nhật</h2>
+    <!-- ================= PHIM MỚI ================= -->
+
+    <h2 class="section-title">
+        Phim mới cập nhật
+    </h2>
 
     <div class="movie-grid">
 
         <div
             class="movie"
             data-title="ONE PIECE TẬP 997"
-            onclick="openYouTubeMovie('bGcVGahgQAA','ONE PIECE (TẬP 997)')"
+            onclick="openYouTubeMovie(
+                'bGcVGahgQAA',
+                'ONE PIECE (TẬP 997)'
+            )"
         >
 
             <img
@@ -462,6 +589,7 @@ button{
             >
 
             <div class="movie-info">
+
                 <div class="movie-title">
                     ONE PIECE (TẬP 997)
                 </div>
@@ -469,6 +597,7 @@ button{
                 <div class="movie-type">
                     Phim mới cập nhật
                 </div>
+
             </div>
 
         </div>
@@ -480,11 +609,18 @@ button{
 </main>
 
 
-<!-- ================= ANIMATION PAGE ================= -->
+<!-- ========================================================= -->
+<!-- ===================== PHIM HOẠT HÌNH ==================== -->
+<!-- ========================================================= -->
 
 <section id="animationPage">
 
-<button class="back-button" onclick="closeAnimationPage()">×</button>
+<button
+    class="back-button"
+    onclick="closeAnimationPage()"
+>
+    ×
+</button>
 
 <div class="container">
 
@@ -501,63 +637,96 @@ button{
     </div>
 
 
-    <div class="movie-grid" style="margin-top:20px;">
+    <div
+        class="movie-grid"
+        style="margin-top:20px;"
+    >
+
+        <!-- SDF-1 -->
 
         <div
             class="movie"
             data-title="SDF-1"
-            onclick="openPlaceholder('SDF-1')"
+            onclick="openYouTubeMovie(
+                'wT0wEIjhHJc',
+                'SDF-1'
+            )"
         >
 
             <img
                 class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
+                src="https://i.ytimg.com/vi/wT0wEIjhHJc/maxresdefault.jpg"
                 alt="SDF-1"
             >
 
             <div class="movie-info">
-                <div class="movie-title">SDF-1</div>
-                <div class="movie-type">Phim hoạt hình</div>
+
+                <div class="movie-title">
+                    SDF-1
+                </div>
+
+                <div class="movie-type">
+                    Phim hoạt hình
+                </div>
+
             </div>
 
         </div>
 
+
+        <!-- SDF-2 -->
 
         <div
             class="movie"
             data-title="SDF-2"
-            onclick="openPlaceholder('SDF-2')"
+            onclick="openYouTubeMovie(
+                'dHAV91nRl8A',
+                'SDF-2'
+            )"
         >
 
             <img
                 class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
+                src="https://i.ytimg.com/vi/dHAV91nRl8A/maxresdefault.jpg"
                 alt="SDF-2"
             >
 
             <div class="movie-info">
-                <div class="movie-title">SDF-2</div>
-                <div class="movie-type">Phim hoạt hình</div>
+
+                <div class="movie-title">
+                    SDF-2
+                </div>
+
+                <div class="movie-type">
+                    Phim hoạt hình
+                </div>
+
             </div>
 
         </div>
 
 
+        <!-- SDF-3 UPDATE -->
+
         <div
             class="movie"
             data-title="SDF-3"
-            onclick="openPlaceholder('SDF-3')"
         >
 
-            <img
-                class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
-                alt="SDF-3"
-            >
+            <div class="update-poster">
+                <span>UPDATE</span>
+            </div>
 
             <div class="movie-info">
-                <div class="movie-title">SDF-3</div>
-                <div class="movie-type">Phim hoạt hình</div>
+
+                <div class="movie-title">
+                    SDF-3
+                </div>
+
+                <div class="movie-type">
+                    Chưa cập nhật
+                </div>
+
             </div>
 
         </div>
@@ -569,17 +738,26 @@ button{
 </section>
 
 
-<!-- ================= 18 PAGE ================= -->
+<!-- ========================================================= -->
+<!-- =========================== 18 ========================== -->
+<!-- ========================================================= -->
 
 <section id="age18Page">
 
-<button class="back-button" onclick="close18Page()">×</button>
+<button
+    class="back-button"
+    onclick="close18Page()"
+>
+    ×
+</button>
 
 <div class="container">
 
     <div class="page-head">
 
-        <div class="age-badge">18</div>
+        <div class="age-badge">
+            18
+        </div>
 
         <div class="page-title">
             PHIM VÕ THUẬT
@@ -593,7 +771,6 @@ button{
 
 
     <div
-        id="vtkList"
         class="movie-grid"
         style="margin-top:20px;"
     >
@@ -603,18 +780,15 @@ button{
         <div
             class="movie vtk-card"
             data-title="VTK-1"
-            onclick="openWebsiteMovie('DAN_LINK_VTK_1','VTK-1')"
         >
 
             <div class="vtk-number">
                 VTK-1
             </div>
 
-            <img
-                class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
-                alt="VTK-1"
-            >
+            <div class="update-poster">
+                <span>UPDATE</span>
+            </div>
 
             <div class="movie-info">
 
@@ -623,7 +797,7 @@ button{
                 </div>
 
                 <div class="movie-type">
-                    Võ thuật
+                    Chưa cập nhật
                 </div>
 
             </div>
@@ -636,18 +810,15 @@ button{
         <div
             class="movie vtk-card"
             data-title="VTK-2"
-            onclick="openWebsiteMovie('DAN_LINK_VTK_2','VTK-2')"
         >
 
             <div class="vtk-number">
                 VTK-2
             </div>
 
-            <img
-                class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
-                alt="VTK-2"
-            >
+            <div class="update-poster">
+                <span>UPDATE</span>
+            </div>
 
             <div class="movie-info">
 
@@ -656,7 +827,7 @@ button{
                 </div>
 
                 <div class="movie-type">
-                    Võ thuật
+                    Chưa cập nhật
                 </div>
 
             </div>
@@ -669,18 +840,15 @@ button{
         <div
             class="movie vtk-card"
             data-title="VTK-3"
-            onclick="openWebsiteMovie('DAN_LINK_VTK_3','VTK-3')"
         >
 
             <div class="vtk-number">
                 VTK-3
             </div>
 
-            <img
-                class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
-                alt="VTK-3"
-            >
+            <div class="update-poster">
+                <span>UPDATE</span>
+            </div>
 
             <div class="movie-info">
 
@@ -689,7 +857,7 @@ button{
                 </div>
 
                 <div class="movie-type">
-                    Võ thuật
+                    Chưa cập nhật
                 </div>
 
             </div>
@@ -702,18 +870,15 @@ button{
         <div
             class="movie vtk-card"
             data-title="VTK-4"
-            onclick="openWebsiteMovie('DAN_LINK_VTK_4','VTK-4')"
         >
 
             <div class="vtk-number">
                 VTK-4
             </div>
 
-            <img
-                class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
-                alt="VTK-4"
-            >
+            <div class="update-poster">
+                <span>UPDATE</span>
+            </div>
 
             <div class="movie-info">
 
@@ -722,7 +887,7 @@ button{
                 </div>
 
                 <div class="movie-type">
-                    Võ thuật
+                    Chưa cập nhật
                 </div>
 
             </div>
@@ -736,7 +901,9 @@ button{
 </section>
 
 
-<!-- ================= PLAYER ================= -->
+<!-- ========================================================= -->
+<!-- ======================== PLAYER ========================== -->
+<!-- ========================================================= -->
 
 <div id="movieModal">
 
@@ -760,7 +927,7 @@ button{
         ></div>
 
         <div class="player-note">
-            Nhấn nút phát trên trình phát để xem video.
+            Nhấn phát để xem video.
         </div>
 
     </div>
@@ -770,18 +937,32 @@ button{
 
 <script>
 
-const DEFAULT_VIDEO_ID = "bGcVGahgQAA";
+/* ========================================================= */
+/* ======================= ELEMENTS ======================== */
+/* ========================================================= */
 
-const mainPage = document.getElementById("mainPage");
-const animationPage = document.getElementById("animationPage");
-const age18Page = document.getElementById("age18Page");
+const mainPage =
+    document.getElementById("mainPage");
 
-const movieModal = document.getElementById("movieModal");
-const playerTitle = document.getElementById("playerTitle");
-const videoFrame = document.getElementById("videoFrame");
+const animationPage =
+    document.getElementById("animationPage");
+
+const age18Page =
+    document.getElementById("age18Page");
+
+const movieModal =
+    document.getElementById("movieModal");
+
+const playerTitle =
+    document.getElementById("playerTitle");
+
+const videoFrame =
+    document.getElementById("videoFrame");
 
 
-/* ================= SEARCH ================= */
+/* ========================================================= */
+/* ========================= SEARCH ========================= */
+/* ========================================================= */
 
 function searchMovies(){
 
@@ -802,9 +983,13 @@ function searchMovies(){
             .toLowerCase();
 
         if(title.includes(input)){
+
             movie.style.display = "";
+
         }else{
+
             movie.style.display = "none";
+
         }
 
     });
@@ -812,29 +997,36 @@ function searchMovies(){
 }
 
 
-/* ================= MAIN ================= */
+/* ========================================================= */
+/* ========================= MAIN =========================== */
+/* ========================================================= */
 
 function showMain(){
 
     mainPage.style.display = "block";
+
     animationPage.style.display = "none";
+
     age18Page.style.display = "none";
+
+    window.scrollTo(0,0);
 
 }
 
 
-/* ================= ANIMATION ================= */
+/* ========================================================= */
+/* ====================== ANIMATION ========================= */
+/* ========================================================= */
 
 function openAnimationPage(){
 
     mainPage.style.display = "none";
+
     animationPage.style.display = "block";
+
     age18Page.style.display = "none";
 
-    window.scrollTo({
-        top:0,
-        behavior:"instant"
-    });
+    window.scrollTo(0,0);
 
 }
 
@@ -846,18 +1038,19 @@ function closeAnimationPage(){
 }
 
 
-/* ================= 18 ================= */
+/* ========================================================= */
+/* =========================== 18 =========================== */
+/* ========================================================= */
 
 function open18Page(){
 
     mainPage.style.display = "none";
+
     animationPage.style.display = "none";
+
     age18Page.style.display = "block";
 
-    window.scrollTo({
-        top:0,
-        behavior:"instant"
-    });
+    window.scrollTo(0,0);
 
 }
 
@@ -869,7 +1062,9 @@ function close18Page(){
 }
 
 
-/* ================= YOUTUBE PLAYER ================= */
+/* ========================================================= */
+/* ===================== YOUTUBE PLAYER ===================== */
+/* ========================================================= */
 
 function openYouTubeMovie(videoId,title){
 
@@ -878,6 +1073,7 @@ function openYouTubeMovie(videoId,title){
     videoFrame.innerHTML = `
         <iframe
             src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+            title="${title}"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen>
         </iframe>
@@ -888,94 +1084,9 @@ function openYouTubeMovie(videoId,title){
 }
 
 
-/* ================= WEBSITE VIDEO ================= */
-
-function openWebsiteMovie(url,title){
-
-    if(
-        !url ||
-        url === "https://xhamster.com/videos/stop-jerking-off-to-soulless-pixels-stepbro-fuck-your-stepsister-stepsisters-porn-addiction-xhVl3hF?utm_source=ext_shared&utm_medium=referral&utm_campaign=link" ||
-        url === "https://xhamster.com/videos/jav-bondage-hardcore-porn-xhWQqU2?utm_source=ext_shared&utm_medium=referral&utm_campaign=link" ||
-        url === "https://xhamster.com/videos/luna-evans-homemade-pov-anal-tight-ass-stretched-until-i-cum-on-it-xh759qt?utm_source=ext_shared&utm_medium=referral&utm_campaign=link" ||
-        url === "https://xhamster.com/videos/dripping-creampies-compilation-xhPTh4B?utm_source=ext_shared&utm_medium=referral&utm_campaign=link"
-    ){
-
-        alert(
-            "Bạn chưa nhập link website video cho " +
-            title +
-            ". Hãy thay DAN_LINK_VTK bằng URL video của bạn."
-        );
-
-        return;
-    }
-
-
-    playerTitle.textContent = title;
-
-
-    /*
-      Nếu link là file MP4/WEBM trực tiếp,
-      trình duyệt sẽ phát ngay trong website.
-    */
-
-    const lowerUrl = url.toLowerCase();
-
-    if(
-        lowerUrl.includes(".mp4") ||
-        lowerUrl.includes(".webm") ||
-        lowerUrl.includes(".ogg") ||
-        lowerUrl.includes(".m4v")
-    ){
-
-        videoFrame.innerHTML = `
-            <video
-                controls
-                autoplay
-                playsinline
-                preload="metadata"
-            >
-                <source src="${url}">
-                Trình duyệt không hỗ trợ video này.
-            </video>
-        `;
-
-    }else{
-
-        /*
-          Nếu URL là trang web có trình phát,
-          mở trang đó trong iframe.
-        */
-
-        videoFrame.innerHTML = `
-            <iframe
-                src="${url}"
-                allow="autoplay; fullscreen; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        `;
-
-    }
-
-
-    movieModal.style.display = "flex";
-
-}
-
-
-/* ================= PLACEHOLDER ================= */
-
-function openPlaceholder(title){
-
-    alert(
-        title +
-        " chưa có link video. " +
-        "Bạn có thể thêm link website video vào phần cấu hình."
-    );
-
-}
-
-
-/* ================= CLOSE PLAYER ================= */
+/* ========================================================= */
+/* ====================== CLOSE PLAYER ====================== */
+/* ========================================================= */
 
 function closeMovie(){
 
@@ -988,7 +1099,9 @@ function closeMovie(){
 }
 
 
-/* ================= ESC ================= */
+/* ========================================================= */
+/* ======================= ESC KEY ========================== */
+/* ========================================================= */
 
 document.addEventListener(
     "keydown",
@@ -1004,7 +1117,9 @@ document.addEventListener(
 );
 
 
-/* ================= CLICK OUTSIDE ================= */
+/* ========================================================= */
+/* =================== CLICK OUTSIDE ======================== */
+/* ========================================================= */
 
 movieModal.addEventListener(
     "click",
@@ -1022,4 +1137,4 @@ movieModal.addEventListener(
 </script>
 
 </body>
-</html>
+    </html>
