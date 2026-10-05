@@ -905,6 +905,8 @@ main{
 
 <main>
 
+<!-- ================= TRANG CHỦ ================= -->
+
 <section id="homePage" class="page active">
 
     <h2 class="page-title">
@@ -973,6 +975,8 @@ main{
 
     <div class="movie-grid">
 
+        <!-- ONE PIECE -->
+
         <div
             class="movie-card"
             onclick="openMovie('ONE PIECE (TẬP 997)','bGcVGahgQAA')"
@@ -990,6 +994,8 @@ main{
             </div>
 
         </div>
+
+        <!-- TRAI NGHÈO CỨU MỸ NHÂN -->
 
         <div
             class="movie-card vip-card"
@@ -1019,6 +1025,7 @@ main{
                 >
 
                 10
+
             </div>
 
             <div class="movie-name">
@@ -1026,6 +1033,8 @@ main{
             </div>
 
         </div>
+
+        <!-- DORAEMON -->
 
         <div
             class="movie-card vip-card"
@@ -1055,6 +1064,7 @@ main{
                 >
 
                 5
+
             </div>
 
             <div class="movie-name">
@@ -1062,6 +1072,8 @@ main{
             </div>
 
         </div>
+
+        <!-- CHILL -->
 
         <div
             class="movie-card vip-card"
@@ -1091,6 +1103,7 @@ main{
                 >
 
                 19
+
             </div>
 
             <div class="movie-name">
@@ -1102,6 +1115,8 @@ main{
     </div>
 
 </section>
+
+<!-- ================= HOẠT HÌNH ================= -->
 
 <section id="animationPage" class="page">
 
@@ -1177,10 +1192,7 @@ main{
 
         <div
             class="movie-card"
-            onclick="openMovie(
-                'DORAEMON (TẬP 17)',
-                '1f31UHe8Pxw'
-            )"
+            onclick="openMovie('DORAEMON (TẬP 17)','1f31UHe8Pxw')"
             data-name="doraemon tập 17"
         >
 
@@ -1198,10 +1210,7 @@ main{
 
         <div
             class="movie-card"
-            onclick="openMovie(
-                'DORAEMON #33',
-                'l1KC_W-JlFE'
-            )"
+            onclick="openMovie('DORAEMON #33','l1KC_W-JlFE')"
             data-name="doraemon 33"
         >
 
@@ -1219,10 +1228,7 @@ main{
 
         <div
             class="movie-card"
-            onclick="openMovie(
-                'CONAN 1071',
-                'AaQ-XUENnZY'
-            )"
+            onclick="openMovie('CONAN 1071','AaQ-XUENnZY')"
             data-name="conan 1071"
         >
 
@@ -1240,10 +1246,7 @@ main{
 
         <div
             class="movie-card"
-            onclick="openMovie(
-                'TRUYỆN CỦA ĐỐM_1',
-                'LuEeAUVFtHA'
-            )"
+            onclick="openMovie('TRUYỆN CỦA ĐỐM_1','LuEeAUVFtHA')"
             data-name="truyện của đốm 1"
         >
 
@@ -1287,6 +1290,7 @@ main{
                 >
 
                 5
+
             </div>
 
             <div class="movie-name">
@@ -1310,6 +1314,8 @@ main{
     </div>
 
 </section>
+
+<!-- ================= 18 ================= -->
 
 <section id="martialPage" class="page">
 
@@ -1396,6 +1402,7 @@ main{
                 >
 
                 10
+
             </div>
 
             <div class="movie-name">
@@ -1420,6 +1427,8 @@ main{
 
 </section>
 
+<!-- ================= NHẠC ================= -->
+
 <section id="musicPage" class="page">
 
     <div
@@ -1437,10 +1446,7 @@ main{
 
         <div
             class="movie-card"
-            onclick="openMovie(
-                'CÂY ĐA QUÁN DỐC',
-                'fUuqVfmhXQE'
-            )"
+            onclick="openMovie('CÂY ĐA QUÁN DỐC','fUuqVfmhXQE')"
             data-name="cây đa quán dốc"
         >
 
@@ -1458,10 +1464,7 @@ main{
 
         <div
             class="movie-card"
-            onclick="openMovie(
-                'CON VỊT _TNHI',
-                'oIStM-HF_kc'
-            )"
+            onclick="openMovie('CON VỊT _TNHI','oIStM-HF_kc')"
             data-name="con vịt tnhi"
         >
 
@@ -1505,6 +1508,7 @@ main{
                 >
 
                 19
+
             </div>
 
             <div class="movie-name">
@@ -1530,6 +1534,8 @@ main{
 </section>
 
 </main>
+
+<!-- ================= PLAYER ================= -->
 
 <div id="playerModal" class="player-modal">
 
@@ -1569,17 +1575,26 @@ main{
 
         </div>
 
-        <div id="playerTitle" class="player-title">
+        <div
+            id="playerTitle"
+            class="player-title"
+        >
             Đang xem
         </div>
 
-        <div id="vipLock" class="vip-lock">
+        <div
+            id="vipLock"
+            class="vip-lock"
+        >
 
             <div class="vip-lock-title">
                 PHIM VIP
             </div>
 
-            <div id="vipLockText" class="vip-lock-text">
+            <div
+                id="vipLockText"
+                class="vip-lock-text"
+            >
                 Phí xem phim
             </div>
 
@@ -1605,6 +1620,8 @@ main{
 
 </div>
 
+<!-- ================= WATCH REWARD ================= -->
+
 <div id="watchReward" class="watch-reward">
 
     <img
@@ -1616,7 +1633,10 @@ main{
         NHẬN TIỀN
     </span>
 
-    <span id="rewardTime" class="reward-time">
+    <span
+        id="rewardTime"
+        class="reward-time"
+    >
         56
     </span>
 
@@ -1629,11 +1649,19 @@ main{
     alt="Money"
 >
 
-<div id="rewardPopup" class="reward-popup">
+<div
+    id="rewardPopup"
+    class="reward-popup"
+>
     +1 TIỀN DORAEMON
 </div>
 
-<div id="vipMessage" class="vip-message">
+<!-- ================= VIP MESSAGE ================= -->
+
+<div
+    id="vipMessage"
+    class="vip-message"
+>
 
     <div class="vip-message-title">
         KHÔNG ĐỦ TIỀN
@@ -1653,7 +1681,12 @@ main{
 
 </div>
 
-<div id="welcomeNotice" class="welcome-notice">
+<!-- ================= WELCOME ================= -->
+
+<div
+    id="welcomeNotice"
+    class="welcome-notice"
+>
 
     <div class="welcome-box">
 
@@ -1670,8 +1703,7 @@ main{
         </div>
 
         <div class="welcome-text">
-            NƠI LƯU TRỮ CÁC PHIM HOẠT HÌNH,
-            HÀNH ĐỘNG, NHẠC VÀ CÁC LOẠI
+            NƠI LƯU TRỮ CÁC PHIM HOẠT HÌNH, HÀNH ĐỘNG, NHẠC VÀ CÁC LOẠI
         </div>
 
         <img
@@ -1684,7 +1716,12 @@ main{
 
 </div>
 
-<div id="shortsPage" class="shorts-page">
+<!-- ================= PHIM NGẮN ================= -->
+
+<div
+    id="shortsPage"
+    class="shorts-page"
+>
 
     <div class="shorts-top">
 
@@ -1696,13 +1733,19 @@ main{
             ← QUAY VỀ TRANG CHÍNH
         </button>
 
-        <div id="shortsCount" class="shorts-count">
+        <div
+            id="shortsCount"
+            class="shorts-count"
+        >
             1 / 5
         </div>
 
     </div>
 
-    <div id="shortView" class="short-view">
+    <div
+        id="shortView"
+        class="short-view"
+    >
 
         <iframe
             id="shortFrame"
@@ -1743,7 +1786,8 @@ updateMoney();
 
 function showPage(pageId){
 
-    document.querySelectorAll(".page")
+    document
+        .querySelectorAll(".page")
         .forEach(page=>{
             page.classList.remove("active");
         });
@@ -1758,7 +1802,7 @@ function showPage(pageId){
     window.scrollTo(0,0);
 }
 
-/* ================= PLAYER DATA ================= */
+/* ================= PLAYER ================= */
 
 let currentVideoId = "";
 let currentVipVideo = "";
@@ -1766,8 +1810,6 @@ let currentVipPrice = 0;
 
 let rewardTimer = null;
 let rewardSeconds = 56;
-
-/* ================= NORMAL MOVIE ================= */
 
 function openMovie(title,videoId){
 
@@ -1777,14 +1819,17 @@ function openMovie(title,videoId){
     currentVipVideo = "";
     currentVipPrice = 0;
 
-    document.getElementById("playerTitle")
-        .textContent = title;
+    document.getElementById(
+        "playerTitle"
+    ).textContent = title;
 
-    document.getElementById("playerVip")
-        .classList.remove("show");
+    document.getElementById(
+        "playerVip"
+    ).classList.remove("show");
 
-    document.getElementById("vipLock")
-        .classList.remove("show");
+    document.getElementById(
+        "vipLock"
+    ).classList.remove("show");
 
     const frame =
         document.getElementById("playerFrame");
@@ -1796,13 +1841,12 @@ function openMovie(title,videoId){
         videoId +
         "?autoplay=1&rel=0&playsinline=1";
 
-    document.getElementById("playerModal")
+    document
+        .getElementById("playerModal")
         .classList.add("show");
 
     startReward();
 }
-
-/* ================= VIP MOVIE ================= */
 
 function openVipMovie(title,videoId,price){
 
@@ -1812,23 +1856,29 @@ function openVipMovie(title,videoId,price){
     currentVipVideo = videoId;
     currentVipPrice = Number(price);
 
-    document.getElementById("playerTitle")
-        .textContent = title;
+    document.getElementById(
+        "playerTitle"
+    ).textContent = title;
 
-    document.getElementById("playerVipCost")
-        .textContent = "-" + currentVipPrice;
+    document.getElementById(
+        "playerVipCost"
+    ).textContent =
+        "-" + currentVipPrice;
 
-    document.getElementById("playerVip")
-        .classList.add("show");
+    document.getElementById(
+        "playerVip"
+    ).classList.add("show");
 
-    document.getElementById("vipLockText")
-        .textContent =
+    document.getElementById(
+        "vipLockText"
+    ).textContent =
         "Phí xem phim: " +
         currentVipPrice +
         " tiền Doraemon";
 
-    document.getElementById("vipLock")
-        .classList.add("show");
+    document.getElementById(
+        "vipLock"
+    ).classList.add("show");
 
     const frame =
         document.getElementById("playerFrame");
@@ -1836,7 +1886,8 @@ function openVipMovie(title,videoId,price){
     frame.src = "";
     frame.style.display = "none";
 
-    document.getElementById("playerModal")
+    document
+        .getElementById("playerModal")
         .classList.add("show");
 }
 
@@ -1869,7 +1920,8 @@ function buyVip(){
         currentVipVideo +
         "?autoplay=1&rel=0&playsinline=1";
 
-    document.getElementById("vipLock")
+    document
+        .getElementById("vipLock")
         .classList.remove("show");
 
     stopReward();
@@ -1881,16 +1933,20 @@ function closePlayer(){
 
     stopReward();
 
-    document.getElementById("playerFrame")
-        .src = "";
+    document.getElementById(
+        "playerFrame"
+    ).src = "";
 
-    document.getElementById("playerModal")
+    document
+        .getElementById("playerModal")
         .classList.remove("show");
 
-    document.getElementById("playerVip")
+    document
+        .getElementById("playerVip")
         .classList.remove("show");
 
-    document.getElementById("vipLock")
+    document
+        .getElementById("vipLock")
         .classList.remove("show");
 
     currentVideoId = "";
@@ -1906,34 +1962,39 @@ function startReward(){
 
     rewardSeconds = 56;
 
-    document.getElementById("rewardTime")
-        .textContent = rewardSeconds;
+    document.getElementById(
+        "rewardTime"
+    ).textContent =
+        rewardSeconds;
 
-    document.getElementById("watchReward")
+    document
+        .getElementById("watchReward")
         .classList.add("show");
 
-    rewardTimer = setInterval(()=>{
+    rewardTimer =
+        setInterval(()=>{
 
-        rewardSeconds--;
+            rewardSeconds--;
 
-        document.getElementById("rewardTime")
-            .textContent = rewardSeconds;
+            document.getElementById(
+                "rewardTime"
+            ).textContent =
+                rewardSeconds;
 
-        if(rewardSeconds <= 0){
+            if(rewardSeconds <= 0){
 
-            stopReward();
+                stopReward();
 
-            money += 1;
+                money += 1;
 
-            updateMoney();
+                updateMoney();
 
-            showRewardPopup();
+                showRewardPopup();
 
-            flyMoney();
+                flyMoney();
+            }
 
-        }
-
-    },1000);
+        },1000);
 }
 
 function stopReward(){
@@ -1945,11 +2006,12 @@ function stopReward(){
         rewardTimer = null;
     }
 
-    document.getElementById("watchReward")
+    document
+        .getElementById("watchReward")
         .classList.remove("show");
 }
 
-/* ================= REWARD POPUP ================= */
+/* ================= POPUP ================= */
 
 function showRewardPopup(){
 
@@ -1981,12 +2043,10 @@ function flyMoney(){
         target.getBoundingClientRect();
 
     const x =
-        targetRect.left -
-        20;
+        targetRect.left - 20;
 
     const y =
-        targetRect.top -
-        100;
+        targetRect.top - 100;
 
     moneyImg.style.setProperty(
         "--target-x",
@@ -2026,8 +2086,11 @@ function closeVipMessage(){
 
     message.classList.remove("show");
 
-    message.style.pointerEvents = "none";
-    message.style.visibility = "hidden";
+    message.style.pointerEvents =
+        "none";
+
+    message.style.visibility =
+        "hidden";
 
     setTimeout(()=>{
         message.style.visibility = "";
@@ -2035,7 +2098,9 @@ function closeVipMessage(){
 }
 
 const vipClose =
-    document.getElementById("vipMessageClose");
+    document.getElementById(
+        "vipMessageClose"
+    );
 
 vipClose.addEventListener(
     "click",
@@ -2045,8 +2110,11 @@ vipClose.addEventListener(
 vipClose.addEventListener(
     "touchend",
     function(e){
+
         e.preventDefault();
+
         closeVipMessage();
+
     },
     {passive:false}
 );
@@ -2056,9 +2124,12 @@ vipClose.addEventListener(
 function closeWelcome(){
 
     const welcome =
-        document.getElementById("welcomeNotice");
+        document.getElementById(
+            "welcomeNotice"
+        );
 
-    welcome.style.display = "none";
+    welcome.style.display =
+        "none";
 
     localStorage.setItem(
         "ncb_welcome_seen",
@@ -2066,36 +2137,44 @@ function closeWelcome(){
     );
 }
 
-window.addEventListener("load",function(){
+window.addEventListener(
+    "load",
+    function(){
 
-    if(
-        localStorage.getItem("ncb_welcome_seen")
-        !== "1"
-    ){
+        if(
+            localStorage.getItem(
+                "ncb_welcome_seen"
+            ) !== "1"
+        ){
 
-        document.getElementById("welcomeNotice")
-            .style.display = "flex";
+            document.getElementById(
+                "welcomeNotice"
+            ).style.display =
+                "flex";
+        }
 
     }
-
-});
+);
 
 /* ================= SEARCH ================= */
 
 function searchMovies(){
 
     const keyword =
-        document.getElementById("searchInput")
-        .value
-        .trim()
-        .toLowerCase();
+        document
+            .getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
 
-    document.querySelectorAll(".movie-card")
+    document
+        .querySelectorAll(".movie-card")
         .forEach(card=>{
 
             const name =
-                (card.dataset.name || "")
-                .toLowerCase();
+                (
+                    card.dataset.name || ""
+                ).toLowerCase();
 
             if(!keyword){
 
@@ -2105,22 +2184,23 @@ function searchMovies(){
 
                 card.style.display =
                     name.includes(keyword)
-                    ? ""
-                    : "none";
-
+                        ? ""
+                        : "none";
             }
 
         });
 }
 
-/* ================= PHIM NGẮN ================= */
+/* ================= SHORTS ================= */
 
 const shortVideos = [
+
     "hFDx6aWqC8w",
     "NW4h1-WDuTA",
     "AXnAy7O4Lgg",
     "ZirEmDj4l0k",
     "jgj9Jf5Scj0"
+
 ];
 
 let currentShort = 0;
@@ -2129,7 +2209,8 @@ function openShorts(){
 
     currentShort = 0;
 
-    document.getElementById("shortsPage")
+    document
+        .getElementById("shortsPage")
         .classList.add("show");
 
     loadShort();
@@ -2137,10 +2218,12 @@ function openShorts(){
 
 function closeShorts(){
 
-    document.getElementById("shortFrame")
+    document
+        .getElementById("shortFrame")
         .src = "";
 
-    document.getElementById("shortsPage")
+    document
+        .getElementById("shortsPage")
         .classList.remove("show");
 }
 
@@ -2149,13 +2232,15 @@ function loadShort(){
     const id =
         shortVideos[currentShort];
 
-    document.getElementById("shortFrame")
+    document
+        .getElementById("shortFrame")
         .src =
         "https://www.youtube.com/embed/" +
         id +
         "?autoplay=1&mute=1&rel=0&playsinline=1";
 
-    document.getElementById("shortsCount")
+    document
+        .getElementById("shortsCount")
         .textContent =
         (currentShort + 1) +
         " / " +
@@ -2172,7 +2257,6 @@ function nextShort(){
         currentShort++;
 
         loadShort();
-
     }
 }
 
@@ -2183,17 +2267,18 @@ function previousShort(){
         currentShort--;
 
         loadShort();
-
     }
 }
 
-/* ================= SHORT SWIPE ================= */
+/* ================= SWIPE ================= */
 
 let touchStartY = 0;
 let touchEndY = 0;
 
 const shortView =
-    document.getElementById("shortView");
+    document.getElementById(
+        "shortView"
+    );
 
 shortView.addEventListener(
     "touchstart",
@@ -2214,9 +2299,12 @@ shortView.addEventListener(
             e.changedTouches[0].screenY;
 
         const difference =
-            touchStartY - touchEndY;
+            touchStartY -
+            touchEndY;
 
-        if(Math.abs(difference) < 50){
+        if(
+            Math.abs(difference) < 50
+        ){
             return;
         }
 
@@ -2234,13 +2322,13 @@ shortView.addEventListener(
     {passive:true}
 );
 
-/* ================= MOUSE WHEEL ================= */
-
 shortView.addEventListener(
     "wheel",
     function(e){
 
-        if(Math.abs(e.deltaY) < 30){
+        if(
+            Math.abs(e.deltaY) < 30
+        ){
             return;
         }
 
@@ -2258,7 +2346,7 @@ shortView.addEventListener(
     {passive:true}
 );
 
-/* ================= ESC ================= */
+/* ================= KEYBOARD ================= */
 
 document.addEventListener(
     "keydown",
@@ -2275,9 +2363,10 @@ document.addEventListener(
     }
 );
 
-/* ================= PLAYER OUTSIDE ================= */
+/* ================= PLAYER BACKGROUND CLICK ================= */
 
-document.getElementById("playerModal")
+document
+    .getElementById("playerModal")
     .addEventListener(
         "click",
         function(e){
