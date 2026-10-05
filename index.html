@@ -2,429 +2,376 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>@NCB_STUDIO</title>
 
 <style>
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
-    font-family:Arial,sans-serif;
-}
-
-html,body{
-    background:#080808;
-    color:#fff;
-    min-height:100%;
 }
 
 body{
-    overflow-x:hidden;
+    background:#050505;
+    color:#fff;
+    font-family:Arial,sans-serif;
+    min-height:100vh;
 }
 
-.header{
-    height:65px;
-    background:#111;
-    border-bottom:1px solid #292929;
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:0 15px;
+header{
     position:sticky;
     top:0;
     z-index:100;
+    height:65px;
+    background:#090909;
+    border-bottom:1px solid #222;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:10px 15px;
 }
 
 .logo{
-    font-size:21px;
+    font-size:22px;
     font-weight:bold;
     white-space:nowrap;
 }
 
 .search{
     flex:1;
-    max-width:520px;
+    max-width:500px;
     margin:auto;
 }
 
 .search input{
     width:100%;
-    height:40px;
-    border:0;
-    outline:none;
-    border-radius:22px;
-    background:#222;
+    background:#151515;
     color:#fff;
-    padding:0 18px;
-    font-size:15px;
+    border:1px solid #333;
+    border-radius:20px;
+    padding:11px 16px;
+    outline:none;
 }
 
 .user{
-    width:40px;
-    height:40px;
+    width:38px;
+    height:38px;
     border-radius:50%;
-    background:#242424;
+    background:#222;
     display:flex;
-    justify-content:center;
     align-items:center;
-    font-size:21px;
+    justify-content:center;
+    font-size:20px;
 }
 
-.container{
-    width:94%;
-    max-width:1200px;
+main{
+    width:100%;
+    max-width:1100px;
     margin:auto;
-    padding-bottom:50px;
+    padding:18px 14px 50px;
+}
+
+h1{
+    font-size:24px;
+    margin:10px 0 15px;
+}
+
+h2{
+    font-size:20px;
+    margin:25px 0 12px;
 }
 
 .hero{
-    margin-top:18px;
     width:100%;
-    height:235px;
-    border-radius:15px;
+    background:#111;
+    border-radius:12px;
     overflow:hidden;
-    position:relative;
-    background:#151515;
+    cursor:pointer;
+    border:1px solid #222;
 }
 
 .hero img{
     width:100%;
-    height:100%;
+    display:block;
+    aspect-ratio:16/9;
     object-fit:cover;
 }
 
-.hero::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:linear-gradient(
-        to top,
-        rgba(0,0,0,.95),
-        rgba(0,0,0,.05)
-    );
-}
-
-.hero-info{
-    position:absolute;
-    z-index:2;
-    left:20px;
-    bottom:20px;
-}
-
-.hero-info h1{
-    font-size:25px;
-}
-
-.hero-info p{
-    margin-top:6px;
-    color:#ccc;
-}
-
-.section-title{
-    margin:25px 0 14px;
-    font-size:21px;
-    font-weight:bold;
-}
-
-/* ================= LIVE ================= */
-
-.live-box{
-    width:100%;
-    background:#111;
-    border:1px solid #292929;
-    border-radius:15px;
+.hero-title{
     padding:12px;
-    overflow:hidden;
-}
-
-.live-title{
     font-size:19px;
     font-weight:bold;
-    margin-bottom:8px;
 }
 
-.live-status{
-    color:#aaa;
-    font-size:13px;
-    margin-bottom:10px;
-}
-
-.live-video{
-    width:100%;
-    aspect-ratio:16/9;
-    background:#000;
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.live-video iframe{
-    width:100%;
-    height:100%;
-    border:0;
-}
-
-/* ================= CATEGORY ================= */
-
-.category-grid{
+.categories{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:12px;
+    margin-top:18px;
 }
 
 .category{
-    min-height:95px;
-    background:#171717;
+    min-height:90px;
+    background:#111;
     border:1px solid #292929;
-    border-radius:14px;
+    border-radius:12px;
     display:flex;
-    justify-content:center;
     align-items:center;
-    text-align:center;
+    justify-content:center;
+    font-size:18px;
+    font-weight:bold;
     cursor:pointer;
+    transition:.2s;
 }
 
 .category:active{
     transform:scale(.97);
 }
 
-.category h3{
-    font-size:19px;
+/* LIVE KÉO NGANG */
+.live-scroll{
+    width:100%;
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    padding-bottom:8px;
+    scrollbar-width:none;
 }
 
-.category p{
-    color:#999;
-    font-size:13px;
-    margin-top:6px;
+.live-scroll::-webkit-scrollbar{
+    display:none;
 }
 
-/* ================= MOVIES ================= */
-
-.movie-grid{
-    display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:14px;
-}
-
-.movie{
-    background:#151515;
+.live-card{
+    flex:0 0 100%;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    background:#111;
     border:1px solid #292929;
-    border-radius:13px;
-    overflow:hidden;
-    cursor:pointer;
-    transition:.15s;
-}
-
-.movie:active{
-    transform:scale(.97);
-}
-
-.poster{
-    width:100%;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    display:block;
-    background:#000;
-}
-
-.movie-info{
-    padding:11px;
-}
-
-.movie-title{
-    font-size:16px;
-    font-weight:bold;
-}
-
-.movie-type{
-    color:#999;
-    margin-top:5px;
-    font-size:13px;
-}
-
-/* ================= UPDATE ================= */
-
-.update-poster{
-    width:100%;
-    aspect-ratio:16/9;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#777;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.update-poster span{
-    border:1px solid #444;
-    padding:8px 15px;
-    border-radius:8px;
-}
-
-/* ================= PAGES ================= */
-
-#animationPage,
-#age18Page{
-    display:none;
-}
-
-.page-head{
-    padding-top:18px;
-    text-align:center;
-}
-
-.page-title{
-    font-size:24px;
-    font-weight:bold;
-}
-
-.page-description{
-    color:#999;
-    font-size:14px;
-    margin-top:7px;
-}
-
-.back-button{
-    position:fixed;
-    top:12px;
-    left:12px;
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    background:#171717;
-    border:1px solid #444;
-    color:#fff;
-    font-size:25px;
-    z-index:300;
-    cursor:pointer;
-}
-
-/* ================= 18 ================= */
-
-.age-badge{
-    width:70px;
-    height:70px;
-    border-radius:50%;
-    background:#151515;
-    border:2px solid #555;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    margin:0 auto 10px;
-    font-size:25px;
-    font-weight:bold;
-}
-
-.vtk-card{
-    position:relative;
-}
-
-.vtk-number{
-    position:absolute;
-    top:8px;
-    left:8px;
-    background:rgba(0,0,0,.9);
-    border-radius:7px;
-    padding:5px 8px;
-    font-size:12px;
-    z-index:2;
-}
-
-/* ================= PLAYER ================= */
-
-#movieModal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.97);
-    z-index:500;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    padding:15px;
-}
-
-.player-box{
-    width:100%;
-    max-width:950px;
-}
-
-.player-title{
-    text-align:center;
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:12px;
-}
-
-.video-frame{
-    width:100%;
-    aspect-ratio:16/9;
-    background:#000;
     border-radius:12px;
     overflow:hidden;
 }
 
-.video-frame iframe{
+.live-title{
+    padding:11px 13px;
+    font-weight:bold;
+}
+
+.live-frame{
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+}
+
+.live-frame iframe{
     width:100%;
     height:100%;
     border:0;
 }
 
-.close-player{
-    position:fixed;
-    top:15px;
-    right:15px;
-    width:42px;
-    height:42px;
-    border-radius:50%;
-    background:#222;
-    color:#fff;
-    font-size:24px;
+/* ẢNH 18 */
+.photo-section{
+    margin-top:25px;
+}
+
+.photo-scroll{
+    display:flex;
+    gap:12px;
+    width:100%;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    padding-bottom:8px;
+}
+
+.photo-scroll::-webkit-scrollbar{
+    display:none;
+}
+
+.photo-card{
+    flex:0 0 82%;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    background:#111;
+    border:1px solid #292929;
+    border-radius:12px;
+    overflow:hidden;
+}
+
+.photo-card img{
+    width:100%;
+    aspect-ratio:16/10;
+    object-fit:cover;
+    display:block;
+    background:#000;
+}
+
+.photo-name{
+    padding:10px;
+    font-weight:bold;
+    text-align:center;
+}
+
+.movie-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+}
+
+.movie{
+    background:#111;
+    border:1px solid #292929;
+    border-radius:10px;
+    overflow:hidden;
     cursor:pointer;
 }
 
-@media(max-width:600px){
+.movie img{
+    width:100%;
+    aspect-ratio:16/9;
+    object-fit:cover;
+    display:block;
+}
 
-    .header{
-        padding:0 9px;
-        gap:7px;
+.movie-title{
+    padding:9px;
+    font-weight:bold;
+    font-size:15px;
+}
+
+.update{
+    aspect-ratio:16/9;
+    background:#000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1px solid #222;
+}
+
+.update span{
+    font-size:20px;
+    font-weight:bold;
+    color:#777;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.back{
+    display:inline-block;
+    background:#181818;
+    border:1px solid #333;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-bottom:15px;
+}
+
+/* PLAYER */
+.player-modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.96);
+    z-index:9999;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+}
+
+.player-modal.show{
+    display:flex;
+}
+
+.player-box{
+    width:100%;
+    max-width:1000px;
+    position:relative;
+}
+
+.close-player{
+    position:absolute;
+    right:0;
+    top:-45px;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    border:1px solid #444;
+    background:#171717;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+}
+
+.player-title{
+    margin-bottom:10px;
+    font-weight:bold;
+    font-size:18px;
+}
+
+.player-video{
+    width:100%;
+    aspect-ratio:16/9;
+    background:#000;
+}
+
+.player-video iframe{
+    width:100%;
+    height:100%;
+    border:0;
+}
+
+.empty{
+    color:#777;
+    padding:20px 0;
+}
+
+@media(max-width:600px){
+    header{
+        height:60px;
+        padding:9px 10px;
     }
 
     .logo{
-        font-size:17px;
+        font-size:18px;
     }
 
-    .user{
-        width:36px;
-        height:36px;
+    main{
+        padding:12px 10px 40px;
     }
 
-    .search input{
-        height:37px;
-        font-size:13px;
-    }
-
-    .hero{
-        height:200px;
-    }
-
-    .hero-info h1{
+    h1{
         font-size:21px;
     }
 
-    .movie-grid{
-        grid-template-columns:repeat(2,1fr);
-        gap:10px;
-    }
-
-    .movie-title{
-        font-size:14px;
+    .categories{
+        gap:8px;
     }
 
     .category{
-        min-height:85px;
+        min-height:75px;
+        font-size:15px;
+    }
+
+    .photo-card{
+        flex:0 0 88%;
+    }
+
+    .movie-grid{
+        gap:8px;
+    }
+
+    .movie-title{
+        font-size:13px;
     }
 }
 </style>
@@ -432,510 +379,404 @@ body{
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
-<header class="header">
-
+<header>
     <div class="logo">@NCB_STUDIO</div>
 
     <div class="search">
         <input
-            id="searchInput"
             type="text"
+            id="searchInput"
             placeholder="Tìm kiếm phim..."
             oninput="searchMovies()"
         >
     </div>
 
     <div class="user">👤</div>
-
 </header>
 
 
-<!-- ================= TRANG CHỦ ================= -->
+<!-- TRANG CHÍNH -->
+<main id="mainPage" class="page active">
 
-<main id="mainPage">
+    <h1>PHIM MỚI CẬP NHẬT</h1>
 
-<div class="container">
-
-    <section class="hero">
-
+    <!-- ONE PIECE -->
+    <div
+        class="hero"
+        data-title="ONE PIECE TẬP 997"
+        onclick="openMovie('bGcVGahgQAA','ONE PIECE - TẬP 997')"
+    >
         <img
             src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
             alt="ONE PIECE"
         >
+        <div class="hero-title">
+            ONE PIECE - TẬP 997
+        </div>
+    </div>
 
-        <div class="hero-info">
 
-            <h1>ONE PIECE (TẬP 997)</h1>
+    <!-- DANH MỤC -->
+    <div class="categories">
 
-            <p>Phim mới cập nhật</p>
-
+        <div class="category" onclick="openAnimationPage()">
+            🎨 PHIM HOẠT HÌNH
         </div>
 
-    </section>
-
-
-    <!-- ================= PHÁT TRỰC TIẾP ================= -->
-
-    <h2 class="section-title">
-        PHÁT TRỰC TIẾP
-    </h2>
-
-    <section class="live-box">
-
-        <div class="live-title">
-            🔴 PHÁT TRỰC TIẾP
+        <div class="category" onclick="open18Page()">
+            18
         </div>
 
-        <div
-            id="liveStatus"
-            class="live-status"
-        >
-            Đang phát: LIVE
-        </div>
-
-        <div class="live-video">
-
-            <div id="liveFrame"></div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ================= DANH MỤC ================= -->
-
-    <h2 class="section-title">
-        Danh mục
-    </h2>
-
-    <div class="category-grid">
-
-        <div
-            class="category"
-            onclick="openAnimationPage()"
-        >
-
-            <div>
-
-                <h3>🎨 PHIM HOẠT HÌNH</h3>
-
-                <p>
-                    SDF-1 → CONAN 1071
-                </p>
-
-            </div>
-
-        </div>
-
-
-        <div
-            class="category"
-            onclick="open18Page()"
-        >
-
-            <div>
-
-                <h3>18</h3>
-
-                <p>
-                    VTK-1 → VTK-4
-                </p>
-
-            </div>
-
+        <div class="category" onclick="openPhoto18Page()">
+            🖼️ ẢNH 18
         </div>
 
     </div>
 
 
-    <!-- ================= PHIM MỚI ================= -->
+    <!-- LIVE -->
+    <h2>PHÁT TRỰC TIẾP</h2>
 
-    <h2 class="section-title">
-        Phim mới cập nhật
-    </h2>
+    <div class="live-scroll">
+
+        <div class="live-card">
+            <div class="live-title">
+                🔴 PHÁT TRỰC TIẾP
+            </div>
+
+            <div class="live-frame">
+                <iframe
+                    src="https://www.youtube.com/embed/619isj3yLv8?autoplay=0&rel=0"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+
+        <div class="live-card">
+            <div class="live-title">
+                🎬 SDF-1
+            </div>
+
+            <div class="live-frame">
+                <iframe
+                    src="https://www.youtube.com/embed/wT0wEIjhHJc?autoplay=0&rel=0"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+
+        <div class="live-card">
+            <div class="live-title">
+                🎬 SDF-2
+            </div>
+
+            <div class="live-frame">
+                <iframe
+                    src="https://www.youtube.com/embed/dHAV91nRl8A?autoplay=0&rel=0"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+
+        <div class="live-card">
+            <div class="live-title">
+                🎬 CONAN 1071
+            </div>
+
+            <div class="live-frame">
+                <iframe
+                    src="https://www.youtube.com/embed/AaQ-XUENnZY?autoplay=0&rel=0"
+                    allow="autoplay; encrypted-media; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- TRANG HOẠT HÌNH -->
+<main id="animationPage" class="page">
+
+    <div class="back" onclick="showMain()">
+        ← Quay lại
+    </div>
+
+    <h1>🎨 PHIM HOẠT HÌNH</h1>
 
     <div class="movie-grid">
 
         <div
             class="movie"
-            data-title="ONE PIECE TẬP 997"
-            onclick="openYouTubeMovie(
-                'bGcVGahgQAA',
-                'ONE PIECE (TẬP 997)'
-            )"
-        >
-
-            <img
-                class="poster"
-                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
-                alt="ONE PIECE"
-            >
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    ONE PIECE (TẬP 997)
-                </div>
-
-                <div class="movie-type">
-                    Phim mới cập nhật
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</main>
-
-
-<!-- ================= PHIM HOẠT HÌNH ================= -->
-
-<section id="animationPage">
-
-<button
-    class="back-button"
-    onclick="closeAnimationPage()"
->
-    ×
-</button>
-
-<div class="container">
-
-    <div class="page-head">
-
-        <div class="page-title">
-            🎨 PHIM HOẠT HÌNH
-        </div>
-
-        <div class="page-description">
-            SDF-1 → CONAN 1071
-        </div>
-
-    </div>
-
-
-    <div
-        class="movie-grid"
-        style="margin-top:20px;"
-    >
-
-        <!-- SDF-1 -->
-
-        <div
-            class="movie"
             data-title="SDF-1"
-            onclick="openYouTubeMovie(
-                'wT0wEIjhHJc',
-                'SDF-1'
-            )"
+            onclick="openMovie('wT0wEIjhHJc','SDF-1')"
         >
-
             <img
-                class="poster"
-                src="https://i.ytimg.com/vi/wT0wEIjhHJc/maxresdefault.jpg"
+                src="https://i.ytimg.com/vi/wT0wEIjhHJc/hq720.jpg"
                 alt="SDF-1"
             >
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    SDF-1
-                </div>
-
-                <div class="movie-type">
-                    Phim hoạt hình
-                </div>
-
-            </div>
-
+            <div class="movie-title">SDF-1</div>
         </div>
 
-
-        <!-- SDF-2 -->
 
         <div
             class="movie"
             data-title="SDF-2"
-            onclick="openYouTubeMovie(
-                'dHAV91nRl8A',
-                'SDF-2'
-            )"
+            onclick="openMovie('dHAV91nRl8A','SDF-2')"
         >
-
             <img
-                class="poster"
-                src="https://i.ytimg.com/vi/dHAV91nRl8A/maxresdefault.jpg"
+                src="https://i.ytimg.com/vi/dHAV91nRl8A/hq720.jpg"
                 alt="SDF-2"
             >
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    SDF-2
-                </div>
-
-                <div class="movie-type">
-                    Phim hoạt hình
-                </div>
-
-            </div>
-
+            <div class="movie-title">SDF-2</div>
         </div>
 
-
-        <!-- SDF-3 UPDATE -->
 
         <div
             class="movie"
             data-title="SDF-3"
         >
-
-            <div class="update-poster">
+            <div class="update">
                 <span>UPDATE</span>
             </div>
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    SDF-3
-                </div>
-
-                <div class="movie-type">
-                    Chưa cập nhật
-                </div>
-
-            </div>
-
+            <div class="movie-title">SDF-3</div>
         </div>
 
-
-        <!-- CONAN 1071 -->
 
         <div
             class="movie"
             data-title="CONAN 1071"
-            onclick="openYouTubeMovie(
-                'AaQ-XUENnZY',
-                'CONAN 1071'
-            )"
+            onclick="openMovie('AaQ-XUENnZY','CONAN 1071')"
         >
-
             <img
-                class="poster"
-                src="https://i.ytimg.com/vi/AaQ-XUENnZY/maxresdefault.jpg"
+                src="https://i.ytimg.com/vi/AaQ-XUENnZY/hq720.jpg"
                 alt="CONAN 1071"
             >
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    CONAN 1071
-                </div>
-
-                <div class="movie-type">
-                    Phim hoạt hình
-                </div>
-
-            </div>
-
+            <div class="movie-title">CONAN 1071</div>
         </div>
 
     </div>
 
-</div>
-
-</section>
+</main>
 
 
-<!-- ================= 18 ================= -->
+<!-- TRANG 18 -->
+<main id="page18" class="page">
 
-<section id="age18Page">
+    <div class="back" onclick="showMain()">
+        ← Quay lại
+    </div>
 
-<button
-    class="back-button"
-    onclick="close18Page()"
+    <h1>PHIM VÕ THUẬT</h1>
+
+    <div class="movie-grid">
+
+        <div class="movie">
+            <div class="update">
+                <span>UPDATE</span>
+            </div>
+            <div class="movie-title">VTK-1</div>
+        </div>
+
+        <div class="movie">
+            <div class="update">
+                <span>UPDATE</span>
+            </div>
+            <div class="movie-title">VTK-2</div>
+        </div>
+
+        <div class="movie">
+            <div class="update">
+                <span>UPDATE</span>
+            </div>
+            <div class="movie-title">VTK-3</div>
+        </div>
+
+        <div class="movie">
+            <div class="update">
+                <span>UPDATE</span>
+            </div>
+            <div class="movie-title">VTK-4</div>
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- TRANG ẢNH 18 -->
+<main id="photo18Page" class="page">
+
+    <div class="back" onclick="showMain()">
+        ← Quay lại
+    </div>
+
+    <h1>🖼️ ẢNH 18</h1>
+
+    <p class="empty">
+        Kéo ngang để chuyển ảnh.
+    </p>
+
+    <div class="photo-scroll">
+
+        <!-- ẢNH 1 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0821-060508-013.jpg" alt="Ảnh 1">
+            <div class="photo-name">ẢNH 1</div>
+        </div>
+
+        <!-- ẢNH 2 -->
+        <div class="photo-card">
+            <img src="https://1.bp.blogspot.com/-H1eu7SaRLCU/YRe1tDW6jvI/AAAAAAAAAFM/oS9md32tul8FtXwGIkeMsDqL9Qw8B-ySQCLcBGAsYHQ/s0/anh-sex-0821-192230-007.jpg" alt="Ảnh 2">
+            <div class="photo-name">ẢNH 2</div>
+        </div>
+
+        <!-- ẢNH 3 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164124-039.jpg" alt="Ảnh 3">
+            <div class="photo-name">ẢNH 3</div>
+        </div>
+
+        <!-- ẢNH 4 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164123-029.jpg" alt="Ảnh 4">
+            <div class="photo-name">ẢNH 4</div>
+        </div>
+
+        <!-- ẢNH 5 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164123-033.jpg" alt="Ảnh 5">
+            <div class="photo-name">ẢNH 5</div>
+        </div>
+
+        <!-- ẢNH 6 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164122-027.jpg" alt="Ảnh 6">
+            <div class="photo-name">ẢNH 6</div>
+        </div>
+
+        <!-- ẢNH 7 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164122-025.jpg" alt="Ảnh 7">
+            <div class="photo-name">ẢNH 7</div>
+        </div>
+
+        <!-- ẢNH 8 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164121-017.jpg" alt="Ảnh 8">
+            <div class="photo-name">ẢNH 8</div>
+        </div>
+
+        <!-- ẢNH 9 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164120-009.jpg" alt="Ảnh 9">
+            <div class="photo-name">ẢNH 9</div>
+        </div>
+
+        <!-- ẢNH 10 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164120-008.jpg" alt="Ảnh 10">
+            <div class="photo-name">ẢNH 10</div>
+        </div>
+
+        <!-- ẢNH 11 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164121-015.jpg" alt="Ảnh 11">
+            <div class="photo-name">ẢNH 11</div>
+        </div>
+
+        <!-- ẢNH 12 -->
+        <div class="photo-card">
+            <img src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/158157230229276.jpg" alt="Ảnh 12">
+            <div class="photo-name">ẢNH 12</div>
+        </div>
+
+        <!-- ẢNH 13 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164121-020.jpg" alt="Ảnh 13">
+            <div class="photo-name">ẢNH 13</div>
+        </div>
+
+        <!-- ẢNH 14 -->
+        <div class="photo-card">
+            <img src="https://1.bp.blogspot.com/-7OlxE_WUQUc/YRe11TUOMmI/AAAAAAAAAG4/BKwf9CqxG3It57yXSSagmBZdCseT2zyywCLcBGAsYHQ/s0/anh-sex-0821-192233-034.jpg" alt="13">
+            <div class="photo-name">ẢNH 13</div>
+        </div>
+
+        <!-- ẢNH 15 -->
+        <div class="photo-card">
+            <img src="https://1.bp.blogspot.com/-kDd9SgV590s/YRe132f__FI/AAAAAAAAAHY/dipFDQNJ7G4ZIB62dgx0U2DmkkkP4k9FQCLcBGAsYHQ/s0/anh-sex-0821-192233-042.jpg" alt="Ảnh 13">
+            <div class="photo-name">L3</div>
+        </div>
+
+        <!-- ẢNH 16 -->
+        <div class="photo-card">
+            <img src="https://1.https://ml1.nude3x.com/images/2022/02/anh-sex-0821-060508-013.jpg" alt="Yến">
+            <div class="photo-name">ẢNH 12</div>
+        </div>
+
+        <!-- ẢNH 17 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2021/10/anh-sex-0921-25165653-004.jpg" alt="Vy">
+            <div class="photo-name">ẢNH 13</div>
+        </div>
+
+        <!-- ẢNH 18 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164121-020.jpg" alt="Ảnhp">
+            <div class="photo-name">ẢNH 13</div>
+        </div>
+
+        <!-- ẢNH 19 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0821-060508-001.jpg" alt="o3">
+            <div class="photo-name">ẢNH 13</div>
+        </div>
+
+        <!-- ẢNH 20 -->
+        <div class="photo-card">
+            <img src="https://ml1.nude3x.com/images/2022/02/anh-sex-0222-28164120-005.jpg" alt="Lồn_1">
+            <div class="photo-name">ẢNH 20</div>
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- PLAYER -->
+<div
+    id="playerModal"
+    class="player-modal"
+    onclick="outsideClose(event)"
 >
-    ×
-</button>
-
-<div class="container">
-
-    <div class="page-head">
-
-        <div class="age-badge">
-            18
-        </div>
-
-        <div class="page-title">
-            PHIM VÕ THUẬT
-        </div>
-
-        <div class="page-description">
-            VTK-1 → VTK-4
-        </div>
-
-    </div>
-
-
-    <div
-        class="movie-grid"
-        style="margin-top:20px;"
-    >
-
-        <!-- VTK-1 -->
-
-        <div
-            class="movie vtk-card"
-            data-title="VTK-1"
-        >
-
-            <div class="vtk-number">
-                VTK-1
-            </div>
-
-            <div class="update-poster">
-                <span>UPDATE</span>
-            </div>
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    VTK-1
-                </div>
-
-                <div class="movie-type">
-                    Chưa cập nhật
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- VTK-2 -->
-
-        <div
-            class="movie vtk-card"
-            data-title="VTK-2"
-        >
-
-            <div class="vtk-number">
-                VTK-2
-            </div>
-
-            <div class="update-poster">
-                <span>UPDATE</span>
-            </div>
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    VTK-2
-                </div>
-
-                <div class="movie-type">
-                    Chưa cập nhật
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- VTK-3 -->
-
-        <div
-            class="movie vtk-card"
-            data-title="VTK-3"
-        >
-
-            <div class="vtk-number">
-                VTK-3
-            </div>
-
-            <div class="update-poster">
-                <span>UPDATE</span>
-            </div>
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    VTK-3
-                </div>
-
-                <div class="movie-type">
-                    Chưa cập nhật
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <!-- VTK-4 -->
-
-        <div
-            class="movie vtk-card"
-            data-title="VTK-4"
-        >
-
-            <div class="vtk-number">
-                VTK-4
-            </div>
-
-            <div class="update-poster">
-                <span>UPDATE</span>
-            </div>
-
-            <div class="movie-info">
-
-                <div class="movie-title">
-                    VTK-4
-                </div>
-
-                <div class="movie-type">
-                    Chưa cập nhật
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section>
-
-
-<!-- ================= PLAYER ================= -->
-
-<div id="movieModal">
-
-    <button
-        class="close-player"
-        onclick="closeMovie()"
-    >
-        ×
-    </button>
 
     <div class="player-box">
 
-        <div
-            id="playerTitle"
-            class="player-title"
-        ></div>
+        <button
+            class="close-player"
+            onclick="closeMovie()"
+        >
+            ×
+        </button>
 
         <div
-            id="videoFrame"
-            class="video-frame"
-        ></div>
+            id="playerTitle"
+            class="player-title">
+        </div>
+
+        <div
+            id="playerVideo"
+            class="player-video">
+        </div>
 
     </div>
 
@@ -944,13 +785,136 @@ body{
 
 <script>
 
-/* ================================================= */
-/* =================== TÌM KIẾM ==================== */
-/* ================================================= */
+/* =========================
+   CHUYỂN TRANG
+========================= */
+
+function hidePages(){
+    document
+        .querySelectorAll(".page")
+        .forEach(page => page.classList.remove("active"));
+}
+
+function showMain(){
+    hidePages();
+    document
+        .getElementById("mainPage")
+        .classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function openAnimationPage(){
+    hidePages();
+    document
+        .getElementById("animationPage")
+        .classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function open18Page(){
+    hidePages();
+    document
+        .getElementById("page18")
+        .classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+function openPhoto18Page(){
+    hidePages();
+    document
+        .getElementById("photo18Page")
+        .classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =========================
+   YOUTUBE PLAYER
+========================= */
+
+function openMovie(videoId,title){
+
+    const modal =
+        document.getElementById("playerModal");
+
+    const titleBox =
+        document.getElementById("playerTitle");
+
+    const video =
+        document.getElementById("playerVideo");
+
+    titleBox.textContent = title;
+
+    video.innerHTML =
+        '<iframe src="https://www.youtube.com/embed/' +
+        videoId +
+        '?autoplay=1&rel=0" ' +
+        'allow="autoplay; encrypted-media; picture-in-picture" ' +
+        'allowfullscreen></iframe>';
+
+    modal.classList.add("show");
+}
+
+
+function closeMovie(){
+
+    const modal =
+        document.getElementById("playerModal");
+
+    const video =
+        document.getElementById("playerVideo");
+
+    video.innerHTML = "";
+
+    modal.classList.remove("show");
+}
+
+
+function outsideClose(event){
+
+    if(event.target ===
+       document.getElementById("playerModal")){
+
+        closeMovie();
+    }
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+            closeMovie();
+        }
+
+    }
+);
+
+
+/* =========================
+   TÌM KIẾM PHIM
+========================= */
 
 function searchMovies(){
 
-    const input =
+    const keyword =
         document
         .getElementById("searchInput")
         .value
@@ -966,298 +930,11 @@ function searchMovies(){
                 .toLowerCase();
 
             movie.style.display =
-                title.includes(input)
+                title.includes(keyword)
                 ? ""
                 : "none";
-
         });
 }
-
-
-/* ================================================= */
-/* ===================== TRANG ====================== */
-/* ================================================= */
-
-function showMain(){
-
-    document.getElementById("mainPage").style.display =
-        "block";
-
-    document.getElementById("animationPage").style.display =
-        "none";
-
-    document.getElementById("age18Page").style.display =
-        "none";
-
-    window.scrollTo(0,0);
-}
-
-
-function openAnimationPage(){
-
-    document.getElementById("mainPage").style.display =
-        "none";
-
-    document.getElementById("animationPage").style.display =
-        "block";
-
-    document.getElementById("age18Page").style.display =
-        "none";
-
-    window.scrollTo(0,0);
-}
-
-
-function closeAnimationPage(){
-
-    showMain();
-
-}
-
-
-function open18Page(){
-
-    document.getElementById("mainPage").style.display =
-        "none";
-
-    document.getElementById("animationPage").style.display =
-        "none";
-
-    document.getElementById("age18Page").style.display =
-        "block";
-
-    window.scrollTo(0,0);
-}
-
-
-function close18Page(){
-
-    showMain();
-
-}
-
-
-/* ================================================= */
-/* =================== XEM PHIM ===================== */
-/* ================================================= */
-
-function openYouTubeMovie(videoId,title){
-
-    document.getElementById("playerTitle").textContent =
-        title;
-
-    document.getElementById("videoFrame").innerHTML = `
-        <iframe
-            src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
-            title="${title}"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-    `;
-
-    document.getElementById("movieModal").style.display =
-        "flex";
-}
-
-
-/* ================================================= */
-/* ================= ĐÓNG VIDEO ===================== */
-/* ================================================= */
-
-function closeMovie(){
-
-    document.getElementById("movieModal").style.display =
-        "none";
-
-    document.getElementById("videoFrame").innerHTML =
-        "";
-
-    document.getElementById("playerTitle").textContent =
-        "";
-}
-
-
-/* ================================================= */
-/* ================ LIVE TỰ ĐỔI VIDEO =============== */
-/* ================================================= */
-
-const AUTO_PLAY_LIST = [
-
-    {
-        id:"619isj3yLv8",
-        title:"PHÁT TRỰC TIẾP"
-    },
-
-    {
-        id:"wT0wEIjhHJc",
-        title:"SDF-1"
-    },
-
-    {
-        id:"dHAV91nRl8A",
-        title:"SDF-2"
-    },
-
-    {
-        id:"AaQ-XUENnZY",
-        title:"CONAN 1071"
-    }
-
-];
-
-let autoIndex = 0;
-let autoPlayer = null;
-
-
-/* YouTube API */
-
-const ytScript =
-    document.createElement("script");
-
-ytScript.src =
-    "https://www.youtube.com/iframe_api";
-
-document.head.appendChild(ytScript);
-
-
-/* YouTube gọi hàm này */
-
-window.onYouTubeIframeAPIReady = function(){
-
-    autoPlayer =
-        new YT.Player("liveFrame",{
-
-            videoId:
-                AUTO_PLAY_LIST[0].id,
-
-            playerVars:{
-                autoplay:0,
-                controls:1,
-                rel:0,
-                playsinline:1
-            },
-
-            events:{
-
-                onReady:function(){
-
-                    updateLiveStatus();
-
-                },
-
-                onStateChange:function(event){
-
-                    if(
-                        event.data ===
-                        YT.PlayerState.ENDED
-                    ){
-
-                        nextAutoVideo();
-
-                    }
-
-                }
-
-            }
-
-        });
-
-};
-
-
-/* Video tiếp theo */
-
-function nextAutoVideo(){
-
-    autoIndex++;
-
-    if(
-        autoIndex >=
-        AUTO_PLAY_LIST.length
-    ){
-
-        autoIndex = 0;
-
-    }
-
-    const next =
-        AUTO_PLAY_LIST[autoIndex];
-
-    if(
-        autoPlayer &&
-        typeof autoPlayer.loadVideoById ===
-        "function"
-    ){
-
-        autoPlayer.loadVideoById(
-            next.id
-        );
-
-        updateLiveStatus();
-
-    }
-
-}
-
-
-/* Tên video đang phát */
-
-function updateLiveStatus(){
-
-    const current =
-        AUTO_PLAY_LIST[autoIndex];
-
-    if(!current){
-        return;
-    }
-
-    document.getElementById(
-        "liveStatus"
-    ).textContent =
-        "Đang phát: " +
-        current.title;
-}
-
-
-/* ================================================= */
-/* ===================== ESC ======================== */
-/* ================================================= */
-
-document.addEventListener(
-    "keydown",
-    function(event){
-
-        if(event.key === "Escape"){
-
-            closeMovie();
-
-        }
-
-    }
-);
-
-
-/* ================================================= */
-/* =============== BẤM NGOÀI PLAYER ================ */
-/* ================================================= */
-
-document.getElementById(
-    "movieModal"
-).addEventListener(
-    "click",
-    function(event){
-
-        if(
-            event.target ===
-            this
-        ){
-
-            closeMovie();
-
-        }
-
-    }
-);
 
 </script>
 
