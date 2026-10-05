@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 <title>@NCB_STUDIO</title>
 
@@ -22,15 +22,6 @@ html,body{
 
 body{
     overflow-x:hidden;
-}
-
-button,input{
-    font-family:Arial,sans-serif;
-}
-
-button{
-    border:0;
-    outline:none;
 }
 
 .header{
@@ -151,7 +142,13 @@ button{
 .live-title{
     font-size:19px;
     font-weight:bold;
-    margin-bottom:11px;
+    margin-bottom:8px;
+}
+
+.live-status{
+    color:#aaa;
+    font-size:13px;
+    margin-bottom:10px;
 }
 
 .live-video{
@@ -186,7 +183,6 @@ button{
     align-items:center;
     text-align:center;
     cursor:pointer;
-    transition:.2s;
 }
 
 .category:active{
@@ -217,11 +213,11 @@ button{
     border-radius:13px;
     overflow:hidden;
     cursor:pointer;
-    transition:.2s;
+    transition:.15s;
 }
 
 .movie:active{
-    transform:scale(.98);
+    transform:scale(.97);
 }
 
 .poster{
@@ -254,12 +250,11 @@ button{
     aspect-ratio:16/9;
     background:#000;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     color:#777;
     font-size:18px;
     font-weight:bold;
-    letter-spacing:1px;
 }
 
 .update-poster span{
@@ -390,13 +385,6 @@ button{
     cursor:pointer;
 }
 
-.player-note{
-    margin-top:12px;
-    text-align:center;
-    color:#999;
-    font-size:13px;
-}
-
 @media(max-width:600px){
 
     .header{
@@ -438,7 +426,6 @@ button{
     .category{
         min-height:85px;
     }
-
 }
 </style>
 </head>
@@ -465,15 +452,11 @@ button{
 </header>
 
 
-<!-- ========================================================= -->
-<!-- ======================= TRANG CHỦ ======================= -->
-<!-- ========================================================= -->
+<!-- ================= TRANG CHỦ ================= -->
 
 <main id="mainPage">
 
 <div class="container">
-
-    <!-- HERO -->
 
     <section class="hero">
 
@@ -505,14 +488,16 @@ button{
             🔴 PHÁT TRỰC TIẾP
         </div>
 
+        <div
+            id="liveStatus"
+            class="live-status"
+        >
+            Đang phát: LIVE
+        </div>
+
         <div class="live-video">
 
-            <iframe
-                src="https://www.youtube.com/embed/6C9w2xfZBjY?autoplay=0"
-                title="Phát trực tiếp"
-                allow="autoplay; encrypted-media; picture-in-picture"
-                allowfullscreen>
-            </iframe>
+            <div id="liveFrame"></div>
 
         </div>
 
@@ -537,7 +522,7 @@ button{
                 <h3>🎨 PHIM HOẠT HÌNH</h3>
 
                 <p>
-                    SDF-1 → SDF-3
+                    SDF-1 → CONAN 1071
                 </p>
 
             </div>
@@ -609,9 +594,7 @@ button{
 </main>
 
 
-<!-- ========================================================= -->
-<!-- ===================== PHIM HOẠT HÌNH ==================== -->
-<!-- ========================================================= -->
+<!-- ================= PHIM HOẠT HÌNH ================= -->
 
 <section id="animationPage">
 
@@ -631,7 +614,7 @@ button{
         </div>
 
         <div class="page-description">
-            Danh sách phim SDF-1 đến SDF-3
+            SDF-1 → CONAN 1071
         </div>
 
     </div>
@@ -731,6 +714,38 @@ button{
 
         </div>
 
+
+        <!-- CONAN 1071 -->
+
+        <div
+            class="movie"
+            data-title="CONAN 1071"
+            onclick="openYouTubeMovie(
+                'AaQ-XUENnZY',
+                'CONAN 1071'
+            )"
+        >
+
+            <img
+                class="poster"
+                src="https://i.ytimg.com/vi/AaQ-XUENnZY/maxresdefault.jpg"
+                alt="CONAN 1071"
+            >
+
+            <div class="movie-info">
+
+                <div class="movie-title">
+                    CONAN 1071
+                </div>
+
+                <div class="movie-type">
+                    Phim hoạt hình
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
@@ -738,9 +753,7 @@ button{
 </section>
 
 
-<!-- ========================================================= -->
-<!-- =========================== 18 ========================== -->
-<!-- ========================================================= -->
+<!-- ================= 18 ================= -->
 
 <section id="age18Page">
 
@@ -901,9 +914,7 @@ button{
 </section>
 
 
-<!-- ========================================================= -->
-<!-- ======================== PLAYER ========================== -->
-<!-- ========================================================= -->
+<!-- ================= PLAYER ================= -->
 
 <div id="movieModal">
 
@@ -926,10 +937,6 @@ button{
             class="video-frame"
         ></div>
 
-        <div class="player-note">
-            Nhấn phát để xem video.
-        </div>
-
     </div>
 
 </div>
@@ -937,32 +944,9 @@ button{
 
 <script>
 
-/* ========================================================= */
-/* ======================= ELEMENTS ======================== */
-/* ========================================================= */
-
-const mainPage =
-    document.getElementById("mainPage");
-
-const animationPage =
-    document.getElementById("animationPage");
-
-const age18Page =
-    document.getElementById("age18Page");
-
-const movieModal =
-    document.getElementById("movieModal");
-
-const playerTitle =
-    document.getElementById("playerTitle");
-
-const videoFrame =
-    document.getElementById("videoFrame");
-
-
-/* ========================================================= */
-/* ========================= SEARCH ========================= */
-/* ========================================================= */
+/* ================================================= */
+/* =================== TÌM KIẾM ==================== */
+/* ================================================= */
 
 function searchMovies(){
 
@@ -973,61 +957,54 @@ function searchMovies(){
         .toLowerCase()
         .trim();
 
-    const movies =
-        document.querySelectorAll(".movie");
+    document
+        .querySelectorAll(".movie")
+        .forEach(movie => {
 
-    movies.forEach(movie => {
+            const title =
+                (movie.dataset.title || "")
+                .toLowerCase();
 
-        const title =
-            (movie.dataset.title || "")
-            .toLowerCase();
+            movie.style.display =
+                title.includes(input)
+                ? ""
+                : "none";
 
-        if(title.includes(input)){
-
-            movie.style.display = "";
-
-        }else{
-
-            movie.style.display = "none";
-
-        }
-
-    });
-
+        });
 }
 
 
-/* ========================================================= */
-/* ========================= MAIN =========================== */
-/* ========================================================= */
+/* ================================================= */
+/* ===================== TRANG ====================== */
+/* ================================================= */
 
 function showMain(){
 
-    mainPage.style.display = "block";
+    document.getElementById("mainPage").style.display =
+        "block";
 
-    animationPage.style.display = "none";
+    document.getElementById("animationPage").style.display =
+        "none";
 
-    age18Page.style.display = "none";
+    document.getElementById("age18Page").style.display =
+        "none";
 
     window.scrollTo(0,0);
-
 }
 
 
-/* ========================================================= */
-/* ====================== ANIMATION ========================= */
-/* ========================================================= */
-
 function openAnimationPage(){
 
-    mainPage.style.display = "none";
+    document.getElementById("mainPage").style.display =
+        "none";
 
-    animationPage.style.display = "block";
+    document.getElementById("animationPage").style.display =
+        "block";
 
-    age18Page.style.display = "none";
+    document.getElementById("age18Page").style.display =
+        "none";
 
     window.scrollTo(0,0);
-
 }
 
 
@@ -1038,20 +1015,18 @@ function closeAnimationPage(){
 }
 
 
-/* ========================================================= */
-/* =========================== 18 =========================== */
-/* ========================================================= */
-
 function open18Page(){
 
-    mainPage.style.display = "none";
+    document.getElementById("mainPage").style.display =
+        "none";
 
-    animationPage.style.display = "none";
+    document.getElementById("animationPage").style.display =
+        "none";
 
-    age18Page.style.display = "block";
+    document.getElementById("age18Page").style.display =
+        "block";
 
     window.scrollTo(0,0);
-
 }
 
 
@@ -1062,46 +1037,191 @@ function close18Page(){
 }
 
 
-/* ========================================================= */
-/* ===================== YOUTUBE PLAYER ===================== */
-/* ========================================================= */
+/* ================================================= */
+/* =================== XEM PHIM ===================== */
+/* ================================================= */
 
 function openYouTubeMovie(videoId,title){
 
-    playerTitle.textContent = title;
+    document.getElementById("playerTitle").textContent =
+        title;
 
-    videoFrame.innerHTML = `
+    document.getElementById("videoFrame").innerHTML = `
         <iframe
-            src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+            src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
             title="${title}"
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen>
         </iframe>
     `;
 
-    movieModal.style.display = "flex";
-
+    document.getElementById("movieModal").style.display =
+        "flex";
 }
 
 
-/* ========================================================= */
-/* ====================== CLOSE PLAYER ====================== */
-/* ========================================================= */
+/* ================================================= */
+/* ================= ĐÓNG VIDEO ===================== */
+/* ================================================= */
 
 function closeMovie(){
 
-    movieModal.style.display = "none";
+    document.getElementById("movieModal").style.display =
+        "none";
 
-    videoFrame.innerHTML = "";
+    document.getElementById("videoFrame").innerHTML =
+        "";
 
-    playerTitle.textContent = "";
+    document.getElementById("playerTitle").textContent =
+        "";
+}
+
+
+/* ================================================= */
+/* ================ LIVE TỰ ĐỔI VIDEO =============== */
+/* ================================================= */
+
+const AUTO_PLAY_LIST = [
+
+    {
+        id:"619isj3yLv8",
+        title:"PHÁT TRỰC TIẾP"
+    },
+
+    {
+        id:"wT0wEIjhHJc",
+        title:"SDF-1"
+    },
+
+    {
+        id:"dHAV91nRl8A",
+        title:"SDF-2"
+    },
+
+    {
+        id:"AaQ-XUENnZY",
+        title:"CONAN 1071"
+    }
+
+];
+
+let autoIndex = 0;
+let autoPlayer = null;
+
+
+/* YouTube API */
+
+const ytScript =
+    document.createElement("script");
+
+ytScript.src =
+    "https://www.youtube.com/iframe_api";
+
+document.head.appendChild(ytScript);
+
+
+/* YouTube gọi hàm này */
+
+window.onYouTubeIframeAPIReady = function(){
+
+    autoPlayer =
+        new YT.Player("liveFrame",{
+
+            videoId:
+                AUTO_PLAY_LIST[0].id,
+
+            playerVars:{
+                autoplay:0,
+                controls:1,
+                rel:0,
+                playsinline:1
+            },
+
+            events:{
+
+                onReady:function(){
+
+                    updateLiveStatus();
+
+                },
+
+                onStateChange:function(event){
+
+                    if(
+                        event.data ===
+                        YT.PlayerState.ENDED
+                    ){
+
+                        nextAutoVideo();
+
+                    }
+
+                }
+
+            }
+
+        });
+
+};
+
+
+/* Video tiếp theo */
+
+function nextAutoVideo(){
+
+    autoIndex++;
+
+    if(
+        autoIndex >=
+        AUTO_PLAY_LIST.length
+    ){
+
+        autoIndex = 0;
+
+    }
+
+    const next =
+        AUTO_PLAY_LIST[autoIndex];
+
+    if(
+        autoPlayer &&
+        typeof autoPlayer.loadVideoById ===
+        "function"
+    ){
+
+        autoPlayer.loadVideoById(
+            next.id
+        );
+
+        updateLiveStatus();
+
+    }
 
 }
 
 
-/* ========================================================= */
-/* ======================= ESC KEY ========================== */
-/* ========================================================= */
+/* Tên video đang phát */
+
+function updateLiveStatus(){
+
+    const current =
+        AUTO_PLAY_LIST[autoIndex];
+
+    if(!current){
+        return;
+    }
+
+    document.getElementById(
+        "liveStatus"
+    ).textContent =
+        "Đang phát: " +
+        current.title;
+}
+
+
+/* ================================================= */
+/* ===================== ESC ======================== */
+/* ================================================= */
 
 document.addEventListener(
     "keydown",
@@ -1117,15 +1237,20 @@ document.addEventListener(
 );
 
 
-/* ========================================================= */
-/* =================== CLICK OUTSIDE ======================== */
-/* ========================================================= */
+/* ================================================= */
+/* =============== BẤM NGOÀI PLAYER ================ */
+/* ================================================= */
 
-movieModal.addEventListener(
+document.getElementById(
+    "movieModal"
+).addEventListener(
     "click",
     function(event){
 
-        if(event.target === movieModal){
+        if(
+            event.target ===
+            this
+        ){
 
             closeMovie();
 
@@ -1137,4 +1262,4 @@ movieModal.addEventListener(
 </script>
 
 </body>
-    </html>
+</html>
