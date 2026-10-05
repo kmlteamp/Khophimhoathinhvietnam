@@ -2,74 +2,146 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>@NCB_STUDIO</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+<title>@NCB_STUDIO - KHO PHIM VN</title>
 
 <style>
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+html,body{
+    min-height:100%;
+    background:#050505;
+    color:#fff;
 }
 
 body{
-    background:#050505;
-    color:#fff;
-    font-family:Arial,sans-serif;
-    min-height:100vh;
+    overflow-x:hidden;
 }
+
+/* ================= HEADER ================= */
 
 header{
     position:sticky;
     top:0;
     z-index:1000;
-    height:65px;
-    background:#090909;
-    border-bottom:1px solid #222;
+    min-height:70px;
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:10px 15px;
+    gap:15px;
+    padding:10px 18px;
+    background:rgba(7,7,7,.97);
+    border-bottom:1px solid #222;
 }
 
 .logo{
-    font-size:22px;
-    font-weight:bold;
+    font-size:25px;
+    font-weight:900;
     white-space:nowrap;
 }
 
-.search{
+.search-box{
     flex:1;
-    max-width:500px;
+    max-width:600px;
     margin:auto;
 }
 
-.search input{
+.search-box input{
     width:100%;
+    height:42px;
+    border-radius:22px;
+    border:1px solid #333;
+    outline:none;
     background:#151515;
     color:#fff;
-    border:1px solid #333;
-    border-radius:22px;
-    padding:11px 16px;
-    outline:none;
+    padding:0 18px;
+    font-size:15px;
 }
 
-.user{
+.search-box input::placeholder{
+    color:#888;
+}
+
+/* ================= MONEY ================= */
+
+.money-box{
+    position:fixed;
+    right:14px;
+    top:14px;
+    z-index:7000;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    padding:5px 10px 5px 5px;
+    background:rgba(10,10,10,.96);
+    border:1px solid #333;
+    border-radius:30px;
+}
+
+.money-logo{
     width:38px;
     height:38px;
     border-radius:50%;
-    background:#222;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:20px;
+    object-fit:cover;
+    border:2px solid #fff;
 }
+
+.money-count{
+    min-width:20px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+}
+
+/* ================= TITLE ================= */
+
+.rainbow-title{
+    width:100%;
+    text-align:center;
+    margin:18px 0 20px;
+}
+
+.rainbow-sub{
+    display:inline-block;
+    font-size:30px;
+    font-weight:1000;
+    letter-spacing:3px;
+    background:linear-gradient(
+        90deg,
+        #ff0000,
+        #ff7a00,
+        #ffe600,
+        #00d95f,
+        #00aaff,
+        #6c4cff,
+        #ff00a8,
+        #ff0000
+    );
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    background-size:300% 100%;
+    animation:rainbowMove 4s linear infinite;
+}
+
+@keyframes rainbowMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* ================= MAIN ================= */
 
 main{
     width:100%;
-    max-width:1100px;
+    max-width:1200px;
     margin:auto;
-    padding:18px 14px 50px;
+    padding:0 20px 30px;
 }
 
 .page{
@@ -80,223 +152,197 @@ main{
     display:block;
 }
 
-h1{
+/* ================= PAGE TITLE ================= */
+
+.page-title{
+    margin:15px 0 18px;
     font-size:24px;
-    margin:10px 0 15px;
+    font-weight:900;
 }
 
-h2{
-    font-size:20px;
-    margin:25px 0 12px;
+.back-button{
+    display:inline-block;
+    cursor:pointer;
 }
 
-/* =========================
-   HERO
-========================= */
+/* ================= HERO ================= */
 
 .hero{
+    position:relative;
     width:100%;
+    border-radius:18px;
+    overflow:hidden;
     background:#111;
     border:1px solid #252525;
-    border-radius:12px;
-    overflow:hidden;
     cursor:pointer;
 }
 
 .hero img{
     width:100%;
-    aspect-ratio:16/9;
-    object-fit:cover;
+    aspect-ratio:16/7;
     display:block;
+    object-fit:cover;
+}
+
+.hero-info{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:50px 22px 20px;
+    background:linear-gradient(
+        transparent,
+        rgba(0,0,0,.96)
+    );
 }
 
 .hero-title{
-    padding:12px;
-    font-size:19px;
+    font-size:25px;
     font-weight:bold;
 }
 
-/* =========================
-   CATEGORY
-========================= */
+.hero-sub{
+    margin-top:7px;
+    color:#bbb;
+}
+
+/* ================= CATEGORY ================= */
 
 .categories{
     display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-top:18px;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+    margin:25px 0;
 }
 
 .category{
-    min-height:90px;
-    background:#111;
+    min-height:100px;
+    border-radius:16px;
     border:1px solid #292929;
-    border-radius:12px;
+    background:#111;
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
     text-align:center;
-    font-size:17px;
+    font-size:18px;
     font-weight:bold;
     cursor:pointer;
-    user-select:none;
+    transition:.2s;
 }
 
-.category:active{
-    transform:scale(.97);
+.category:hover{
+    background:#1d1d1d;
+    transform:translateY(-2px);
 }
 
-/* =========================
-   LIVE KÉO NGANG
-========================= */
-
-.live-scroll{
-    width:100%;
-    display:flex;
-    gap:12px;
-    overflow-x:auto;
-    scroll-snap-type:x mandatory;
-    scroll-behavior:smooth;
-    scrollbar-width:none;
-    padding-bottom:8px;
-}
-
-.live-scroll::-webkit-scrollbar{
-    display:none;
-}
-
-.live-card{
-    flex:0 0 100%;
-    scroll-snap-align:center;
-    scroll-snap-stop:always;
-    background:#111;
-    border:1px solid #292929;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.live-title{
-    padding:12px 14px;
-    font-size:17px;
-    font-weight:bold;
-}
-
-.live-frame{
-    width:100%;
-    aspect-ratio:16/9;
-    background:#000;
-}
-
-.live-frame iframe{
-    width:100%;
-    height:100%;
-    border:0;
-}
-
-/* =========================
-   MOVIE GRID
-========================= */
+/* ================= MOVIE GRID ================= */
 
 .movie-grid{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:12px;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
 }
 
-.movie{
+.movie-card{
+    position:relative;
     background:#111;
     border:1px solid #292929;
-    border-radius:10px;
+    border-radius:14px;
     overflow:hidden;
     cursor:pointer;
+    transition:.2s;
 }
 
-.movie img{
+.movie-card:hover{
+    transform:translateY(-3px);
+    border-color:#555;
+}
+
+.movie-poster{
     width:100%;
     aspect-ratio:16/9;
     object-fit:cover;
     display:block;
+    background:#000;
 }
 
-.movie-title{
-    padding:10px;
+.movie-name{
+    padding:13px;
     font-size:15px;
     font-weight:bold;
+    line-height:1.35;
 }
 
-.update{
+/* ================= UPDATE ================= */
+
+.update-card{
     width:100%;
     aspect-ratio:16/9;
     background:#000;
     display:flex;
-    justify-content:center;
     align-items:center;
-}
-
-.update span{
-    color:#777;
-    font-size:21px;
-    font-weight:bold;
-}
-
-/* =========================
-   BACK
-========================= */
-
-.back{
-    display:inline-block;
-    background:#181818;
-    border:1px solid #333;
-    border-radius:8px;
-    padding:10px 15px;
-    margin-bottom:15px;
-    cursor:pointer;
-}
-
-/* =========================
-   ẢNH 18 - XẾP DỌC
-========================= */
-
-.photo-list{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    gap:16px;
-}
-
-.photo-card{
-    width:100%;
-    background:#111;
-    border:1px solid #292929;
-    border-radius:12px;
-    overflow:hidden;
-}
-
-.photo-card img{
-    width:100%;
-    display:block;
-    background:#000;
-    object-fit:contain;
-    max-height:700px;
-}
-
-.photo-name{
-    padding:11px;
+    justify-content:center;
     text-align:center;
-    font-size:16px;
-    font-weight:bold;
+    color:#fff;
+    font-size:20px;
+    font-weight:900;
 }
 
-/* =========================
-   PLAYER
-========================= */
+/* ================= VIP ================= */
+
+.vip-card{
+    border-color:#8d7100;
+}
+
+.vip-card .movie-poster{
+    filter:brightness(.75);
+}
+
+.vip-badge{
+    position:absolute;
+    top:9px;
+    right:9px;
+    padding:6px 10px;
+    border-radius:8px;
+    background:#ffd000;
+    color:#000;
+    font-size:14px;
+    font-weight:1000;
+    z-index:2;
+}
+
+.vip-cost{
+    position:absolute;
+    left:9px;
+    top:9px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    padding:5px 8px;
+    border-radius:7px;
+    background:rgba(0,0,0,.88);
+    color:#ffd000;
+    font-size:12px;
+    font-weight:bold;
+    z-index:3;
+}
+
+.vip-cost img{
+    width:21px;
+    height:21px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid #fff;
+}
+
+/* ================= PLAYER ================= */
 
 .player-modal{
-    display:none;
     position:fixed;
     inset:0;
-    z-index:9999;
+    z-index:5000;
     background:rgba(0,0,0,.96);
+    display:none;
     align-items:center;
     justify-content:center;
     padding:15px;
@@ -308,98 +354,512 @@ h2{
 
 .player-box{
     width:100%;
-    max-width:1000px;
+    max-width:1100px;
     position:relative;
+}
+
+.player-title{
+    color:#fff;
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:12px;
+    padding-right:180px;
+}
+
+.player-frame{
+    width:100%;
+    aspect-ratio:16/9;
+    border:0;
+    border-radius:12px;
+    background:#000;
 }
 
 .close-player{
     position:absolute;
     right:0;
-    top:-45px;
-    width:38px;
-    height:38px;
+    top:-5px;
+    width:40px;
+    height:40px;
+    border:0;
     border-radius:50%;
-    border:1px solid #444;
-    background:#171717;
+    background:#222;
     color:#fff;
-    font-size:23px;
+    font-size:27px;
+    cursor:pointer;
+    z-index:20;
+}
+
+/* ================= VIP PLAYER ================= */
+
+.player-vip{
+    position:absolute;
+    right:50px;
+    top:-5px;
+    display:none;
+    align-items:center;
+    gap:7px;
+    padding:6px 9px;
+    background:#111;
+    border:1px solid #8f7200;
+    border-radius:9px;
+    z-index:10;
+}
+
+.player-vip.show{
+    display:flex;
+}
+
+.player-vip-button{
+    border:0;
+    border-radius:7px;
+    background:#ffd000;
+    color:#000;
+    padding:7px 10px;
+    font-weight:1000;
     cursor:pointer;
 }
 
-.player-title{
-    font-size:18px;
+.player-vip-cost{
+    display:flex;
+    align-items:center;
+    gap:5px;
+    color:#ffd000;
+    font-size:12px;
     font-weight:bold;
+}
+
+.player-vip-cost img{
+    width:22px;
+    height:22px;
+    border-radius:50%;
+    object-fit:cover;
+    border:1px solid #fff;
+}
+
+.vip-lock{
+    width:100%;
+    aspect-ratio:16/9;
+    border-radius:12px;
+    background:radial-gradient(
+        circle at center,
+        #252525 0,
+        #080808 65%
+    );
+    display:none;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+}
+
+.vip-lock.show{
+    display:flex;
+}
+
+.vip-lock-title{
+    color:#ffd000;
+    font-size:30px;
+    font-weight:1000;
     margin-bottom:10px;
 }
 
-.player-video{
-    width:100%;
-    aspect-ratio:16/9;
-    background:#000;
+.vip-lock-text{
+    color:#ccc;
+    font-size:15px;
+    margin-bottom:17px;
 }
 
-.player-video iframe{
+.vip-buy{
+    border:0;
+    border-radius:10px;
+    background:#ffd000;
+    color:#000;
+    padding:12px 20px;
+    font-size:16px;
+    font-weight:1000;
+    cursor:pointer;
+}
+
+/* ================= WATCH REWARD ================= */
+
+.watch-reward{
+    position:fixed;
+    z-index:6000;
+    top:85px;
+    left:15px;
+    display:none;
+    align-items:center;
+    gap:9px;
+    padding:9px 12px;
+    border-radius:13px;
+    background:rgba(15,15,15,.96);
+    border:1px solid #333;
+}
+
+.watch-reward.show{
+    display:flex;
+}
+
+.watch-reward img{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.reward-text{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.reward-time{
+    font-size:18px;
+    font-weight:900;
+    min-width:25px;
+    text-align:center;
+}
+
+/* ================= FLY MONEY ================= */
+
+.flying-money{
+    position:fixed;
+    z-index:9000;
+    left:20px;
+    top:100px;
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    object-fit:cover;
+    opacity:0;
+    pointer-events:none;
+}
+
+.flying-money.fly{
+    opacity:1;
+    animation:flyMoney 1.2s ease-in-out forwards;
+}
+
+@keyframes flyMoney{
+    0%{
+        transform:translate(0,0) scale(1.1);
+        opacity:1;
+    }
+
+    70%{
+        transform:translate(
+            var(--target-x),
+            var(--target-y)
+        ) scale(.65);
+        opacity:1;
+    }
+
+    100%{
+        transform:translate(
+            var(--target-x),
+            var(--target-y)
+        ) scale(.15);
+        opacity:0;
+    }
+}
+
+/* ================= REWARD POPUP ================= */
+
+.reward-popup{
+    position:fixed;
+    z-index:8000;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) scale(.8);
+    background:#111;
+    border:1px solid #333;
+    border-radius:18px;
+    padding:22px 30px;
+    text-align:center;
+    font-size:21px;
+    font-weight:bold;
+    opacity:0;
+    pointer-events:none;
+    transition:.25s;
+}
+
+.reward-popup.show{
+    opacity:1;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+/* ================= VIP MESSAGE ================= */
+
+.vip-message{
+    position:fixed;
+    z-index:12000;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-50%) scale(.8);
+    width:calc(100% - 40px);
+    max-width:390px;
+    padding:24px 20px;
+    background:#111;
+    border:2px solid #ffd000;
+    border-radius:18px;
+    text-align:center;
+    opacity:0;
+    pointer-events:none;
+    visibility:hidden;
+    transition:opacity .25s,transform .25s;
+}
+
+.vip-message.show{
+    opacity:1;
+    pointer-events:auto;
+    visibility:visible;
+    transform:translate(-50%,-50%) scale(1);
+}
+
+.vip-message-title{
+    color:#ffd000;
+    font-size:22px;
+    font-weight:1000;
+    margin-bottom:10px;
+}
+
+.vip-message-text{
+    color:#fff;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.vip-message-close{
+    position:relative;
+    z-index:5;
+    margin-top:17px;
+    border:0;
+    border-radius:9px;
+    padding:10px 24px;
+    background:#ffd000;
+    color:#000;
+    font-weight:bold;
+    cursor:pointer;
+    touch-action:manipulation;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome-notice{
+    position:fixed;
+    inset:0;
+    z-index:10000;
+    background:rgba(0,0,0,.75);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.welcome-box{
+    position:relative;
+    width:100%;
+    max-width:430px;
+    background:#111;
+    border:2px solid #333;
+    border-radius:18px;
+    padding:25px 18px 18px;
+    text-align:center;
+}
+
+.welcome-close{
+    position:absolute;
+    top:8px;
+    right:8px;
+    width:36px;
+    height:36px;
+    border:none;
+    border-radius:50%;
+    background:#292929;
+    color:#fff;
+    font-size:25px;
+    cursor:pointer;
+}
+
+.welcome-title{
+    padding:5px 35px 10px;
+    font-size:21px;
+    font-weight:bold;
+}
+
+.welcome-text{
+    color:#ccc;
+    font-size:15px;
+    line-height:1.5;
+    margin-bottom:15px;
+}
+
+.welcome-image{
+    width:100%;
+    max-height:280px;
+    object-fit:cover;
+    border-radius:13px;
+    display:block;
+}
+
+/* ================= PHIM NGẮN ================= */
+
+.shorts-page{
+    position:fixed;
+    inset:0;
+    z-index:4000;
+    background:#000;
+    display:none;
+    flex-direction:column;
+}
+
+.shorts-page.show{
+    display:flex;
+}
+
+.shorts-top{
+    position:absolute;
+    top:12px;
+    left:12px;
+    right:12px;
+    z-index:20;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.back-home{
+    border:1px solid #444;
+    background:rgba(0,0,0,.75);
+    color:#fff;
+    border-radius:10px;
+    padding:10px 14px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.shorts-count{
+    background:rgba(0,0,0,.75);
+    border:1px solid #444;
+    padding:9px 12px;
+    border-radius:10px;
+    font-weight:bold;
+}
+
+.short-view{
+    width:100%;
+    height:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    touch-action:none;
+    overflow:hidden;
+}
+
+.short-frame{
     width:100%;
     height:100%;
     border:0;
+    background:#000;
 }
 
-/* =========================
-   MOBILE
-========================= */
+/* ================= MOBILE ================= */
 
-@media(max-width:600px){
+@media(max-width:850px){
 
     header{
-        height:60px;
-        padding:9px 10px;
+        min-height:65px;
+        padding:10px;
+        gap:9px;
+        flex-wrap:wrap;
     }
 
     .logo{
-        font-size:18px;
+        font-size:20px;
     }
 
-    main{
-        padding:12px 10px 40px;
-    }
-
-    h1{
-        font-size:21px;
-    }
-
-    h2{
-        font-size:19px;
-    }
-
-    .categories{
-        grid-template-columns:1fr;
-        gap:8px;
-    }
-
-    .category{
-        min-height:70px;
-        font-size:16px;
+    .search-box{
+        order:3;
+        flex-basis:100%;
     }
 
     .movie-grid{
         grid-template-columns:repeat(2,1fr);
-        gap:8px;
     }
 
-    .movie-title{
+    main{
+        padding:0 12px 30px;
+    }
+
+    .hero img{
+        aspect-ratio:16/9;
+    }
+
+    .hero-title{
+        font-size:20px;
+    }
+
+    .rainbow-sub{
+        font-size:27px;
+    }
+}
+
+@media(max-width:700px){
+
+    .categories{
+        grid-template-columns:1fr;
+    }
+
+    .category{
+        min-height:75px;
+    }
+
+    .welcome-box{
+        max-width:350px;
+        padding:23px 14px 14px;
+    }
+
+    .welcome-title{
+        font-size:18px;
+    }
+
+    .welcome-text{
+        font-size:14px;
+    }
+
+    .welcome-image{
+        max-height:240px;
+    }
+}
+
+@media(max-width:420px){
+
+    .movie-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .movie-name{
+        padding:9px;
         font-size:13px;
     }
 
-    .photo-list{
-        gap:12px;
+    .money-box{
+        right:8px;
+        top:8px;
     }
 
-    .photo-card img{
-        max-height:none;
+    .money-logo{
+        width:32px;
+        height:32px;
     }
 
-    .photo-name{
-        font-size:14px;
+    .money-count{
+        font-size:16px;
+    }
+
+    .rainbow-sub{
+        font-size:23px;
+        letter-spacing:2px;
     }
 }
 </style>
@@ -407,47 +867,62 @@ h2{
 
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
-
 <header>
 
     <div class="logo">
         @NCB_STUDIO
     </div>
 
-    <div class="search">
+    <div class="search-box">
         <input
-            id="searchInput"
             type="text"
+            id="searchInput"
             placeholder="Tìm kiếm phim..."
             oninput="searchMovies()"
         >
     </div>
 
-    <div class="user">
-        👤
-    </div>
-
 </header>
 
 
-<!-- =====================================================
-     TRANG CHÍNH
-===================================================== -->
+<!-- MONEY -->
 
-<main id="mainPage" class="page active">
+<div class="money-box">
 
-    <h1>PHIM MỚI CẬP NHẬT</h1>
+    <img
+        id="moneyLogo"
+        class="money-logo"
+        src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+        alt="Doraemon"
+    >
+
+    <span id="moneyCount" class="money-count">0</span>
+
+</div>
 
 
-    <!-- ONE PIECE -->
+<!-- TITLE -->
+
+<div class="rainbow-title">
+    <div class="rainbow-sub">
+        KHO PHIM VN
+    </div>
+</div>
+
+
+<main>
+
+<!-- ================= TRANG CHÍNH ================= -->
+
+<section id="homePage" class="page active">
+
+    <h2 class="page-title">
+        PHIM HOT
+    </h2>
 
     <div
         class="hero"
-        data-title="ONE PIECE TẬP 997"
-        onclick="openMovie('bGcVGahgQAA','ONE PIECE - TẬP 997')"
+        onclick="openMovie('ONE PIECE (TẬP 997)','bGcVGahgQAA')"
     >
 
         <img
@@ -455,733 +930,900 @@ h2{
             alt="ONE PIECE"
         >
 
-        <div class="hero-title">
-            ONE PIECE - TẬP 997
+        <div class="hero-info">
+
+            <div class="hero-title">
+                ONE PIECE (TẬP 997)
+            </div>
+
+            <div class="hero-sub">
+                Xem phim ngay
+            </div>
+
         </div>
 
     </div>
 
-
-    <!-- DANH MỤC -->
 
     <div class="categories">
 
         <div
             class="category"
-            onclick="openAnimationPage()"
+            onclick="showPage('animationPage')"
         >
-            🎨 PHIM HOẠT HÌNH
+            PHIM HOẠT HÌNH
         </div>
-
 
         <div
             class="category"
-            onclick="open18Page()"
+            onclick="showPage('martialPage')"
         >
             18
         </div>
 
+        <div
+            class="category"
+            onclick="showPage('musicPage')"
+        >
+            NHẠC
+        </div>
 
         <div
             class="category"
-            onclick="openPhoto18Page()"
+            onclick="openShorts()"
         >
-            🖼️ ẢNH 18
+            PHIM NGẮN
         </div>
 
     </div>
 
 
-    <!-- =================================================
-         LIVE
-         CHỈ CÓ LIVE Ở ĐÂY
-         KÉO NGANG ĐỂ ĐỔI LIVE
-    ================================================== -->
-
-    <h2>PHÁT TRỰC TIẾP</h2>
-
-    <div class="live-scroll">
-
-
-        <!-- LIVE 1 -->
-
-        <div class="live-card">
-
-            <div class="live-title">
-                🔴 PHÁT TRỰC TIẾP
-            </div>
-
-            <div class="live-frame">
-
-                <iframe
-                    src="https://www.youtube.com/embed/619isj3yLv8?autoplay=0&rel=0"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-        </div>
-
-
-        <!-- LIVE 2
-             THAY ID YOUTUBE Ở ĐÂY -->
-
-        <div class="live-card">
-
-            <div class="live-title">
-                🔴 LIVE 2
-            </div>
-
-            <div class="live-frame">
-
-                <iframe
-                    src="https://www.youtube.com/embed/LIVE_ID_2?autoplay=0&rel=0"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-        </div>
-
-
-        <!-- LIVE 3 -->
-
-        <div class="live-card">
-
-            <div class="live-title">
-                🔴 LIVE 3
-            </div>
-
-            <div class="live-frame">
-
-                <iframe
-                    src="https://www.youtube.com/embed/LIVE_ID_3?autoplay=0&rel=0"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-        </div>
-
-
-        <!-- LIVE 4 -->
-
-        <div class="live-card">
-
-            <div class="live-title">
-                🔴 LIVE 4
-            </div>
-
-            <div class="live-frame">
-
-                <iframe
-                    src="https://www.youtube.com/embed/LIVE_ID_4?autoplay=0&rel=0"
-                    allow="autoplay; encrypted-media; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-        </div>
-
-
-    </div>
-
-</main>
-
-
-<!-- =====================================================
-     PHIM HOẠT HÌNH
-===================================================== -->
-
-<main id="animationPage" class="page">
-
-    <div
-        class="back"
-        onclick="showMain()"
-    >
-        ← Quay lại
-    </div>
-
-
-    <h1>🎨 PHIM HOẠT HÌNH</h1>
+    <h2 class="page-title">
+        PHIM HOT
+    </h2>
 
 
     <div class="movie-grid">
 
-
-        <!-- SDF 1 -->
-
         <div
-            class="movie"
-            data-title="SDF-1"
-            onclick="openMovie('wT0wEIjhHJc','SDF-1')"
+            class="movie-card"
+            onclick="openMovie('ONE PIECE (TẬP 997)','bGcVGahgQAA')"
+            data-name="one piece tập 997"
         >
 
             <img
-                src="https://i.ytimg.com/vi/wT0wEIjhHJc/hq720.jpg"
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/bGcVGahgQAA/maxresdefault.jpg"
+                alt="ONE PIECE"
+            >
+
+            <div class="movie-name">
+                ONE PIECE (TẬP 997)
+            </div>
+
+        </div>
+
+
+        <!-- PHIM HOT VIP - TRAI NGHÈO CỨU MỸ NHÂN -->
+
+        <div
+            class="movie-card vip-card"
+            onclick="openVipMovie(
+                'TRAI NGHÈO CỨU MỸ NHÂN',
+                'fz67-VIGx5E',
+                10
+            )"
+            data-name="trai nghèo cứu mỹ nhân"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/fz67-VIGx5E/maxresdefault.jpg"
+                alt="TRAI NGHÈO CỨU MỸ NHÂN"
+            >
+
+            <div class="vip-badge">
+                VIP
+            </div>
+
+            <div class="vip-cost">
+
+                <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+                    alt="Money"
+                >
+
+                10
+            </div>
+
+            <div class="movie-name">
+                TRAI NGHÈO CỨU MỸ NHÂN
+            </div>
+
+        </div>
+
+
+        <!-- PHIM HOT VIP - DORAEMON #119VIP -->
+
+        <div
+            class="movie-card vip-card"
+            onclick="openVipMovie(
+                'DORAEMON #119VIP',
+                'Rz2KR7O296Q',
+                5
+            )"
+            data-name="doraemon #119vip"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/Rz2KR7O296Q/maxresdefault.jpg"
+                alt="DORAEMON #119VIP"
+            >
+
+            <div class="vip-badge">
+                VIP
+            </div>
+
+            <div class="vip-cost">
+
+                <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+                    alt="Money"
+                >
+
+                5
+            </div>
+
+            <div class="movie-name">
+                DORAEMON #119VIP
+            </div>
+
+        </div>
+
+
+        <!-- PHIM HOT VIP - CHILL #001VIP -->
+
+        <div
+            class="movie-card vip-card"
+            onclick="openVipMovie(
+                'chill #001vip',
+                'vH8DV82yZbY',
+                19
+            )"
+            data-name="chill #001vip"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/vH8DV82yZbY/maxresdefault.jpg"
+                alt="chill #001vip"
+            >
+
+            <div class="vip-badge">
+                VIP
+            </div>
+
+            <div class="vip-cost">
+
+                <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+                    alt="Money"
+                >
+
+                19
+            </div>
+
+            <div class="movie-name">
+                chill #001vip
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PHIM HOẠT HÌNH ================= -->
+
+<section id="animationPage" class="page">
+
+    <div
+        class="page-title back-button"
+        onclick="showPage('homePage')"
+    >
+        ← QUAY VỀ TRANG CHÍNH
+    </div>
+
+    <h2 class="page-title">
+        PHIM HOẠT HÌNH
+    </h2>
+
+    <div class="movie-grid">
+
+        <div
+            class="movie-card"
+            onclick="openMovie('SDF-1','wT0wEIjhHJc')"
+            data-name="sdf-1"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/wT0wEIjhHJc/maxresdefault.jpg"
                 alt="SDF-1"
             >
 
-            <div class="movie-title">
+            <div class="movie-name">
                 SDF-1
             </div>
 
         </div>
 
 
-        <!-- SDF 2 -->
-
         <div
-            class="movie"
-            data-title="SDF-2"
-            onclick="openMovie('dHAV91nRl8A','SDF-2')"
+            class="movie-card"
+            onclick="openMovie('SDF-2','dHAV91nRl8A')"
+            data-name="sdf-2"
         >
 
             <img
-                src="https://i.ytimg.com/vi/dHAV91nRl8A/hq720.jpg"
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/dHAV91nRl8A/maxresdefault.jpg"
                 alt="SDF-2"
             >
 
-            <div class="movie-title">
+            <div class="movie-name">
                 SDF-2
             </div>
 
         </div>
 
 
-        <!-- SDF 3 -->
-
         <div
-            class="movie"
-            data-title="SDF-3"
+            class="movie-card"
+            onclick="openMovie(
+                'DORAEMON CHUYẾN PHIÊU LƯU NAM CỰC',
+                'RylJMmCnPzM'
+            )"
+            data-name="doraemon chuyến phiêu lưu nam cực"
         >
 
-            <div class="update">
-                <span>UPDATE</span>
-            </div>
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/RylJMmCnPzM/maxresdefault.jpg"
+                alt="DORAEMON CHUYẾN PHIÊU LƯU NAM CỰC"
+            >
 
-            <div class="movie-title">
-                SDF-3
+            <div class="movie-name">
+                DORAEMON CHUYẾN PHIÊU LƯU NAM CỰC
             </div>
 
         </div>
 
 
-        <!-- CONAN 1071 -->
-
         <div
-            class="movie"
-            data-title="CONAN 1071"
-            onclick="openMovie('AaQ-XUENnZY','CONAN 1071')"
+            class="movie-card"
+            onclick="openMovie(
+                'DORAEMON (TẬP 17)',
+                '1f31UHe8Pxw'
+            )"
+            data-name="doraemon tập 17"
         >
 
             <img
-                src="https://i.ytimg.com/vi/AaQ-XUENnZY/hq720.jpg"
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/1f31UHe8Pxw/maxresdefault.jpg"
+                alt="DORAEMON (TẬP 17)"
+            >
+
+            <div class="movie-name">
+                DORAEMON (TẬP 17)
+            </div>
+
+        </div>
+
+
+        <div
+            class="movie-card"
+            onclick="openMovie(
+                'DORAEMON #33',
+                'l1KC_W-JlFE'
+            )"
+            data-name="doraemon 33"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/l1KC_W-JlFE/maxresdefault.jpg"
+                alt="DORAEMON #33"
+            >
+
+            <div class="movie-name">
+                DORAEMON #33
+            </div>
+
+        </div>
+
+
+        <div
+            class="movie-card"
+            onclick="openMovie(
+                'CONAN 1071',
+                'AaQ-XUENnZY'
+            )"
+            data-name="conan 1071"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/AaQ-XUENnZY/maxresdefault.jpg"
                 alt="CONAN 1071"
             >
 
-            <div class="movie-title">
+            <div class="movie-name">
                 CONAN 1071
             </div>
 
         </div>
 
 
+        <div
+            class="movie-card"
+            onclick="openMovie(
+                'TRUYỆN CỦA ĐỐM_1',
+                'LuEeAUVFtHA'
+            )"
+            data-name="truyện của đốm 1"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/LuEeAUVFtHA/maxresdefault.jpg"
+                alt="TRUYỆN CỦA ĐỐM_1"
+            >
+
+            <div class="movie-name">
+                TRUYỆN CỦA ĐỐM_1
+            </div>
+
+        </div>
+
+
+        <!-- DORAEMON #119VIP -->
+
+        <div
+            class="movie-card vip-card"
+            onclick="openVipMovie(
+                'DORAEMON #119VIP',
+                'Rz2KR7O296Q',
+                5
+            )"
+            data-name="doraemon #119vip"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/Rz2KR7O296Q/maxresdefault.jpg"
+                alt="DORAEMON #119VIP"
+            >
+
+            <div class="vip-badge">
+                VIP
+            </div>
+
+            <div class="vip-cost">
+
+                <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+                    alt="Money"
+                >
+
+                5
+            </div>
+
+            <div class="movie-name">
+                DORAEMON #119VIP
+            </div>
+
+        </div>
+
+
+        <div class="movie-card">
+
+            <div class="update-card">
+                UPDATE
+            </div>
+
+            <div class="movie-name">
+                PHIM HOẠT HÌNH MỚI
+            </div>
+
+        </div>
+
     </div>
 
-</main>
+</section>
 
 
-<!-- =====================================================
-     TRANG 18 - VÕ THUẬT
-===================================================== -->
+<!-- ================= 18 ================= -->
 
-<main id="page18" class="page">
+<section id="martialPage" class="page">
 
     <div
-        class="back"
-        onclick="showMain()"
+        class="page-title back-button"
+        onclick="showPage('homePage')"
     >
-        ← Quay lại
+        ← QUAY VỀ TRANG CHÍNH
     </div>
 
-
-    <h1>PHIM VÕ THUẬT</h1>
-
+    <h2 class="page-title">
+        18
+    </h2>
 
     <div class="movie-grid">
 
+        <div
+            class="movie-card"
+            onclick="openMovie(
+                'TIỂU SƯ TRƯỞNG NGHĨA',
+                'yML5SFz5cYQ'
+            )"
+            data-name="tiểu sư trưởng nghĩa"
+        >
 
-        <div class="movie">
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/yML5SFz5cYQ/maxresdefault.jpg"
+                alt="TIỂU SƯ TRƯỞNG NGHĨA"
+            >
 
-            <div class="update">
-                <span>UPDATE</span>
-            </div>
-
-            <div class="movie-title">
-                VTK-1
-            </div>
-
-        </div>
-
-
-        <div class="movie">
-
-            <div class="update">
-                <span>UPDATE</span>
-            </div>
-
-            <div class="movie-title">
-                VTK-2
+            <div class="movie-name">
+                TIỂU SƯ TRƯỞNG NGHĨA
             </div>
 
         </div>
 
 
-        <div class="movie">
+        <div
+            class="movie-card"
+            onclick="openMovie(
+                'XUYÊN KHÔNG VỀ THỜI NẠN ĐÓI',
+                'QnFuboBfHfs'
+            )"
+            data-name="xuyên không về thời nạn đói"
+        >
 
-            <div class="update">
-                <span>UPDATE</span>
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/QnFuboBfHfs/maxresdefault.jpg"
+                alt="XUYÊN KHÔNG VỀ THỜI NẠN ĐÓI"
+            >
+
+            <div class="movie-name">
+                XUYÊN KHÔNG VỀ THỜI NẠN ĐÓI
             </div>
 
-            <div class="movie-title">
-                VTK-3
+        </div>
+
+
+        <!-- TRAI NGHÈO CỨU MỸ NHÂN VIP 10 -->
+
+        <div
+            class="movie-card vip-card"
+            onclick="openVipMovie(
+                'TRAI NGHÈO CỨU MỸ NHÂN',
+                'fz67-VIGx5E',
+                10
+            )"
+            data-name="trai nghèo cứu mỹ nhân"
+        >
+
+            <img
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/fz67-VIGx5E/maxresdefault.jpg"
+                alt="TRAI NGHÈO CỨU MỸ NHÂN"
+            >
+
+            <div class="vip-badge">
+                VIP
+            </div>
+
+            <div class="vip-cost">
+
+                <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+                    alt="Money"
+                >
+
+                10
+            </div>
+
+            <div class="movie-name">
+                TRAI NGHÈO CỨU MỸ NHÂN
             </div>
 
         </div>
 
 
-        <div class="movie">
+        <div class="movie-card">
 
-            <div class="update">
-                <span>UPDATE</span>
+            <div class="update-card">
+                UPDATE
             </div>
 
-            <div class="movie-title">
-                VTK-4
+            <div class="movie-name">
+                PHIM MỚI
             </div>
 
         </div>
-
 
     </div>
 
-</main>
+</section>
 
 
-<!-- =====================================================
-     ẢNH 18
-     13 ẢNH XẾP DỌC
-===================================================== -->
+<!-- ================= NHẠC ================= -->
 
-<main id="photo18Page" class="page">
+<section id="musicPage" class="page">
 
     <div
-        class="back"
-        onclick="showMain()"
+        class="page-title back-button"
+        onclick="showPage('homePage')"
     >
-        ← Quay lại
+        ← QUAY VỀ TRANG CHÍNH
     </div>
 
+    <h2 class="page-title">
+        NHẠC
+    </h2>
 
-    <h1>🖼️ ẢNH 18</h1>
+    <div class="movie-grid">
 
-
-    <div class="photo-list">
-
-
-        <!-- ẢNH 1 -->
-
-        <div class="photo-card">
+        <div
+            class="movie-card"
+            onclick="openMovie(
+                'CÂY ĐA QUÁN DỐC',
+                'fUuqVfmhXQE'
+            )"
+            data-name="cây đa quán dốc"
+        >
 
             <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292754.jpg"
-                alt="Ảnh 1"
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/fUuqVfmhXQE/maxresdefault.jpg"
+                alt="CÂY ĐA QUÁN DỐC"
             >
 
-            <div class="photo-name">
-                ẢNH 1
+            <div class="movie-name">
+                CÂY ĐA QUÁN DỐC
             </div>
 
         </div>
 
 
-        <!-- ẢNH 2 -->
-
-        <div class="photo-card">
+        <div
+            class="movie-card"
+            onclick="openMovie(
+                'CON VỊT _TNHI',
+                'oIStM-HF_kc'
+            )"
+            data-name="con vịt tnhi"
+        >
 
             <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292755.jpg"
-                alt="Ảnh 2"
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/oIStM-HF_kc/maxresdefault.jpg"
+                alt="CON VỊT _TNHI"
             >
 
-            <div class="photo-name">
-                ẢNH 2
+            <div class="movie-name">
+                CON VỊT _TNHI
             </div>
 
         </div>
 
 
-        <!-- ẢNH 3 -->
+        <!-- CHILL #001VIP -->
 
-        <div class="photo-card">
+        <div
+            class="movie-card vip-card"
+            onclick="openVipMovie(
+                'chill #001vip',
+                'vH8DV82yZbY',
+                19
+            )"
+            data-name="chill #001vip"
+        >
 
             <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292771.jpg"
-                alt="Ảnh 3"
+                class="movie-poster"
+                src="https://i.ytimg.com/vi/vH8DV82yZbY/maxresdefault.jpg"
+                alt="chill #001vip"
             >
 
-            <div class="photo-name">
-                ẢNH 3
+            <div class="vip-badge">
+                VIP
+            </div>
+
+            <div class="vip-cost">
+
+                <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+                    alt="Money"
+                >
+
+                19
+            </div>
+
+            <div class="movie-name">
+                chill #001vip
             </div>
 
         </div>
 
 
-        <!-- ẢNH 4 -->
+        <div class="movie-card">
 
-        <div class="photo-card">
+            <div class="update-card">
+                UPDATE
+            </div>
 
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292774.jpg"
-                alt="Ảnh 4"
-            >
-
-            <div class="photo-name">
-                ẢNH 4
+            <div class="movie-name">
+                NHẠC MỚI
             </div>
 
         </div>
-
-
-        <!-- ẢNH 5 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292727.jpg"
-                alt="Ảnh 5"
-            >
-
-            <div class="photo-name">
-                ẢNH 5
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 6 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://1.bp.blogspot.com/-kDd9SgV590s/YRe132f__FI/AAAAAAAAAHY/dipFDQNJ7G4ZIB62dgx0U2DmkkkP4k9FQCLcBGAsYHQ/s0/anh-sex-0821-192233-042.jpg"
-                alt="Ảnh 6"
-            >
-
-            <div class="photo-name">
-                ẢNH 6
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 7 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://1.bp.blogspot.com/-vuek4IVyXtY/YRe14U80AyI/AAAAAAAAAHg/EQpkV5IIqlEVYG_kyn-3ghNtdGqFfw44ACLcBGAsYHQ/s0/anh-sex-0821-192234-044.jpg"
-                alt="Ảnh 7"
-            >
-
-            <div class="photo-name">
-                ẢNH 7
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 8 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://1.bp.blogspot.com/-KFPvZxCN-HY/YRe14GchTcI/AAAAAAAAAHc/zVkZcbCOCkgyFjc849G-2e99l8Yzu5wngCLcBGAsYHQ/s0/anh-sex-0821-192234-043.jpg"
-                alt="Ảnh 8"
-            >
-
-            <div class="photo-name">
-                ẢNH 8
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 9 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://1.bp.blogspot.com/-9bhJtVebEUc/YRe15svKioI/AAAAAAAAAHw/1OSgkr1YNFgPAsrWBc66WH5XXm3bcprAwCLcBGAsYHQ/s0/anh-sex-0821-192234-048.jpg"
-                alt="Ảnh 9"
-            >
-
-            <div class="photo-name">
-                ẢNH 9
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 10 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://ml1.nude3x.com/images/2021/10/hinh-sex-1021-03022748-004.jpg"
-                alt="Ảnh 10"
-            >
-
-            <div class="photo-name">
-                ẢNH 10
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 11 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://ml1.nude3x.com/images/2021/10/anh-sex-1021-25142404-014.jpg"
-                alt="Ảnh 11"
-            >
-
-            <div class="photo-name">
-                ẢNH 11
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 12 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://ml1.nude3x.com/images/2021/10/anh-sex-1021-25142404-008.jpg"
-                alt="Ảnh 12"
-            >
-
-            <div class="photo-name">
-                ẢNH 12
-            </div>
-
-        </div>
-
-        <!-- ẢNH 13 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292741.jpg"
-                alt="Ảnh 12"
-            >
-
-            <div class="photo-name">
-                ẢNH 13
-            </div>
-
-        </div>
-
-        <!-- ẢNH 14 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292742.jpg"
-                alt="Ảnh 14"
-            >
-
-            <div class="photo-name">
-                ẢNH 14
-            </div>
-
-        </div>
-
-        <!-- ẢNH 15 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292743.jpg"
-                alt="Ảnh 15"
-            >
-
-            <div class="photo-name">
-                ẢNH 12
-            </div>
-
-        </div>
-
-        <!-- ẢNH 16 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292744.jpg"
-                alt="Ảnh 16"
-            >
-
-            <div class="photo-name">
-                ẢNH 16
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 17 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292749.jpg"
-                alt="Ảnh 17"
-            >
-
-            <div class="photo-name">
-                ẢNH 17
-            </div>
-
-        </div>
-
-        <!-- ẢNH 18 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292750.jpg"
-                alt="Ảnh 18"
-            >
-
-            <div class="photo-name">
-                ẢNH 18
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 19 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292751.jpg"
-                alt="Ảnh 19"
-            >
-
-            <div class="photo-name">
-                ẢNH 12
-            </div>
-
-        </div>
-
-        
-        
-        <!-- ẢNH 20 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292738.jpg"
-                alt="Ảnh 20"
-            >
-
-            <div class="photo-name">
-                ẢNH 12
-            </div>
-
-        </div>
-
-
-        <!-- ẢNH 20 -->
-
-        <div class="photo-card">
-
-            <img
-                src="https://meitu.jrants.com/wp-content/uploads/2024/02/23/1581572302292741.jpg"
-                alt="Ảnh 28"
-            >
-
-            <div class="photo-name">
-                ẢNH 18
-            </div>
-
-        </div>
-        
-        
-     
-
-
-        <!-- ẢNH 22-->
-
-        <div class="photo-card">
-
-            <img
-                src="https://ml1.nude3x.com/images/2022/02/anh-sex-0821-060508-001.jpg"
-                alt="Ảnh 21"
-            >
-
-            <div class="photo-name">
-                ẢNH 1
-            </div>
-
-        </div>
-
 
     </div>
+
+</section>
 
 </main>
 
 
-<!-- =====================================================
-     PLAYER PHIM
-===================================================== -->
+<!-- ================= PLAYER ================= -->
 
 <div
     id="playerModal"
     class="player-modal"
-    onclick="outsideClose(event)"
 >
 
     <div class="player-box">
 
-
         <button
             class="close-player"
-            onclick="closeMovie()"
+            type="button"
+            onclick="closePlayer()"
         >
             ×
         </button>
 
+        <div
+            id="playerVip"
+            class="player-vip"
+        >
+
+            <div class="player-vip-cost">
+
+                <img
+                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+                    alt="Money"
+                >
+
+                <span id="playerVipCost">
+                    0
+                </span>
+
+            </div>
+
+            <button
+                id="playerVipButton"
+                class="player-vip-button"
+                type="button"
+                onclick="buyVip()"
+            >
+                XEM VIP
+            </button>
+
+        </div>
+
 
         <div
             id="playerTitle"
-            class="player-title">
+            class="player-title"
+        >
+            Đang xem
         </div>
 
 
         <div
-            id="playerVideo"
-            class="player-video">
+            id="vipLock"
+            class="vip-lock"
+        >
+
+            <div class="vip-lock-title">
+                PHIM VIP
+            </div>
+
+            <div
+                id="vipLockText"
+                class="vip-lock-text"
+            >
+                Phí xem phim
+            </div>
+
+            <button
+                class="vip-buy"
+                type="button"
+                onclick="buyVip()"
+            >
+                MỞ PHIM VIP
+            </button>
+
         </div>
 
+
+        <iframe
+            id="playerFrame"
+            class="player-frame"
+            src=""
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+        ></iframe>
+
+    </div>
+
+</div>
+
+
+<!-- ================= WATCH REWARD ================= -->
+
+<div
+    id="watchReward"
+    class="watch-reward"
+>
+
+    <img
+        src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+        alt="Doraemon"
+    >
+
+    <span class="reward-text">
+        NHẬN TIỀN
+    </span>
+
+    <span
+        id="rewardTime"
+        class="reward-time"
+    >
+        56
+    </span>
+
+</div>
+
+
+<!-- ================= FLYING MONEY ================= -->
+
+<img
+    id="flyingMoney"
+    class="flying-money"
+    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
+    alt="Money"
+>
+
+
+<!-- ================= REWARD POPUP ================= -->
+
+<div
+    id="rewardPopup"
+    class="reward-popup"
+>
+    +1 TIỀN DORAEMON
+</div>
+
+
+<!-- ================= VIP MESSAGE ================= -->
+
+<div
+    id="vipMessage"
+    class="vip-message"
+>
+
+    <div class="vip-message-title">
+        KHÔNG ĐỦ TIỀN
+    </div>
+
+    <div class="vip-message-text">
+        KHÔNG ĐỦ TIỀN ĐỂ XEM :(
+    </div>
+
+    <button
+        id="vipMessageClose"
+        class="vip-message-close"
+        type="button"
+    >
+        ĐÓNG
+    </button>
+
+</div>
+
+
+<!-- ================= WELCOME ================= -->
+
+<div
+    id="welcomeNotice"
+    class="welcome-notice"
+>
+
+    <div class="welcome-box">
+
+        <button
+            class="welcome-close"
+            type="button"
+            onclick="closeWelcome()"
+        >
+            ×
+        </button>
+
+        <div class="welcome-title">
+            CHÀO MỪNG ĐẾN VỚI KHO PHIM VIỆT NAM
+        </div>
+
+        <div class="welcome-text">
+            NƠI LƯU TRỮ CÁC PHIM HOẠT HÌNH,
+            HÀNH ĐỘNG, NHẠC VÀ CÁC LOẠI
+        </div>
+
+        <img
+            class="welcome-image"
+            src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-3.jpg.webp"
+            alt="Welcome"
+        >
+
+    </div>
+
+</div>
+
+
+<!-- ================= PHIM NGẮN ================= -->
+
+<div
+    id="shortsPage"
+    class="shorts-page"
+>
+
+    <div class="shorts-top">
+
+        <button
+            class="back-home"
+            type="button"
+            onclick="closeShorts()"
+        >
+            ← QUAY VỀ TRANG CHÍNH
+        </button>
+
+        <div
+            id="shortsCount"
+            class="shorts-count"
+        >
+            1 / 5
+        </div>
+
+    </div>
+
+    <div
+        id="shortView"
+        class="short-view"
+    >
+
+        <iframe
+            id="shortFrame"
+            class="short-frame"
+            src=""
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+        ></iframe>
 
     </div>
 
@@ -1190,174 +1832,601 @@ h2{
 
 <script>
 
-/* =========================
-   ẨN TẤT CẢ TRANG
-========================= */
+/* ================= MONEY ================= */
 
-function hidePages(){
+const MONEY_LOGO =
+"https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp";
 
-    document
-        .querySelectorAll(".page")
-        .forEach(function(page){
+let money =
+Number(localStorage.getItem("ncb_money") || 0);
 
+function updateMoney(){
+
+    document.getElementById("moneyCount").textContent =
+        money;
+
+    localStorage.setItem(
+        "ncb_money",
+        String(money)
+    );
+}
+
+updateMoney();
+
+
+/* ================= PAGE ================= */
+
+function showPage(pageId){
+
+    document.querySelectorAll(".page")
+        .forEach(page=>{
             page.classList.remove("active");
-
         });
 
-}
+    const page =
+        document.getElementById(pageId);
 
-
-/* =========================
-   TRANG CHÍNH
-========================= */
-
-function showMain(){
-
-    hidePages();
-
-    document
-        .getElementById("mainPage")
-        .classList.add("active");
+    if(page){
+        page.classList.add("active");
+    }
 
     window.scrollTo(0,0);
-
 }
 
 
-/* =========================
-   HOẠT HÌNH
-========================= */
+/* ================= PLAYER DATA ================= */
 
-function openAnimationPage(){
+let currentVideoId = "";
+let currentVipVideo = "";
+let currentVipPrice = 0;
 
-    hidePages();
-
-    document
-        .getElementById("animationPage")
-        .classList.add("active");
-
-    window.scrollTo(0,0);
-
-}
+let rewardTimer = null;
+let rewardSeconds = 56;
 
 
-/* =========================
-   PHIM 18
-========================= */
+/* ================= NORMAL MOVIE ================= */
 
-function open18Page(){
+function openMovie(title,videoId){
 
-    hidePages();
+    stopReward();
 
-    document
-        .getElementById("page18")
-        .classList.add("active");
+    currentVideoId = videoId;
+    currentVipVideo = "";
+    currentVipPrice = 0;
 
-    window.scrollTo(0,0);
+    document.getElementById("playerTitle")
+        .textContent = title;
 
-}
+    document.getElementById("playerVip")
+        .classList.remove("show");
 
+    document.getElementById("vipLock")
+        .classList.remove("show");
 
-/* =========================
-   ẢNH 18
-========================= */
+    const frame =
+        document.getElementById("playerFrame");
 
-function openPhoto18Page(){
+    frame.style.display = "block";
 
-    hidePages();
-
-    document
-        .getElementById("photo18Page")
-        .classList.add("active");
-
-    window.scrollTo(0,0);
-
-}
-
-
-/* =========================
-   MỞ PHIM
-========================= */
-
-function openMovie(videoId,title){
-
-    const modal =
-        document.getElementById("playerModal");
-
-    const titleBox =
-        document.getElementById("playerTitle");
-
-    const video =
-        document.getElementById("playerVideo");
-
-
-    titleBox.textContent = title;
-
-
-    video.innerHTML =
-        '<iframe ' +
-        'src="https://www.youtube.com/embed/' +
+    frame.src =
+        "https://www.youtube.com/embed/" +
         videoId +
-        '?autoplay=1&rel=0" ' +
-        'allow="autoplay; encrypted-media; picture-in-picture" ' +
-        'allowfullscreen>' +
-        '</iframe>';
+        "?autoplay=1&rel=0&playsinline=1";
 
+    document.getElementById("playerModal")
+        .classList.add("show");
 
-    modal.classList.add("show");
-
+    /*
+       PHIM THƯỜNG:
+       XEM 56 GIÂY -> +1 TIỀN
+    */
+    startReward();
 }
 
 
-/* =========================
-   ĐÓNG PHIM
-========================= */
+/* ================= VIP MOVIE ================= */
 
-function closeMovie(){
+function openVipMovie(title,videoId,price){
 
-    const modal =
-        document.getElementById("playerModal");
+    stopReward();
 
-    const video =
-        document.getElementById("playerVideo");
+    currentVideoId = "";
+    currentVipVideo = videoId;
+    currentVipPrice = Number(price);
 
+    document.getElementById("playerTitle")
+        .textContent = title;
 
-    video.innerHTML = "";
+    document.getElementById("playerVipCost")
+        .textContent = "-" + currentVipPrice;
 
-    modal.classList.remove("show");
+    document.getElementById("playerVip")
+        .classList.add("show");
 
+    document.getElementById("vipLockText")
+        .textContent =
+        "Phí xem phim: " +
+        currentVipPrice +
+        " tiền Doraemon";
+
+    document.getElementById("vipLock")
+        .classList.add("show");
+
+    const frame =
+        document.getElementById("playerFrame");
+
+    frame.src = "";
+    frame.style.display = "none";
+
+    document.getElementById("playerModal")
+        .classList.add("show");
+
+    /*
+       QUAN TRỌNG:
+       VIP KHÔNG CHẠY BỘ ĐẾM
+       VIP KHÔNG CỘNG TIỀN
+    */
 }
 
 
-/* =========================
-   CLICK RA NGOÀI PLAYER
-========================= */
+/* ================= BUY VIP ================= */
 
-function outsideClose(event){
+function buyVip(){
+
+    if(!currentVipVideo){
+        return;
+    }
+
+    if(money < currentVipPrice){
+
+        showVipMessage();
+
+        return;
+    }
+
+    /* TRỪ ĐÚNG GIÁ VIP */
+
+    money -= currentVipPrice;
+
+    updateMoney();
+
+    const frame =
+        document.getElementById("playerFrame");
+
+    frame.style.display = "block";
+
+    frame.src =
+        "https://www.youtube.com/embed/" +
+        currentVipVideo +
+        "?autoplay=1&rel=0&playsinline=1";
+
+    document.getElementById("vipLock")
+        .classList.remove("show");
+
+    /*
+       VIP KHÔNG NHẬN THƯỞNG
+    */
+    stopReward();
+}
+
+
+/* ================= CLOSE PLAYER ================= */
+
+function closePlayer(){
+
+    stopReward();
+
+    document.getElementById("playerFrame")
+        .src = "";
+
+    document.getElementById("playerModal")
+        .classList.remove("show");
+
+    document.getElementById("playerVip")
+        .classList.remove("show");
+
+    document.getElementById("vipLock")
+        .classList.remove("show");
+
+    currentVideoId = "";
+    currentVipVideo = "";
+    currentVipPrice = 0;
+}
+
+
+/* ================= REWARD ================= */
+
+function startReward(){
+
+    stopReward();
+
+    rewardSeconds = 56;
+
+    document.getElementById("rewardTime")
+        .textContent = rewardSeconds;
+
+    document.getElementById("watchReward")
+        .classList.add("show");
+
+    rewardTimer = setInterval(()=>{
+
+        rewardSeconds--;
+
+        document.getElementById("rewardTime")
+            .textContent = rewardSeconds;
+
+        if(rewardSeconds <= 0){
+
+            stopReward();
+
+            money += 1;
+
+            updateMoney();
+
+            showRewardPopup();
+
+            flyMoney();
+
+        }
+
+    },1000);
+}
+
+
+function stopReward(){
+
+    if(rewardTimer){
+
+        clearInterval(rewardTimer);
+
+        rewardTimer = null;
+    }
+
+    document.getElementById("watchReward")
+        .classList.remove("show");
+}
+
+
+/* ================= REWARD POPUP ================= */
+
+function showRewardPopup(){
+
+    const popup =
+        document.getElementById("rewardPopup");
+
+    popup.classList.add("show");
+
+    setTimeout(()=>{
+        popup.classList.remove("show");
+    },1800);
+}
+
+
+/* ================= FLY MONEY ================= */
+
+function flyMoney(){
+
+    const moneyImg =
+        document.getElementById("flyingMoney");
+
+    const target =
+        document.querySelector(".money-box");
+
+    if(!target){
+        return;
+    }
+
+    const targetRect =
+        target.getBoundingClientRect();
+
+    const x =
+        targetRect.left -
+        20;
+
+    const y =
+        targetRect.top -
+        100;
+
+    moneyImg.style.setProperty(
+        "--target-x",
+        x + "px"
+    );
+
+    moneyImg.style.setProperty(
+        "--target-y",
+        y + "px"
+    );
+
+    moneyImg.classList.remove("fly");
+
+    void moneyImg.offsetWidth;
+
+    moneyImg.classList.add("fly");
+
+    setTimeout(()=>{
+        moneyImg.classList.remove("fly");
+    },1300);
+}
+
+
+/* ================= VIP MESSAGE ================= */
+
+function showVipMessage(){
+
+    const message =
+        document.getElementById("vipMessage");
+
+    message.classList.add("show");
+}
+
+
+function closeVipMessage(){
+
+    const message =
+        document.getElementById("vipMessage");
+
+    message.classList.remove("show");
+
+    message.style.pointerEvents = "none";
+    message.style.visibility = "hidden";
+
+    setTimeout(()=>{
+        message.style.visibility = "";
+    },300);
+}
+
+
+const vipClose =
+    document.getElementById("vipMessageClose");
+
+vipClose.addEventListener(
+    "click",
+    closeVipMessage
+);
+
+vipClose.addEventListener(
+    "touchend",
+    function(e){
+        e.preventDefault();
+        closeVipMessage();
+    },
+    {passive:false}
+);
+
+
+/* ================= WELCOME ================= */
+
+function closeWelcome(){
+
+    const welcome =
+        document.getElementById("welcomeNotice");
+
+    welcome.style.display = "none";
+
+    localStorage.setItem(
+        "ncb_welcome_seen",
+        "1"
+    );
+}
+
+
+window.addEventListener("load",function(){
+
+    /*
+       Hiện lời chào khi vào website.
+    */
 
     if(
-        event.target ===
-        document.getElementById("playerModal")
+        localStorage.getItem("ncb_welcome_seen")
+        !== "1"
     ){
 
-        closeMovie();
+        document.getElementById("welcomeNotice")
+            .style.display = "flex";
 
     }
 
+});
+
+
+/* ================= SEARCH ================= */
+
+function searchMovies(){
+
+    const keyword =
+        document.getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    document.querySelectorAll(".movie-card")
+        .forEach(card=>{
+
+            const name =
+                (card.dataset.name || "")
+                .toLowerCase();
+
+            if(!keyword){
+
+                card.style.display = "";
+
+            }else{
+
+                card.style.display =
+                    name.includes(keyword)
+                    ? ""
+                    : "none";
+
+            }
+
+        });
 }
 
 
-/* =========================
-   PHÍM ESC
-========================= */
+/* ================= PHIM NGẮN ================= */
+
+const shortVideos = [
+    "hFDx6aWqC8w",
+    "NW4h1-WDuTA",
+    "AXnAy7O4Lgg",
+    "ZirEmDj4l0k",
+    "jgj9Jf5Scj0"
+];
+
+let currentShort = 0;
+
+function openShorts(){
+
+    currentShort = 0;
+
+    document.getElementById("shortsPage")
+        .classList.add("show");
+
+    loadShort();
+}
+
+
+function closeShorts(){
+
+    document.getElementById("shortFrame")
+        .src = "";
+
+    document.getElementById("shortsPage")
+        .classList.remove("show");
+}
+
+
+function loadShort(){
+
+    const id =
+        shortVideos[currentShort];
+
+    document.getElementById("shortFrame")
+        .src =
+        "https://www.youtube.com/embed/" +
+        id +
+        "?autoplay=1&mute=1&rel=0&playsinline=1";
+
+    document.getElementById("shortsCount")
+        .textContent =
+        (currentShort + 1) +
+        " / " +
+        shortVideos.length;
+}
+
+
+function nextShort(){
+
+    if(
+        currentShort <
+        shortVideos.length - 1
+    ){
+
+        currentShort++;
+
+        loadShort();
+
+    }
+}
+
+
+function previousShort(){
+
+    if(currentShort > 0){
+
+        currentShort--;
+
+        loadShort();
+
+    }
+}
+
+
+/* ================= SHORT SWIPE ================= */
+
+let touchStartY = 0;
+let touchEndY = 0;
+
+const shortView =
+    document.getElementById("shortView");
+
+shortView.addEventListener(
+    "touchstart",
+    function(e){
+
+        touchStartY =
+            e.changedTouches[0].screenY;
+
+    },
+    {passive:true}
+);
+
+
+shortView.addEventListener(
+    "touchend",
+    function(e){
+
+        touchEndY =
+            e.changedTouches[0].screenY;
+
+        const difference =
+            touchStartY - touchEndY;
+
+        if(Math.abs(difference) < 50){
+            return;
+        }
+
+        if(difference > 0){
+
+            nextShort();
+
+        }else{
+
+            previousShort();
+
+        }
+
+    },
+    {passive:true}
+);
+
+
+/* ================= MOUSE WHEEL ================= */
+
+shortView.addEventListener(
+    "wheel",
+    function(e){
+
+        if(Math.abs(e.deltaY) < 30){
+            return;
+        }
+
+        if(e.deltaY > 0){
+
+            nextShort();
+
+        }else{
+
+            previousShort();
+
+        }
+
+    },
+    {passive:true}
+);
+
+
+/* ================= ESC ================= */
 
 document.addEventListener(
     "keydown",
-    function(event){
+    function(e){
 
-        if(event.key === "Escape"){
+        if(e.key === "Escape"){
 
-            closeMovie();
+            closePlayer();
+            closeVipMessage();
+            closeShorts();
 
         }
 
@@ -1365,43 +2434,21 @@ document.addEventListener(
 );
 
 
-/* =========================
-   TÌM KIẾM
-========================= */
+/* ================= PLAYER OUTSIDE ================= */
 
-function searchMovies(){
+document.getElementById("playerModal")
+    .addEventListener(
+        "click",
+        function(e){
 
-    const keyword =
-        document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
+            if(e.target === this){
 
-
-    document
-        .querySelectorAll(".movie")
-        .forEach(function(movie){
-
-            const title =
-                (
-                    movie.dataset.title || ""
-                ).toLowerCase();
-
-
-            if(title.includes(keyword)){
-
-                movie.style.display = "";
-
-            }else{
-
-                movie.style.display = "none";
+                closePlayer();
 
             }
 
-        });
-
-}
+        }
+    );
 
 </script>
 
