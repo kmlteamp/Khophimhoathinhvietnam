@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 
 <title>@NCB_STUDIO - KHO PHIM VN</title>
 
@@ -20,11 +20,7 @@ html,body{
     color:#fff;
 }
 
-body{
-    overflow-x:hidden;
-}
-
-/* ================= HEADER ================= */
+body{overflow-x:hidden}
 
 header{
     position:sticky;
@@ -63,11 +59,7 @@ header{
     font-size:15px;
 }
 
-.search-box input::placeholder{
-    color:#888;
-}
-
-/* ================= MONEY ================= */
+.search-box input::placeholder{color:#888}
 
 .money-box{
     position:fixed;
@@ -98,8 +90,6 @@ header{
     font-weight:bold;
 }
 
-/* ================= TITLE ================= */
-
 .rainbow-title{
     width:100%;
     text-align:center;
@@ -113,14 +103,8 @@ header{
     letter-spacing:3px;
     background:linear-gradient(
         90deg,
-        #ff0000,
-        #ff7a00,
-        #ffe600,
-        #00d95f,
-        #00aaff,
-        #6c4cff,
-        #ff00a8,
-        #ff0000
+        #ff0000,#ff7a00,#ffe600,#00d95f,
+        #00aaff,#6c4cff,#ff00a8,#ff0000
     );
     -webkit-background-clip:text;
     background-clip:text;
@@ -130,29 +114,20 @@ header{
 }
 
 @keyframes rainbowMove{
-    0%{background-position:0% 50%}
+    0%{background-position:0 50%}
     50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
+    100%{background-position:0 50%}
 }
-
-/* ================= MAIN ================= */
 
 main{
     width:100%;
     max-width:1200px;
     margin:auto;
-    padding:0 20px 30px;
+    padding:0 20px 40px;
 }
 
-.page{
-    display:none;
-}
-
-.page.active{
-    display:block;
-}
-
-/* ================= PAGE TITLE ================= */
+.page{display:none}
+.page.active{display:block}
 
 .page-title{
     margin:15px 0 18px;
@@ -165,17 +140,15 @@ main{
     cursor:pointer;
 }
 
-/* ================= CATEGORY ================= */
-
 .categories{
     display:grid;
-    grid-template-columns:repeat(2,1fr);
-    gap:15px;
-    margin:25px 0;
+    grid-template-columns:repeat(5,1fr);
+    gap:12px;
+    margin:10px 0 28px;
 }
 
 .category{
-    min-height:100px;
+    min-height:80px;
     border-radius:16px;
     border:1px solid #292929;
     background:#111;
@@ -183,7 +156,7 @@ main{
     align-items:center;
     justify-content:center;
     text-align:center;
-    font-size:18px;
+    font-size:16px;
     font-weight:bold;
     cursor:pointer;
     transition:.2s;
@@ -194,7 +167,42 @@ main{
     transform:translateY(-2px);
 }
 
-/* ================= MOVIE GRID ================= */
+.hero{
+    position:relative;
+    width:100%;
+    border-radius:18px;
+    overflow:hidden;
+    background:#111;
+    border:1px solid #252525;
+    cursor:pointer;
+    margin-bottom:25px;
+}
+
+.hero img{
+    width:100%;
+    aspect-ratio:16/7;
+    display:block;
+    object-fit:cover;
+}
+
+.hero-info{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    padding:50px 22px 20px;
+    background:linear-gradient(transparent,rgba(0,0,0,.96));
+}
+
+.hero-title{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.hero-sub{
+    margin-top:7px;
+    color:#bbb;
+}
 
 .movie-grid{
     display:grid;
@@ -232,27 +240,7 @@ main{
     line-height:1.35;
 }
 
-/* ================= EMPTY ================= */
-
-.empty-box{
-    width:100%;
-    min-height:180px;
-    border:1px solid #292929;
-    border-radius:15px;
-    background:#111;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    color:#777;
-    font-size:16px;
-}
-
-/* ================= VIP ================= */
-
-.vip-card{
-    border-color:#8d7100;
-}
+.vip-card{border-color:#8d7100}
 
 .vip-card .movie-poster{
     filter:brightness(.75);
@@ -275,9 +263,6 @@ main{
     position:absolute;
     left:9px;
     top:9px;
-    display:flex;
-    align-items:center;
-    gap:5px;
     padding:5px 8px;
     border-radius:7px;
     background:rgba(0,0,0,.88);
@@ -287,30 +272,18 @@ main{
     z-index:3;
 }
 
-.vip-cost img{
-    width:21px;
-    height:21px;
-    border-radius:50%;
-    object-fit:cover;
-    border:1px solid #fff;
-}
-
-/* ================= PLAYER ================= */
-
 .player-modal{
     position:fixed;
     inset:0;
     z-index:5000;
-    background:rgba(0,0,0,.96);
+    background:rgba(0,0,0,.97);
     display:none;
     align-items:center;
     justify-content:center;
     padding:15px;
 }
 
-.player-modal.show{
-    display:flex;
-}
+.player-modal.show{display:flex}
 
 .player-box{
     width:100%;
@@ -323,7 +296,7 @@ main{
     font-size:20px;
     font-weight:bold;
     margin-bottom:12px;
-    padding-right:50px;
+    padding-right:60px;
 }
 
 .player-frame{
@@ -349,17 +322,46 @@ main{
     z-index:20;
 }
 
-/* ================= VIP LOCK ================= */
+.watch-reward{
+    position:fixed;
+    z-index:6000;
+    top:85px;
+    left:15px;
+    display:none;
+    align-items:center;
+    gap:9px;
+    padding:9px 12px;
+    border-radius:13px;
+    background:rgba(15,15,15,.96);
+    border:1px solid #333;
+}
+
+.watch-reward.show{display:flex}
+
+.watch-reward img{
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.reward-text{
+    font-weight:bold;
+    font-size:13px;
+}
+
+.reward-time{
+    font-size:18px;
+    font-weight:900;
+    min-width:30px;
+    text-align:center;
+}
 
 .vip-lock{
     width:100%;
     aspect-ratio:16/9;
     border-radius:12px;
-    background:radial-gradient(
-        circle at center,
-        #252525 0,
-        #080808 65%
-    );
+    background:radial-gradient(circle at center,#252525 0,#080808 65%);
     display:none;
     align-items:center;
     justify-content:center;
@@ -367,9 +369,7 @@ main{
     text-align:center;
 }
 
-.vip-lock.show{
-    display:flex;
-}
+.vip-lock.show{display:flex}
 
 .vip-lock-title{
     color:#ffd000;
@@ -395,8 +395,6 @@ main{
     cursor:pointer;
 }
 
-/* ================= VIP MESSAGE ================= */
-
 .vip-message{
     position:fixed;
     z-index:12000;
@@ -413,7 +411,7 @@ main{
     opacity:0;
     pointer-events:none;
     visibility:hidden;
-    transition:opacity .25s,transform .25s;
+    transition:.25s;
 }
 
 .vip-message.show{
@@ -447,45 +445,6 @@ main{
     cursor:pointer;
 }
 
-/* ================= REWARD ================= */
-
-.watch-reward{
-    position:fixed;
-    z-index:6000;
-    top:85px;
-    left:15px;
-    display:none;
-    align-items:center;
-    gap:9px;
-    padding:9px 12px;
-    border-radius:13px;
-    background:rgba(15,15,15,.96);
-    border:1px solid #333;
-}
-
-.watch-reward.show{
-    display:flex;
-}
-
-.watch-reward img{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.reward-text{
-    font-weight:bold;
-    font-size:13px;
-}
-
-.reward-time{
-    font-size:18px;
-    font-weight:900;
-    min-width:25px;
-    text-align:center;
-}
-
 .reward-popup{
     position:fixed;
     z-index:8000;
@@ -509,58 +468,38 @@ main{
     transform:translate(-50%,-50%) scale(1);
 }
 
-/* ================= WELCOME ================= */
-
-.welcome-notice{
+.flying-money{
     position:fixed;
-    inset:0;
-    z-index:10000;
-    background:rgba(0,0,0,.75);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.welcome-box{
-    position:relative;
-    width:100%;
-    max-width:430px;
-    background:#111;
-    border:2px solid #333;
-    border-radius:18px;
-    padding:25px 18px 18px;
-    text-align:center;
-}
-
-.welcome-close{
-    position:absolute;
-    top:8px;
-    right:8px;
-    width:36px;
-    height:36px;
-    border:none;
+    z-index:9000;
+    left:20px;
+    top:100px;
+    width:48px;
+    height:48px;
     border-radius:50%;
-    background:#292929;
-    color:#fff;
-    font-size:25px;
-    cursor:pointer;
+    object-fit:cover;
+    opacity:0;
+    pointer-events:none;
 }
 
-.welcome-title{
-    padding:5px 35px 10px;
-    font-size:21px;
-    font-weight:bold;
+.flying-money.fly{
+    opacity:1;
+    animation:flyMoney 1.2s ease-in-out forwards;
 }
 
-.welcome-text{
-    color:#ccc;
-    font-size:15px;
-    line-height:1.5;
-    margin-bottom:15px;
+@keyframes flyMoney{
+    0%{
+        transform:translate(0,0) scale(1.1);
+        opacity:1;
+    }
+    70%{
+        transform:translate(var(--target-x),var(--target-y)) scale(.65);
+        opacity:1;
+    }
+    100%{
+        transform:translate(var(--target-x),var(--target-y)) scale(.15);
+        opacity:0;
+    }
 }
-
-/* ================= SHORTS ================= */
 
 .shorts-page{
     position:fixed;
@@ -571,9 +510,7 @@ main{
     flex-direction:column;
 }
 
-.shorts-page.show{
-    display:flex;
-}
+.shorts-page.show{display:flex}
 
 .shorts-top{
     position:absolute;
@@ -586,7 +523,7 @@ main{
     justify-content:space-between;
 }
 
-.back-home{
+.back-home,.short-next{
     border:1px solid #444;
     background:rgba(0,0,0,.75);
     color:#fff;
@@ -620,10 +557,17 @@ main{
     background:#000;
 }
 
-/* ================= MOBILE ================= */
+@media(max-width:900px){
+    .categories{
+        grid-template-columns:repeat(3,1fr);
+    }
 
-@media(max-width:850px){
+    .movie-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
 
+@media(max-width:600px){
     header{
         min-height:65px;
         padding:10px;
@@ -631,47 +575,41 @@ main{
         flex-wrap:wrap;
     }
 
-    .logo{
-        font-size:20px;
-    }
+    .logo{font-size:20px}
 
     .search-box{
         order:3;
         flex-basis:100%;
     }
 
-    .movie-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
     main{
         padding:0 12px 30px;
     }
 
-    .rainbow-sub{
-        font-size:27px;
-    }
-}
-
-@media(max-width:700px){
-
     .categories{
-        grid-template-columns:1fr;
+        grid-template-columns:1fr 1fr;
     }
 
     .category{
-        min-height:75px;
+        min-height:70px;
+        font-size:14px;
     }
 
-    .welcome-box{
-        max-width:350px;
+    .hero img{
+        aspect-ratio:16/9;
+    }
+
+    .hero-title{
+        font-size:20px;
+    }
+
+    .rainbow-sub{
+        font-size:25px;
     }
 }
 
 @media(max-width:420px){
-
     .movie-grid{
-        grid-template-columns:1fr 1fr;
         gap:10px;
     }
 
@@ -695,7 +633,7 @@ main{
     }
 
     .rainbow-sub{
-        font-size:23px;
+        font-size:22px;
         letter-spacing:2px;
     }
 }
@@ -705,10 +643,7 @@ main{
 <body>
 
 <header>
-
-    <div class="logo">
-        @NCB_STUDIO
-    </div>
+    <div class="logo">@NCB_STUDIO</div>
 
     <div class="search-box">
         <input
@@ -718,28 +653,22 @@ main{
             oninput="searchMovies()"
         >
     </div>
-
 </header>
 
-<!-- ================= MONEY ================= -->
+<!-- TIỀN -->
 
 <div class="money-box">
-
     <img
         id="moneyLogo"
         class="money-logo"
         src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
         alt="Doraemon"
     >
-
-    <span id="moneyCount" class="money-count">0</span>
-
+    <span id="moneyCount">0</span>
 </div>
 
 <div class="rainbow-title">
-    <div class="rainbow-sub">
-        KHO PHIM VN
-    </div>
+    <div class="rainbow-sub">KHO PHIM VN</div>
 </div>
 
 <main>
@@ -748,55 +677,129 @@ main{
 
 <section id="homePage" class="page active">
 
-    <h2 class="page-title">
-        THỂ LOẠI
-    </h2>
+    <!-- THỂ LOẠI LUÔN Ở ĐẦU -->
+
+    <h2 class="page-title">THỂ LOẠI</h2>
 
     <div class="categories">
 
-        <div
-            class="category"
-            onclick="showPage('animationPage')"
-        >
+        <div class="category"
+             onclick="showPage('animationPage')">
             PHIM HOẠT HÌNH
         </div>
 
-        <div
-            class="category"
-            onclick="showPage('martialPage')"
-        >
-            18
+        <div class="category"
+             onclick="showPage('actionPage')">
+            HÀNH ĐỘNG
         </div>
 
-        <div
-            class="category"
-            onclick="showPage('musicPage')"
-        >
+        <div class="category"
+             onclick="showPage('musicPage')">
             NHẠC
         </div>
 
-        <div
-            class="category"
-            onclick="showPage('sportsPage')"
-        >
-            THỂ THAO
+        <div class="category"
+             onclick="openShorts()">
+            PHIM NGẮN
         </div>
 
-        <div
-            class="category"
-            onclick="openShorts()"
-        >
-            PHIM NGẮN
+        <div class="category"
+             onclick="showPage('sportPage')">
+            THỂ THAO
         </div>
 
     </div>
 
-    <h2 class="page-title">
-        PHIM HOT
-    </h2>
+    <!-- VIP HOT -->
 
-    <div class="empty-box">
-        CHƯA CÓ PHIM HOT
+    <h2 class="page-title">PHIM HOT</h2>
+
+    <div class="movie-grid">
+
+        <!-- DORAEMON VIP -->
+
+        <div class="movie-card vip-card"
+             onclick="openVipMovie(
+                'DORAEMON_#VIP001',
+                'RylJMmCnPzM',
+                10
+             )"
+             data-name="doraemon vip001">
+
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/RylJMmCnPzM/maxresdefault.jpg">
+
+            <div class="vip-badge">VIP</div>
+            <div class="vip-cost">10 TIỀN</div>
+
+            <div class="movie-name">
+                DORAEMON_#VIP001
+            </div>
+        </div>
+
+        <!-- CÂY ĐA VIP -->
+
+        <div class="movie-card vip-card"
+             onclick="openVipMovie(
+                'CÂY ĐA QUÁN DỐC',
+                'fUuqVfmhXQE',
+                3
+             )"
+             data-name="cây đa quán dốc">
+
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/fUuqVfmhXQE/maxresdefault.jpg">
+
+            <div class="vip-badge">VIP</div>
+            <div class="vip-cost">3 TIỀN</div>
+
+            <div class="movie-name">
+                CÂY ĐA QUÁN DỐC
+            </div>
+        </div>
+
+        <!-- HÀNH ĐỘNG VIP -->
+
+        <div class="movie-card vip-card"
+             onclick="openVipMovie(
+                'MẢNH HỔ TRẢ THÙ #030',
+                'TyaXcmf_mmg',
+                4
+             )"
+             data-name="mảnh hổ trả thù 030">
+
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/TyaXcmf_mmg/maxresdefault.jpg">
+
+            <div class="vip-badge">VIP</div>
+            <div class="vip-cost">4 TIỀN</div>
+
+            <div class="movie-name">
+                MẢNH HỔ TRẢ THÙ #030
+            </div>
+        </div>
+
+        <!-- DORAEMON VIP CŨ -->
+
+        <div class="movie-card vip-card"
+             onclick="openVipMovie(
+                'DORAEMON #119VIP',
+                'Rz2KR7O296Q',
+                5
+             )"
+             data-name="doraemon 119vip">
+
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/Rz2KR7O296Q/maxresdefault.jpg">
+
+            <div class="vip-badge">VIP</div>
+            <div class="vip-cost">5 TIỀN</div>
+
+            <div class="movie-name">
+                DORAEMON #119VIP
+            </div>
+        </div>
+
     </div>
 
 </section>
@@ -805,99 +808,81 @@ main{
 
 <section id="animationPage" class="page">
 
-    <div
-        class="page-title back-button"
-        onclick="showPage('homePage')"
-    >
+    <div class="page-title back-button"
+         onclick="showPage('homePage')">
         ← QUAY VỀ TRANG CHÍNH
     </div>
 
-    <h2 class="page-title">
-        PHIM HOẠT HÌNH
-    </h2>
+    <h2 class="page-title">PHIM HOẠT HÌNH</h2>
 
     <div class="movie-grid">
 
-        <!-- DORAMON #1T -->
+        <div class="movie-card"
+             onclick="openMovie('DORAMON_#1T','1f31UHe8Pxw')"
+             data-name="doramon 1t">
 
-        <div
-            class="movie-card"
-            onclick="openMovie('DORAMON_#1T','1f31UHe8Pxw')"
-            data-name="doramon #1t"
-        >
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/1f31UHe8Pxw/maxresdefault.jpg">
 
-            <img
-                class="movie-poster"
-                src="https://i.ytimg.com/vi/1f31UHe8Pxw/maxresdefault.jpg"
-                alt="DORAMON_#1T"
-            >
-
-            <div class="movie-name">
-                DORAMON_#1T
-            </div>
-
+            <div class="movie-name">DORAMON_#1T</div>
         </div>
 
-        <!-- DORAEMON VIP -->
+        <div class="movie-card"
+             onclick="openMovie('DOREMON_#376','Sp6U-jSULkc')"
+             data-name="doremon 376">
 
-        <div
-            class="movie-card vip-card"
-            onclick="openVipMovie(
-                'DORAEMON_#VIP001',
-                'RylJMmCnPzM',
-                10
-            )"
-            data-name="doraemon #vip001"
-        >
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/Sp6U-jSULkc/maxresdefault.jpg">
 
-            <img
-                class="movie-poster"
-                src="https://i.ytimg.com/vi/RylJMmCnPzM/maxresdefault.jpg"
-                alt="DORAEMON_#VIP001"
-            >
+            <div class="movie-name">DOREMON_#376</div>
+        </div>
 
-            <div class="vip-badge">
-                VIP
-            </div>
+        <div class="movie-card"
+             onclick="openMovie('DORAEMON_S13#3','OiGgkXJr9ns')"
+             data-name="doraemon s13 3">
 
-            <div class="vip-cost">
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/OiGgkXJr9ns/maxresdefault.jpg">
 
-                <img
-                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
-                    alt="Money"
-                >
-
-                10
-
-            </div>
-
-            <div class="movie-name">
-                DORAEMON_#VIP001
-            </div>
-
+            <div class="movie-name">DORAEMON_S13#3</div>
         </div>
 
     </div>
 
 </section>
 
-<!-- ================= 18 ================= -->
+<!-- ================= HÀNH ĐỘNG ================= -->
 
-<section id="martialPage" class="page">
+<section id="actionPage" class="page">
 
-    <div
-        class="page-title back-button"
-        onclick="showPage('homePage')"
-    >
+    <div class="page-title back-button"
+         onclick="showPage('homePage')">
         ← QUAY VỀ TRANG CHÍNH
     </div>
 
-    <h2 class="page-title">
-        18
-    </h2>
+    <h2 class="page-title">HÀNH ĐỘNG</h2>
 
-    <div class="empty-box">
-        CHƯA CÓ PHIM
+    <div class="movie-grid">
+
+        <div class="movie-card vip-card"
+             onclick="openVipMovie(
+                'MẢNH HỔ TRẢ THÙ #030',
+                'TyaXcmf_mmg',
+                4
+             )"
+             data-name="mảnh hổ trả thù 030">
+
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/TyaXcmf_mmg/maxresdefault.jpg">
+
+            <div class="vip-badge">VIP</div>
+            <div class="vip-cost">4 TIỀN</div>
+
+            <div class="movie-name">
+                MẢNH HỔ TRẢ THÙ #030
+            </div>
+        </div>
+
     </div>
 
 </section>
@@ -906,76 +891,44 @@ main{
 
 <section id="musicPage" class="page">
 
-    <div
-        class="page-title back-button"
-        onclick="showPage('homePage')"
-    >
+    <div class="page-title back-button"
+         onclick="showPage('homePage')">
         ← QUAY VỀ TRANG CHÍNH
     </div>
 
-    <h2 class="page-title">
-        NHẠC
-    </h2>
+    <h2 class="page-title">NHẠC</h2>
 
     <div class="movie-grid">
 
-        <!-- CÂY ĐA QUÁN DỐC VIP -->
-
-        <div
-            class="movie-card vip-card"
-            onclick="openVipMovie(
+        <div class="movie-card vip-card"
+             onclick="openVipMovie(
                 'CÂY ĐA QUÁN DỐC',
                 'fUuqVfmhXQE',
                 3
-            )"
-            data-name="cây đa quán dốc"
-        >
+             )"
+             data-name="cây đa quán dốc">
 
-            <img
-                class="movie-poster"
-                src="https://i.ytimg.com/vi/fUuqVfmhXQE/maxresdefault.jpg"
-                alt="CÂY ĐA QUÁN DỐC"
-            >
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/fUuqVfmhXQE/maxresdefault.jpg">
 
-            <div class="vip-badge">
-                VIP
-            </div>
-
-            <div class="vip-cost">
-
-                <img
-                    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
-                    alt="Money"
-                >
-
-                3
-
-            </div>
+            <div class="vip-badge">VIP</div>
+            <div class="vip-cost">3 TIỀN</div>
 
             <div class="movie-name">
                 CÂY ĐA QUÁN DỐC
             </div>
-
         </div>
 
-        <!-- CHILL #13 -->
+        <div class="movie-card"
+             onclick="openMovie('CHILL_#13','G1l9hH8HiF8')"
+             data-name="chill 13">
 
-        <div
-            class="movie-card"
-            onclick="openMovie('CHILL_#13','G1l9hH8HiF8')"
-            data-name="chill #13"
-        >
-
-            <img
-                class="movie-poster"
-                src="https://i.ytimg.com/vi/G1l9hH8HiF8/maxresdefault.jpg"
-                alt="CHILL_#13"
-            >
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/G1l9hH8HiF8/maxresdefault.jpg">
 
             <div class="movie-name">
                 CHILL_#13
             </div>
-
         </div>
 
     </div>
@@ -984,62 +937,42 @@ main{
 
 <!-- ================= THỂ THAO ================= -->
 
-<section id="sportsPage" class="page">
+<section id="sportPage" class="page">
 
-    <div
-        class="page-title back-button"
-        onclick="showPage('homePage')"
-    >
+    <div class="page-title back-button"
+         onclick="showPage('homePage')">
         ← QUAY VỀ TRANG CHÍNH
     </div>
 
-    <h2 class="page-title">
-        THỂ THAO
-    </h2>
+    <h2 class="page-title">THỂ THAO</h2>
 
     <div class="movie-grid">
 
-        <!-- PHÁP VS BỈ -->
+        <div class="movie-card"
+             onclick="openMovie('PHÁP VS BỈ','lJKiVq-NWLs')"
+             data-name="pháp vs bỉ">
 
-        <div
-            class="movie-card"
-            onclick="openMovie('PHÁP VS BỈ','lJKiVq-NWLs')"
-            data-name="pháp vs bỉ"
-        >
-
-            <img
-                class="movie-poster"
-                src="https://i.ytimg.com/vi/lJKiVq-NWLs/maxresdefault.jpg"
-                alt="PHÁP VS BỈ"
-            >
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/lJKiVq-NWLs/maxresdefault.jpg">
 
             <div class="movie-name">
                 PHÁP VS BỈ
             </div>
-
         </div>
 
-        <!-- TOÀN CẢNH TRAO CUP -->
-
-        <div
-            class="movie-card"
-            onclick="openMovie(
+        <div class="movie-card"
+             onclick="openMovie(
                 'TOÀN CẢNH TRAO CUP FIFA ASEEN',
                 'EPpQBwSbA6Q'
-            )"
-            data-name="toàn cảnh trao cup fifa aseen"
-        >
+             )"
+             data-name="toàn cảnh trao cup fifa aseen">
 
-            <img
-                class="movie-poster"
-                src="https://i.ytimg.com/vi/EPpQBwSbA6Q/maxresdefault.jpg"
-                alt="TOÀN CẢNH TRAO CUP FIFA ASEEN"
-            >
+            <img class="movie-poster"
+                 src="https://i.ytimg.com/vi/EPpQBwSbA6Q/maxresdefault.jpg">
 
             <div class="movie-name">
                 TOÀN CẢNH TRAO CUP FIFA ASEEN
             </div>
-
         </div>
 
     </div>
@@ -1050,174 +983,100 @@ main{
 
 <!-- ================= PLAYER ================= -->
 
-<div
-    id="playerModal"
-    class="player-modal"
-    onclick="closePlayerOutside(event)"
->
+<div id="playerModal" class="player-modal">
 
     <div class="player-box">
 
-        <button
-            class="close-player"
-            onclick="closePlayer()"
-        >
+        <button class="close-player"
+                onclick="closePlayer()">
             ×
         </button>
 
-        <div
-            id="playerTitle"
-            class="player-title"
-        >
+        <div id="playerTitle"
+             class="player-title">
         </div>
 
         <iframe
             id="playerFrame"
             class="player-frame"
-            src=""
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen>
         </iframe>
 
-        <div
-            id="vipLock"
-            class="vip-lock"
-        >
-
-            <div class="vip-lock-title">
-                NỘI DUNG VIP
-            </div>
-
-            <div
-                id="vipLockText"
-                class="vip-lock-text"
-            >
-                Nội dung này cần mở khóa.
-            </div>
-
-            <button
-                class="vip-buy"
-                onclick="buyCurrentVip()"
-            >
-                MỞ KHÓA
-            </button>
-
-        </div>
-
     </div>
-
-</div>
-
-<!-- ================= VIP MESSAGE ================= -->
-
-<div
-    id="vipMessage"
-    class="vip-message"
->
-
-    <div class="vip-message-title">
-        KHÔNG ĐỦ TIỀN
-    </div>
-
-    <div
-        id="vipMessageText"
-        class="vip-message-text"
-    >
-        Bạn không đủ tiền để mở phim VIP.
-    </div>
-
-    <button
-        class="vip-message-close"
-        onclick="closeVipMessage()"
-    >
-        ĐÓNG
-    </button>
 
 </div>
 
 <!-- ================= REWARD ================= -->
 
-<div
-    id="watchReward"
-    class="watch-reward"
->
+<div id="watchReward" class="watch-reward">
 
     <img
         src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
-        alt="Money"
-    >
+        alt="Doraemon">
 
     <div class="reward-text">
-        Xem phim nhận tiền
+        XEM PHIM NHẬN TIỀN
     </div>
 
-    <div
-        id="rewardTime"
-        class="reward-time"
-    >
-        10
+    <div id="rewardTime"
+         class="reward-time">
+        60
     </div>
 
 </div>
 
-<div
-    id="rewardPopup"
-    class="reward-popup"
->
-    +1 TIỀN
+<div id="rewardPopup"
+     class="reward-popup">
 </div>
 
-<!-- ================= WELCOME ================= -->
-
-<div
-    id="welcomeNotice"
-    class="welcome-notice"
+<img
+    id="flyingMoney"
+    class="flying-money"
+    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
 >
 
-    <div class="welcome-box">
+<!-- ================= VIP MESSAGE ================= -->
 
-        <button
-            class="welcome-close"
-            onclick="closeWelcome()"
-        >
-            ×
-        </button>
+<div id="vipMessage"
+     class="vip-message">
 
-        <div class="welcome-title">
-            CHÀO MỪNG ĐẾN KHO PHIM VN
-        </div>
-
-        <div class="welcome-text">
-            Chọn thể loại để xem phim.
-            Bạn có thể nhận tiền bằng cách xem phim.
-        </div>
-
+    <div class="vip-message-title">
+        VIP
     </div>
+
+    <div id="vipMessageText"
+         class="vip-message-text">
+    </div>
+
+    <button class="vip-message-close"
+            onclick="closeVipMessage()">
+        ĐÓNG
+    </button>
 
 </div>
 
 <!-- ================= SHORTS ================= -->
 
-<div
-    id="shortsPage"
-    class="shorts-page"
->
+<div id="shortsPage"
+     class="shorts-page">
 
     <div class="shorts-top">
 
-        <button
-            class="back-home"
-            onclick="closeShorts()"
-        >
-            ← TRANG CHỦ
+        <button class="back-home"
+                onclick="closeShorts()">
+            ← TRANG CHÍNH
         </button>
 
-        <div
-            id="shortsCount"
-            class="shorts-count"
-        >
-            1 / 4
+        <div id="shortsCount"
+             class="shorts-count">
+            1 / 6
         </div>
+
+        <button class="short-next"
+                onclick="nextShort()">
+            TIẾP →
+        </button>
 
     </div>
 
@@ -1226,7 +1085,6 @@ main{
         <iframe
             id="shortFrame"
             class="short-frame"
-            src=""
             allow="autoplay; encrypted-media; picture-in-picture"
             allowfullscreen>
         </iframe>
@@ -1237,22 +1095,30 @@ main{
 
 <script>
 
-/* ================= DATA ================= */
+/* ================= DỮ LIỆU ================= */
 
-let money = Number(localStorage.getItem("ncb_money")) || 0;
+let money = Number(localStorage.getItem("ncb_money") || 0);
 
-let currentVip = null;
+let currentVideo = "";
+let currentTitle = "";
+let currentVipCost = 0;
 
-let shortsIndex = 0;
+let rewardTimer = null;
+let rewardSeconds = 60;
+let rewardClaimed = false;
+
+let shortIndex = 0;
 
 const shorts = [
     "6baRkKIfdcs",
     "d_NXbeXIwcE",
     "FN0PddMp1pk",
-    "M3h4jsUgMbQ"
+    "M3h4jsUgMbQ",
+    "8VE9QM7SFM0",
+    "l4tfsZUpWCM"
 ];
 
-/* ================= MONEY ================= */
+/* ================= TIỀN ================= */
 
 function updateMoney(){
 
@@ -1266,15 +1132,17 @@ function updateMoney(){
 
 updateMoney();
 
-/* ================= PAGE ================= */
+/* ================= TRANG ================= */
 
-function showPage(pageId){
+function showPage(id){
 
-    document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach(page => {
+            page.classList.remove("active");
+        });
 
-    const page = document.getElementById(pageId);
+    const page = document.getElementById(id);
 
     if(page){
         page.classList.add("active");
@@ -1286,135 +1154,69 @@ function showPage(pageId){
     });
 }
 
-/* ================= NORMAL MOVIE ================= */
+/* ================= PHIM ================= */
 
 function openMovie(title,id){
 
-    const modal =
-        document.getElementById("playerModal");
+    currentTitle = title;
+    currentVideo = id;
+    currentVipCost = 0;
 
-    const frame =
-        document.getElementById("playerFrame");
+    document.getElementById("playerTitle")
+        .textContent = title;
 
-    const playerTitle =
-        document.getElementById("playerTitle");
-
-    const lock =
-        document.getElementById("vipLock");
-
-    playerTitle.textContent = title;
-
-    currentVip = null;
-
-    lock.classList.remove("show");
-
-    frame.style.display = "block";
-
-    frame.src =
+    document.getElementById("playerFrame")
+        .src =
         "https://www.youtube.com/embed/" +
         id +
         "?autoplay=1&rel=0";
 
-    modal.classList.add("show");
+    document
+        .getElementById("playerModal")
+        .classList.add("show");
 
     startReward();
-
 }
 
-/* ================= VIP MOVIE ================= */
+/* ================= VIP ================= */
 
 function openVipMovie(title,id,cost){
 
-    currentVip = {
-        title:title,
-        id:id,
-        cost:cost
-    };
+    currentTitle = title;
+    currentVideo = id;
+    currentVipCost = cost;
 
-    const modal =
-        document.getElementById("playerModal");
+    if(money < cost){
 
-    const frame =
-        document.getElementById("playerFrame");
-
-    const playerTitle =
-        document.getElementById("playerTitle");
-
-    const lock =
-        document.getElementById("vipLock");
-
-    const lockText =
-        document.getElementById("vipLockText");
-
-    playerTitle.textContent = title;
-
-    frame.src = "";
-
-    frame.style.display = "none";
-
-    lock.classList.add("show");
-
-    lockText.textContent =
-        "Phim VIP này cần " +
-        cost +
-        " tiền để mở khóa.";
-
-    modal.classList.add("show");
-
-    stopReward();
-
-}
-
-/* ================= BUY VIP ================= */
-
-function buyCurrentVip(){
-
-    if(!currentVip){
-        return;
-    }
-
-    if(money < currentVip.cost){
-
-        document.getElementById(
-            "vipMessageText"
-        ).textContent =
+        showVipMessage(
             "Bạn cần " +
-            currentVip.cost +
-            " tiền nhưng hiện chỉ có " +
-            money +
-            " tiền.";
-
-        document
-            .getElementById("vipMessage")
-            .classList.add("show");
+            cost +
+            " tiền để xem phim VIP."
+        );
 
         return;
     }
 
-    money -= currentVip.cost;
-
+    money -= cost;
     updateMoney();
 
-    const frame =
-        document.getElementById("playerFrame");
+    document.getElementById("playerTitle")
+        .textContent = title;
 
-    const lock =
-        document.getElementById("vipLock");
-
-    frame.style.display = "block";
-
-    lock.classList.remove("show");
-
-    frame.src =
+    document.getElementById("playerFrame")
+        .src =
         "https://www.youtube.com/embed/" +
-        currentVip.id +
+        id +
         "?autoplay=1&rel=0";
 
-    startReward();
+    document
+        .getElementById("playerModal")
+        .classList.add("show");
 
+    startReward();
 }
 
-/* ================= CLOSE PLAYER ================= */
+/* ================= PLAYER ================= */
 
 function closePlayer(){
 
@@ -1422,167 +1224,183 @@ function closePlayer(){
         .getElementById("playerModal")
         .classList.remove("show");
 
-    document
-        .getElementById("playerFrame")
-        .src = "";
+    document.getElementById("playerFrame").src = "";
+
+    stopReward();
+}
+
+/* ================= XEM 60 GIÂY ================= */
+
+function startReward(){
 
     stopReward();
 
-    currentVip = null;
+    rewardSeconds = 60;
+    rewardClaimed = false;
+
+    document.getElementById("rewardTime")
+        .textContent = rewardSeconds;
+
+    document
+        .getElementById("watchReward")
+        .classList.add("show");
+
+    rewardTimer = setInterval(() => {
+
+        rewardSeconds--;
+
+        document.getElementById("rewardTime")
+            .textContent = rewardSeconds;
+
+        if(rewardSeconds <= 0){
+
+            clearInterval(rewardTimer);
+            rewardTimer = null;
+
+            claimReward();
+        }
+
+    },1000);
 }
 
-function closePlayerOutside(event){
+function stopReward(){
 
-    if(event.target.id === "playerModal"){
-        closePlayer();
+    if(rewardTimer){
+        clearInterval(rewardTimer);
+        rewardTimer = null;
     }
 
+    document
+        .getElementById("watchReward")
+        .classList.remove("show");
+}
+
+function claimReward(){
+
+    if(rewardClaimed) return;
+
+    rewardClaimed = true;
+
+    money += 1;
+
+    updateMoney();
+
+    document
+        .getElementById("watchReward")
+        .classList.remove("show");
+
+    showReward(
+        "Bạn đã xem đủ 60 giây<br>+1 tiền"
+    );
+
+    flyMoney();
+}
+
+/* ================= POPUP ================= */
+
+function showReward(text){
+
+    const popup =
+        document.getElementById("rewardPopup");
+
+    popup.innerHTML = text;
+
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+    },2000);
+}
+
+function flyMoney(){
+
+    const img =
+        document.getElementById("flyingMoney");
+
+    const moneyBox =
+        document.querySelector(".money-box");
+
+    const rect =
+        moneyBox.getBoundingClientRect();
+
+    img.style.setProperty(
+        "--target-x",
+        (rect.left - 20) + "px"
+    );
+
+    img.style.setProperty(
+        "--target-y",
+        (rect.top - 100) + "px"
+    );
+
+    img.classList.remove("fly");
+
+    void img.offsetWidth;
+
+    img.classList.add("fly");
+
+    setTimeout(() => {
+        img.classList.remove("fly");
+    },1300);
 }
 
 /* ================= VIP MESSAGE ================= */
+
+function showVipMessage(text){
+
+    document.getElementById(
+        "vipMessageText"
+    ).textContent = text;
+
+    document
+        .getElementById("vipMessage")
+        .classList.add("show");
+}
 
 function closeVipMessage(){
 
     document
         .getElementById("vipMessage")
         .classList.remove("show");
-
 }
 
-/* ================= SEARCH ================= */
+/* ================= TÌM KIẾM ================= */
 
 function searchMovies(){
 
     const keyword =
         document
-            .getElementById("searchInput")
-            .value
-            .toLowerCase()
-            .trim();
+        .getElementById("searchInput")
+        .value
+        .toLowerCase()
+        .trim();
 
     document
         .querySelectorAll(".movie-card")
         .forEach(card => {
 
             const name =
-                (
-                    card.dataset.name ||
-                    card.textContent
-                ).toLowerCase();
+                (card.dataset.name || "")
+                .toLowerCase();
 
-            if(!keyword || name.includes(keyword)){
-
-                card.style.display = "";
-
-            }else{
-
-                card.style.display = "none";
-
-            }
-
+            card.style.display =
+                name.includes(keyword)
+                ? ""
+                : "none";
         });
-
 }
 
-/* ================= REWARD ================= */
-
-let rewardTimer = null;
-
-let rewardSeconds = 10;
-
-function startReward(){
-
-    stopReward();
-
-    rewardSeconds = 10;
-
-    const box =
-        document.getElementById("watchReward");
-
-    const time =
-        document.getElementById("rewardTime");
-
-    box.classList.add("show");
-
-    time.textContent = rewardSeconds;
-
-    rewardTimer =
-        setInterval(() => {
-
-            rewardSeconds--;
-
-            time.textContent =
-                rewardSeconds;
-
-            if(rewardSeconds <= 0){
-
-                stopReward();
-
-                money += 1;
-
-                updateMoney();
-
-                showRewardPopup();
-
-            }
-
-        },1000);
-
-}
-
-function stopReward(){
-
-    if(rewardTimer){
-
-        clearInterval(rewardTimer);
-
-        rewardTimer = null;
-
-    }
-
-    document
-        .getElementById("watchReward")
-        .classList.remove("show");
-
-}
-
-function showRewardPopup(){
-
-    const popup =
-        document.getElementById("rewardPopup");
-
-    popup.classList.add("show");
-
-    setTimeout(() => {
-
-        popup.classList.remove("show");
-
-    },1500);
-
-}
-
-/* ================= WELCOME ================= */
-
-function closeWelcome(){
-
-    document
-        .getElementById("welcomeNotice")
-        .style.display = "none";
-
-}
-
-/* ================= SHORTS ================= */
+/* ================= PHIM NGẮN ================= */
 
 function openShorts(){
 
-    shortsIndex = 0;
+    shortIndex = 0;
 
     document
         .getElementById("shortsPage")
         .classList.add("show");
 
     loadShort();
-
 }
 
 function closeShorts(){
@@ -1591,91 +1409,49 @@ function closeShorts(){
         .getElementById("shortsPage")
         .classList.remove("show");
 
-    document
-        .getElementById("shortFrame")
-        .src = "";
-
+    document.getElementById("shortFrame").src = "";
 }
 
 function loadShort(){
 
-    const id =
-        shorts[shortsIndex];
+    const id = shorts[shortIndex];
 
-    document
-        .getElementById("shortFrame")
-        .src =
+    document.getElementById("shortFrame").src =
         "https://www.youtube.com/embed/" +
         id +
-        "?autoplay=1&loop=1&rel=0";
+        "?autoplay=1&rel=0";
 
-    document
-        .getElementById("shortsCount")
+    document.getElementById("shortsCount")
         .textContent =
-        (shortsIndex + 1) +
+        (shortIndex + 1) +
         " / " +
         shorts.length;
-
 }
 
-/* ================= SHORTS SWIPE ================= */
+function nextShort(){
 
-let touchStartY = 0;
+    shortIndex++;
 
-document
-    .getElementById("shortsPage")
-    .addEventListener(
-        "touchstart",
-        function(e){
+    if(shortIndex >= shorts.length){
+        shortIndex = 0;
+    }
 
-            touchStartY =
-                e.touches[0].clientY;
+    loadShort();
+}
 
-        },
-        {passive:true}
-    );
+/* ================= PHÍM ESC ================= */
 
-document
-    .getElementById("shortsPage")
-    .addEventListener(
-        "touchend",
-        function(e){
+document.addEventListener("keydown",function(e){
 
-            const touchEndY =
-                e.changedTouches[0].clientY;
+    if(e.key === "Escape"){
 
-            const diff =
-                touchStartY - touchEndY;
+        closePlayer();
+        closeShorts();
+        closeVipMessage();
 
-            if(Math.abs(diff) < 50){
-                return;
-            }
+    }
 
-            if(diff > 0){
-
-                if(shortsIndex < shorts.length - 1){
-
-                    shortsIndex++;
-
-                    loadShort();
-
-                }
-
-            }else{
-
-                if(shortsIndex > 0){
-
-                    shortsIndex--;
-
-                    loadShort();
-
-                }
-
-            }
-
-        },
-        {passive:true}
-    );
+});
 
 </script>
 
