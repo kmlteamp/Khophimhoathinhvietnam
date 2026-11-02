@@ -10,18 +10,9 @@
 body { background: #090910; color: white; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
 
 /* ==================== GIAO DIỆN ĐĂNG NHẬP ==================== */
-.auth-overlay {
-    position: fixed; inset: 0; z-index: 9999;
-    background: #090910;
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px;
-}
+.auth-overlay { position: fixed; inset: 0; z-index: 9999; background: #090910; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .auth-overlay.hidden { display: none; }
-.auth-container {
-    width: 100%; max-width: 390px; background: #151520;
-    border: 1px solid #303044; border-radius: 18px;
-    padding: 25px 22px; box-shadow: 0 15px 45px #0009;
-}
+.auth-container { width: 100%; max-width: 390px; background: #151520; border: 1px solid #303044; border-radius: 18px; padding: 25px 22px; box-shadow: 0 15px 45px #0009; }
 .auth-logo { text-align: center; color: #ff3155; font-size: 27px; font-weight: 900; }
 .auth-sub { text-align: center; color: #9999aa; font-size: 12px; margin: 8px 0 25px; }
 .tabs { display: flex; background: #0d0d16; padding: 5px; border-radius: 9px; margin-bottom: 25px; }
@@ -30,33 +21,18 @@ body { background: #090910; color: white; padding-bottom: 75px; -webkit-tap-high
 .auth-container h2 { font-size: 22px; margin-bottom: 8px; }
 .auth-desc { color: #9999aa; font-size: 13px; margin-bottom: 22px; }
 .auth-container label { display: block; font-size: 13px; margin-bottom: 8px; }
-.auth-container input {
-    width: 100%; padding: 14px; background: #20202d;
-    border: 1px solid #353547; border-radius: 9px;
-    color: white; outline: none; margin-bottom: 18px; font-family: inherit;
-}
+.auth-container input { width: 100%; padding: 14px; background: #20202d; border: 1px solid #353547; border-radius: 9px; color: white; outline: none; margin-bottom: 18px; font-family: inherit; }
 .auth-container input:focus { border-color: #ff3155; }
-.submit {
-    width: 100%; padding: 14px; border: 0; border-radius: 9px;
-    background: #ff3155; color: white; font-weight: bold;
-    font-size: 15px; cursor: pointer; font-family: inherit;
-}
+.submit { width: 100%; padding: 14px; border: 0; border-radius: 9px; background: #ff3155; color: white; font-weight: bold; font-size: 15px; cursor: pointer; font-family: inherit; }
 .submit:active { transform: scale(.98); }
 .auth-message { text-align: center; color: #ff7188; font-size: 13px; margin-top: 15px; min-height: 18px; }
 .auth-footer { text-align: center; color: #777; font-size: 11px; margin-top: 24px; }
 .hidden { display: none !important; }
 
 /* ==================== HEADER ==================== */
-header {
-    height: 60px; background: #141420; border-bottom: 1px solid #29293a;
-    display: flex; align-items: center; justify-content: space-between; padding: 0 16px;
-    position: sticky; top: 0; z-index: 100;
-}
+header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; position: sticky; top: 0; z-index: 100; }
 .logo { font-size: 20px; font-weight: 900; color: #ff3155; display: flex; align-items: center; gap: 6px; }
-.search {
-    background: #252535; border: 1px solid #303044; padding: 9px 15px;
-    border-radius: 20px; color: white; width: 150px; outline: none; font-size: 13px; transition: all 0.2s;
-}
+.search { background: #252535; border: 1px solid #303044; padding: 9px 15px; border-radius: 20px; color: white; width: 150px; outline: none; font-size: 13px; transition: all 0.2s; }
 .search:focus { border-color: #ff3155; width: 180px; }
 
 /* CHUYỂN TRANG */
@@ -69,62 +45,15 @@ header {
 .section-title { font-size: 17px; font-weight: bold; margin: 8px 0 15px; display: flex; justify-content: space-between; align-items: center; }
 .live-label { color: #ff3155; font-size: 12px; cursor: pointer; }
 
-/* KHUNG VIDEO YOUTUBE */
-.video-wrapper {
-    width: 100%; aspect-ratio: 16 / 9;
-    background: #000; border-radius: 14px; overflow: hidden;
-    position: relative; border: 1px solid #343447;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-}
-.video-wrapper iframe {
-    width: 100%; height: 100%; border: 0; display: block;
-}
-
-/* LỚP PHỦ BẮT SỰ KIỆN CLICK VÀ NÚT PLAY CỦA WEB */
-.video-overlay-btn {
-    position: absolute; inset: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: rgba(0, 0, 0, 0.4); /* Làm tối nhẹ để nổi bật nút */
-    cursor: pointer; z-index: 5;
-    transition: background 0.3s;
-}
-.video-overlay-btn:hover {
-    background: rgba(0, 0, 0, 0.2);
-}
-.video-overlay-btn.playing {
-    background: transparent; /* Ẩn nền khi video đang chạy */
-}
-.video-overlay-btn.playing .web-play-icon {
-    opacity: 0; /* Ẩn nút Play khi đang chạy */
-}
-.video-overlay-btn.playing:hover .web-play-icon {
-    opacity: 1; /* Chỉ hiện nút Pause khi rê chuột vào */
-}
-
-.web-play-icon {
-    width: 70px; height: 70px;
-    background: rgba(255, 49, 85, 0.9);
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 30px; color: white;
-    box-shadow: 0 0 30px rgba(255, 49, 85, 0.8);
-    transition: opacity 0.3s, transform 0.2s;
-}
-.video-overlay-btn:hover .web-play-icon {
-    transform: scale(1.1);
-}
+.video-wrapper { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 14px; overflow: hidden; position: relative; border: 1px solid #343447; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+.video-wrapper video { width: 100%; height: 100%; object-fit: cover; display: block; }
+.live-overlay { position: absolute; top: 12px; left: 12px; background: #ff2449; color: white; padding: 4px 10px; border-radius: 5px; font-size: 12px; font-weight: bold; z-index: 5; display: flex; align-items: center; gap: 5px; animation: pulse 1.5s infinite; }
+.live-overlay::before { content: ""; width: 8px; height: 8px; background: white; border-radius: 50%; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 
 .live-info { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
 .live-info h3 { font-size: 18px; }
-.live-badge { background: #ff2449; padding: 5px 10px; border-radius: 5px; font-size: 11px; font-weight: bold; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
 .description { color: #9292a5; font-size: 13px; margin-top: 8px; line-height: 1.5; }
-
-.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-.category { position: relative; height: 120px; border-radius: 12px; overflow: hidden; cursor: pointer; background: #202030; }
-.category img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-.category:hover img { transform: scale(1.1); }
-.category-name { position: absolute; inset: auto 0 0 0; padding: 30px 12px 12px; font-size: 14px; font-weight: bold; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
 
 .movie-list { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
 .movie-list::-webkit-scrollbar { display: none; }
@@ -134,22 +63,31 @@ header {
 .movie p { font-size: 13px; margin-top: 8px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .movie span { font-size: 11px; color: #9292a5; display: block; margin-top: 2px; }
 
+/* ==================== TRANG XEM PHIM CHI TIẾT ==================== */
+.back-btn { background: #29293a; color: white; border: 0; padding: 9px 13px; border-radius: 8px; font-family: inherit; cursor: pointer; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 5px; }
+.player-wrapper { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; position: relative; }
+.player-wrapper iframe { width: 100%; height: 100%; border: 0; display: block; }
+.video-overlay-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.4); cursor: pointer; z-index: 5; transition: background 0.3s; }
+.video-overlay-btn:hover { background: rgba(0, 0, 0, 0.2); }
+.video-overlay-btn.playing { background: transparent; }
+.video-overlay-btn.playing .web-play-icon { opacity: 0; }
+.video-overlay-btn.playing:hover .web-play-icon { opacity: 1; }
+.web-play-icon { width: 70px; height: 70px; background: rgba(255, 49, 85, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; box-shadow: 0 0 30px rgba(255, 49, 85, 0.8); transition: opacity 0.3s, transform 0.2s; }
+.video-overlay-btn:hover .web-play-icon { transform: scale(1.1); }
+
 /* ==================== TRANG DANH MỤC ==================== */
 .heading { font-size: 23px; font-weight: bold; margin-bottom: 7px; }
 .subheading { color: #9999aa; font-size: 13px; margin-bottom: 20px; }
-
 .categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-bottom: 27px; }
 .category-item { position: relative; height: 145px; border-radius: 13px; overflow: hidden; cursor: pointer; border: 1px solid #343448; }
 .category-item img { width: 100%; height: 100%; object-fit: cover; transition: .3s; }
 .category-item:hover img { transform: scale(1.08); }
 .category-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent, #000d); }
 .category-item-title { position: absolute; bottom: 13px; left: 12px; z-index: 2; font-size: 15px; font-weight: bold; }
-
 .filter-list { display: flex; gap: 9px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: none; }
 .filter-list::-webkit-scrollbar { display: none; }
 .filter { white-space: nowrap; padding: 9px 15px; border-radius: 20px; background: #202030; color: #aaa; border: 1px solid #353548; cursor: pointer; font-family: inherit; }
 .filter.active { background: #ff3155; color: white; border-color: #ff3155; }
-
 .movie-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
 .movie-card { cursor: pointer; min-width: 0; }
 .movie-card img { width: 100%; height: 210px; object-fit: cover; border-radius: 11px; background: #202030; }
@@ -163,10 +101,8 @@ header {
 .heading-box span { font-size: 27px; color: #ff3155; }
 .heading-box h1 { font-size: 23px; }
 .sub { color: #9999aa; font-size: 13px; margin: 9px 0 20px; }
-
 .search-full { width: 100%; padding: 13px 15px; border-radius: 10px; border: 1px solid #333348; background: #191925; color: white; outline: none; margin-bottom: 17px; }
 .count { color: #aaa; font-size: 13px; margin-bottom: 15px; }
-
 .fav-movie { display: flex; gap: 13px; background: #171722; border: 1px solid #29293b; border-radius: 12px; padding: 10px; margin-bottom: 13px; }
 .fav-movie img { width: 105px; height: 145px; object-fit: cover; border-radius: 8px; background: #252535; }
 .fav-info { flex: 1; min-width: 0; padding: 5px 0; }
@@ -188,12 +124,10 @@ header {
 .username { font-size: 23px; margin-top: 15px; }
 .user-id { color: #aaa; margin-top: 7px; font-size: 13px; }
 .status { display: inline-block; margin-top: 12px; background: #173b2b; color: #50e59b; padding: 6px 13px; border-radius: 20px; font-size: 12px; }
-
 .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
 .stat { background: #202033; padding: 15px 5px; border-radius: 12px; text-align: center; }
 .stat h2 { color: #ff5570; font-size: 22px; }
 .stat p { color: #aaa; font-size: 12px; margin-top: 6px; }
-
 .section { margin-top: 25px; }
 .section h3 { font-size: 17px; margin-bottom: 13px; }
 .info-card { background: #171722; border: 1px solid #2b2b3c; border-radius: 13px; padding: 5px 15px; }
@@ -201,14 +135,12 @@ header {
 .info-row:last-child { border-bottom: none; }
 .info-row span { color: #9999aa; font-size: 14px; }
 .info-row strong { font-size: 14px; text-align: right; overflow-wrap: anywhere; }
-
 .menu { display: flex; justify-content: space-between; align-items: center; background: #171722; padding: 17px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; border: 1px solid #29293a; }
 .menu:active { background: #29293d; }
 .menu-left { display: flex; gap: 12px; align-items: center; }
 .menu-icon { font-size: 21px; }
 .menu p { font-size: 14px; }
 .arrow { color: #888; }
-
 .logout { width: 100%; margin-top: 20px; padding: 15px; background: #381521; border: 1px solid #8e2941; color: #ff5570; border-radius: 12px; font-weight: bold; cursor: pointer; font-family: inherit; }
 
 /* THANH ĐIỀU HƯỚNG */
@@ -285,81 +217,75 @@ header {
     <!-- ==================== TRANG CHỦ ==================== -->
     <div class="page active" id="pageHome">
         <main class="container">
+            
             <div class="section-title">
-                <span>PHIM ĐANG CHIẾU</span>
+                <span>LIVE TRỰC TIẾP</span>
                 <span class="live-label">● ĐANG PHÁT</span>
             </div>
 
-            <!-- KHUNG VIDEO YOUTUBE ẨN CONTROLS -->
             <div class="video-wrapper">
-                <!-- ID Video YouTube: _r7BFVWAdZw -->
-                <iframe id="ytPlayer" src="https://www.youtube.com/embed/_r7BFVWAdZw?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="live-overlay">LIVE</div>
+                <video controls playsinline autoplay muted loop>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Trình duyệt không hỗ trợ phát video.
+                </video>
+            </div>
+
+            <div class="live-info">
+                <h3>Kênh Live Thể Thao 24/7</h3>
+            </div>
+            <p class="description">
+                Chào mừng bạn đến với kênh Live trực tiếp. Video sẽ tự động phát khi vào trang.
+            </p>
+
+            <div class="section-title" style="margin-top:28px">
+                <span>PHIM ĐỀ XUẤT</span>
+                <span class="live-label" onclick="switchPage('category')">XEM TẤT CẢ ›</span>
+            </div>
+
+            <div class="movie-list">
+                <!-- PHIM DORAEMON TẬP (1) -->
+                <div class="movie" onclick="playMovie('DORAEMON TẬP (1)', 'https://youtu.be/MrMgtf0eqnM?feature=shared', 'Hoạt hình', '2026', 'https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg')">
+                    <img src="https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg" alt="Doraemon Tập 1">
+                    <p>DORAEMON TẬP (1)</p>
+                    <span>Hoạt hình • 2026</span>
+                </div>
                 
-                <!-- Nút Play/Pause của Web đè lên trên -->
+                <!-- PHIM DORAEMON HALLOWEEN -->
+                <div class="movie" onclick="addToFavoritesAndPlay('DORAEMON NGÀY LỄ HALLOWEEN (1)', 'Hoạt hình', '2026', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s" alt="Doraemon">
+                    <p>DORAEMON HALLOWEEN (1)</p>
+                    <span>Hoạt hình • 2026</span>
+                </div>
+
+                <!-- PHIM NGÔN TÌNH (VN) MỚI CẬP NHẬT -->
+                <div class="movie" onclick="playMovie('CHỒNG TÔI LÀ CỰC PHẨM', 'https://youtu.be/D2Y10HFw1sE?si=NeJT3BYnxTUfVuOU', 'Ngôn Tình (VN)', '2026', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Chồng Tôi Là Cực Phẩm">
+                    <p>CHỒNG TÔI LÀ CỰC PHẨM</p>
+                    <span>Ngôn tình (VN) • 2026</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== TRANG XEM PHIM CHI TIẾT ==================== -->
+    <div class="page" id="pageWatch">
+        <main class="container">
+            <button class="back-btn" onclick="switchPage('home')">← Quay lại</button>
+            
+            <div class="player-wrapper">
+                <iframe id="ytPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="video-overlay-btn" id="videoOverlayBtn" onclick="toggleWebVideo()">
                     <div class="web-play-icon" id="webPlayIcon">▶</div>
                 </div>
             </div>
 
-            <div class="live-info">
-                <h3>Tên Phim: DORAEMON NGÀY LỄ HALLOWEEN (1)</h3>
-                <span class="live-badge">● HOT</span>
-            </div>
-
-            <p class="description">
-                Xem phim Doraemon Ngày Lễ Halloween chất lượng cao. Nhấn vào khung để phát hoặc tạm dừng video.
-            </p>
-
-            <div class="section-title" style="margin-top:28px">
-                <span>DANH MỤC PHIM</span>
-                <span class="live-label" onclick="switchPage('category')">XEM TẤT CẢ ›</span>
-            </div>
-
-            <div class="category-grid">
-                <div class="category" onclick="filterMoviesFromHome('Hành động')">
-                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Phim hành động">
-                    <div class="category-name">⚔️ Hành động</div>
-                </div>
-                <div class="category" onclick="filterMoviesFromHome('Tình cảm')">
-                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="Phim tình cảm">
-                    <div class="category-name">❤️ Tình cảm</div>
-                </div>
-                <div class="category" onclick="filterMoviesFromHome('Kinh dị')">
-                    <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=500" alt="Phim kinh dị">
-                    <div class="category-name">👻 Kinh dị</div>
-                </div>
-                <div class="category" onclick="filterMoviesFromHome('Hoạt hình')">
-                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500" alt="Phim hoạt hình">
-                    <div class="category-name">🎨 Hoạt hình</div>
-                </div>
-            </div>
-
-            <div class="section-title" style="margin-top:28px">
-                <span>PHIM ĐỀ XUẤT</span>
-                <span class="live-label">MỚI NHẤT ›</span>
-            </div>
-
-            <div class="movie-list">
-                <div class="movie" onclick="addToFavoritesAndPlay('DORAEMON NGÀY LỄ HALLOWEEN (1)', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400')">
-                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400" alt="Doraemon">
-                    <p>DORAEMON HALLOWEEN</p>
-                    <span>Hoạt hình • 2026</span>
-                </div>
-                <div class="movie" onclick="addToFavoritesAndPlay('Phim nổi bật 02', 'Kinh dị', '2026', 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400')">
-                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400" alt="Phim 2">
-                    <p>Phim nổi bật 02</p>
-                    <span>Kinh dị • 2026</span>
-                </div>
-                <div class="movie" onclick="addToFavoritesAndPlay('Phim nổi bật 03', 'Tình cảm', '2026', 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400')">
-                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400" alt="Phim 3">
-                    <p>Phim nổi bật 03</p>
-                    <span>Tình cảm • 2026</span>
-                </div>
-                <div class="movie" onclick="addToFavoritesAndPlay('Phim nổi bật 04', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400')">
-                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400" alt="Phim 4">
-                    <p>Phim nổi bật 04</p>
-                    <span>Hoạt hình • 2026</span>
-                </div>
+            <h1 id="watchTitle" style="font-size: 20px; margin-top: 15px;">Tên Phim</h1>
+            <div class="meta" id="watchMeta" style="color: #aaa; font-size: 13px; margin-top: 8px;">Thể loại • Năm</div>
+            
+            <div class="section">
+                <h3>NỘI DUNG PHIM</h3>
+                <p class="description" id="watchDesc">Đang cập nhật nội dung...</p>
             </div>
         </main>
     </div>
@@ -383,6 +309,10 @@ header {
                     <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=600" alt="Phiêu lưu">
                     <div class="category-item-title">🧭 PHIÊU LƯU</div>
                 </div>
+                <div class="category-item" onclick="setFilter('Ngôn Tình (VN)')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Ngôn Tình (VN)">
+                    <div class="category-item-title">🌸 NGÔN TÌNH (VN)</div>
+                </div>
             </div>
 
             <div class="section-title">
@@ -395,15 +325,35 @@ header {
                 <button class="filter" onclick="setFilter('Hoạt hình', this)">Hoạt hình</button>
                 <button class="filter" onclick="setFilter('Hành động', this)">Hành động</button>
                 <button class="filter" onclick="setFilter('Phiêu lưu', this)">Phiêu lưu</button>
+                <button class="filter" onclick="setFilter('Ngôn Tình (VN)', this)">Ngôn Tình (VN)</button>
             </div>
 
             <div class="movie-grid" id="movieGrid">
-                <div class="movie-card" data-category="Hoạt hình" data-name="Doraemon Ngày Lễ Halloween" onclick="addToFavoritesAndPlay('DORAEMON NGÀY LỄ HALLOWEEN (1)', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500')">
-                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500" alt="Doraemon">
+                <!-- PHIM DORAEMON TẬP (1) -->
+                <div class="movie-card" data-category="Hoạt hình" data-name="Doraemon Tập 1" onclick="playMovie('DORAEMON TẬP (1)', 'https://youtu.be/MrMgtf0eqnM?feature=shared', 'Hoạt hình', '2026', 'https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg')">
+                    <img src="https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg" alt="Doraemon Tập 1">
+                    <h3>Doraemon Tập (1)</h3>
+                    <p>Hoạt hình • 2026</p>
+                    <span class="movie-tag">HOẠT HÌNH</span>
+                </div>
+
+                <!-- PHIM DORAEMON HALLOWEEN -->
+                <div class="movie-card" data-category="Hoạt hình" data-name="Doraemon Ngày Lễ Halloween" onclick="addToFavoritesAndPlay('DORAEMON NGÀY LỄ HALLOWEEN (1)', 'Hoạt hình', '2026', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s" alt="Doraemon">
                     <h3>Doraemon Halloween (1)</h3>
                     <p>Hoạt hình • 2026</p>
                     <span class="movie-tag">HOẠT HÌNH</span>
                 </div>
+
+                <!-- PHIM NGÔN TÌNH (VN) MỚI CẬP NHẬT -->
+                <div class="movie-card" data-category="Ngôn Tình (VN)" data-name="Chồng Tôi Là Cực Phẩm" onclick="playMovie('CHỒNG TÔI LÀ CỰC PHẨM', 'https://youtu.be/D2Y10HFw1sE?si=NeJT3BYnxTUfVuOU', 'Ngôn Tình (VN)', '2026', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s')">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Chồng Tôi Là Cực Phẩm">
+                    <h3>Chồng Tôi Là Cực Phẩm</h3>
+                    <p>Ngôn tình (VN) • 2026</p>
+                    <span class="movie-tag">NGÔN TÌNH (VN)</span>
+                </div>
+
+                <!-- Các phim khác -->
                 <div class="movie-card" data-category="Hành động" data-name="Nhiệm vụ bí mật" onclick="addToFavoritesAndPlay('Nhiệm vụ bí mật', 'Hành động', '2026', 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500')">
                     <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Nhiệm vụ bí mật">
                     <h3>Nhiệm vụ bí mật</h3>
@@ -413,24 +363,6 @@ header {
                 <div class="movie-card" data-category="Phiêu lưu" data-name="Cuộc phiêu lưu" onclick="addToFavoritesAndPlay('Cuộc phiêu lưu', 'Phiêu lưu', '2026', 'https://images.unsplash.com/photo-1511497584788-876760111969?w=500')">
                     <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=500" alt="Cuộc phiêu lưu">
                     <h3>Cuộc phiêu lưu</h3>
-                    <p>Phiêu lưu • 2026</p>
-                    <span class="movie-tag">PHIÊU LƯU</span>
-                </div>
-                <div class="movie-card" data-category="Hoạt hình" data-name="Vương quốc phép thuật" onclick="addToFavoritesAndPlay('Vương quốc phép thuật', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500')">
-                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" alt="Vương quốc phép thuật">
-                    <h3>Vương quốc phép thuật</h3>
-                    <p>Hoạt hình • 2026</p>
-                    <span class="movie-tag">HOẠT HÌNH</span>
-                </div>
-                <div class="movie-card" data-category="Hành động" data-name="Chiến binh cuối cùng" onclick="addToFavoritesAndPlay('Chiến binh cuối cùng', 'Hành động', '2026', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500')">
-                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500" alt="Chiến binh cuối cùng">
-                    <h3>Chiến binh cuối cùng</h3>
-                    <p>Hành động • 2026</p>
-                    <span class="movie-tag">HÀNH ĐỘNG</span>
-                </div>
-                <div class="movie-card" data-category="Phiêu lưu" data-name="Bí mật rừng xanh" onclick="addToFavoritesAndPlay('Bí mật rừng xanh', 'Phiêu lưu', '2026', 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=500')">
-                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=500" alt="Bí mật rừng xanh">
-                    <h3>Bí mật rừng xanh</h3>
                     <p>Phiêu lưu • 2026</p>
                     <span class="movie-tag">PHIÊU LƯU</span>
                 </div>
@@ -608,47 +540,58 @@ function checkAuth() {
     }
 }
 
-// ==================== XỬ LÝ VIDEO YOUTUBE CUSTOM ====================
+// ==================== XỬ LÝ VIDEO YOUTUBE ====================
 let ytPlayer;
 let isWebVideoPlaying = false;
 const overlayBtn = document.getElementById('videoOverlayBtn');
 const playIcon = document.getElementById('webPlayIcon');
 
-// Hàm tải API của YouTube
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-function onYouTubeIframeAPIReady() {
-    ytPlayer = new YT.Player('ytPlayer', {
-        events: {
-            'onStateChange': onPlayerStateChange
-        }
-    });
+function extractYouTubeID(url) {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
 }
 
-// Cập nhật trạng thái nút bấm khi video chạy/dừng
-function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING) {
-        isWebVideoPlaying = true;
-        overlayBtn.classList.add('playing');
-        playIcon.textContent = '⏸'; // Đổi thành icon tạm dừng
-    } else {
+function loadYouTubeVideo(url) {
+    const videoId = extractYouTubeID(url);
+    if(!videoId) return;
+    
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&autoplay=1`;
+    
+    const iframe = document.getElementById('ytPlayer');
+    iframe.src = embedUrl;
+    
+    // Đặt lại trạng thái nút
+    isWebVideoPlaying = true;
+    overlayBtn.classList.add('playing');
+    playIcon.textContent = '⏸';
+}
+
+function toggleWebVideo() {
+    // Lấy iframe và gửi lệnh postMessage cho YouTube API
+    const iframe = document.getElementById('ytPlayer');
+    if(!iframe.src) return;
+
+    if (isWebVideoPlaying) {
+        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
         isWebVideoPlaying = false;
         overlayBtn.classList.remove('playing');
-        playIcon.textContent = '▶'; // Đổi thành icon phát
+        playIcon.textContent = '▶';
+    } else {
+        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        isWebVideoPlaying = true;
+        overlayBtn.classList.add('playing');
+        playIcon.textContent = '⏸';
     }
 }
 
-// Hàm click để phát hoặc dừng video
-function toggleWebVideo() {
-    if (!ytPlayer) return;
-    if (isWebVideoPlaying) {
-        ytPlayer.pauseVideo();
-    } else {
-        ytPlayer.playVideo();
-    }
+// Hàm mở trang xem phim
+function playMovie(title, url, genre, year, avatar) {
+    switchPage('watch');
+    document.getElementById('watchTitle').textContent = title;
+    document.getElementById('watchMeta').textContent = genre + ' • ' + year;
+    document.getElementById('watchDesc').textContent = 'Đang thưởng thức bộ phim ' + title + '. Chúc bạn xem phim vui vẻ!';
+    loadYouTubeVideo(url);
 }
 
 // ==================== CHUYỂN TRANG CHÍNH ====================
@@ -669,11 +612,19 @@ function switchPage(page) {
     } else if (page === 'profile') {
         document.getElementById('pageProfile').classList.add('active');
         document.getElementById('navProfile').classList.add('active');
+    } else if (page === 'watch') {
+        // Trang xem phim không có nav active
     }
     
-    // Khi chuyển trang, tạm dừng video YouTube
-    if (page !== 'home' && ytPlayer && isWebVideoPlaying) {
-        ytPlayer.pauseVideo();
+    // Khi chuyển trang khỏi watch, dừng video
+    if (page !== 'watch') {
+        const iframe = document.getElementById('ytPlayer');
+        if(iframe.src) {
+            iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            isWebVideoPlaying = false;
+            overlayBtn.classList.remove('playing');
+            playIcon.textContent = '▶';
+        }
     }
 }
 
@@ -717,11 +668,6 @@ function applyFilter() {
     document.getElementById("resultCount").textContent = count + " PHIM";
 }
 
-function filterMoviesFromHome(category) {
-    switchPage('category');
-    setFilter(category);
-}
-
 document.getElementById("globalSearch").addEventListener("input", function() {
     if(this.value.trim() !== "" && !document.getElementById("pageCategory").classList.contains("active")) {
         switchPage('category');
@@ -731,9 +677,9 @@ document.getElementById("globalSearch").addEventListener("input", function() {
 
 // ==================== XỬ LÝ YÊU THÍCH ====================
 const defaultMovies = [
-    { id: 1, name: "DORAEMON NGÀY LỄ HALLOWEEN (1)", genre: "Hoạt hình", year: "2026", image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400" },
-    { id: 2, name: "Nhiệm Vụ Bí Mật", genre: "Hành động", year: "2026", image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400" },
-    { id: 3, name: "Bí Mật Rừng Xanh", genre: "Phiêu lưu", year: "2026", image: "https://images.unsplash.com/photo-1511497584788-876760111969?w=400" }
+    { id: 1, name: "DORAEMON TẬP (1)", genre: "Hoạt hình", year: "2026", image: "https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg" },
+    { id: 2, name: "DORAEMON NGÀY LỄ HALLOWEEN (1)", genre: "Hoạt hình", year: "2026", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s" },
+    { id: 3, name: "CHỒNG TÔI LÀ CỰC PHẨM", genre: "Ngôn Tình (VN)", year: "2026", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" }
 ];
 
 function loadFavorites() {
