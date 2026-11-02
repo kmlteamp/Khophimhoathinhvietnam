@@ -65,7 +65,7 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
 
 /* ==================== TRANG XEM PHIM CHI TIẾT ==================== */
 .back-btn { background: #29293a; color: white; border: 0; padding: 9px 13px; border-radius: 8px; font-family: inherit; cursor: pointer; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 5px; }
-.player-wrapper { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; position: relative; }
+.player-wrapper { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #343447; }
 .player-wrapper iframe { width: 100%; height: 100%; border: 0; display: block; }
 .video-overlay-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.4); cursor: pointer; z-index: 5; transition: background 0.3s; }
 .video-overlay-btn:hover { background: rgba(0, 0, 0, 0.2); }
@@ -74,6 +74,15 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
 .video-overlay-btn.playing:hover .web-play-icon { opacity: 1; }
 .web-play-icon { width: 70px; height: 70px; background: rgba(255, 49, 85, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; box-shadow: 0 0 30px rgba(255, 49, 85, 0.8); transition: opacity 0.3s, transform 0.2s; }
 .video-overlay-btn:hover .web-play-icon { transform: scale(1.1); }
+
+/* NÚT DỰ PHÒNG YOUTUBE */
+.fallback-box {
+    display: none; flex-direction: column; align-items: center; justify-content: center;
+    position: absolute; inset: 0; background: #171722; z-index: 10; padding: 20px; text-align: center;
+}
+.fallback-box.show { display: flex; }
+.fallback-box p { color: #aaa; margin-bottom: 15px; font-size: 14px; }
+.fallback-btn { padding: 12px 20px; background: #ff3155; color: white; border-radius: 8px; text-decoration: none; font-weight: bold; }
 
 /* ==================== TRANG DANH MỤC ==================== */
 .heading { font-size: 23px; font-weight: bold; margin-bottom: 7px; }
@@ -258,7 +267,7 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                     <span>Hoạt hình • 2026</span>
                 </div>
 
-                <!-- PHIM NGÔN TÌNH (VN) MỚI CẬP NHẬT -->
+                <!-- PHIM NGÔN TÌNH (VN) -->
                 <div class="movie" onclick="playMovie('CHỒNG TÔI LÀ CỰC PHẨM', 'https://youtu.be/D2Y10HFw1sE?si=NeJT3BYnxTUfVuOU', 'Ngôn Tình (VN)', '2026', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s')">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Chồng Tôi Là Cực Phẩm">
                     <p>CHỒNG TÔI LÀ CỰC PHẨM</p>
@@ -277,6 +286,11 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                 <iframe id="ytPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="video-overlay-btn" id="videoOverlayBtn" onclick="toggleWebVideo()">
                     <div class="web-play-icon" id="webPlayIcon">▶</div>
+                </div>
+                <!-- Nút dự phòng nếu video bị chặn -->
+                <div class="fallback-box" id="fallbackBox">
+                    <p>Video này không thể phát trực tiếp tại đây.</p>
+                    <a href="" id="fallbackLink" class="fallback-btn" target="_blank">Mở trên YouTube</a>
                 </div>
             </div>
 
@@ -345,7 +359,7 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                     <span class="movie-tag">HOẠT HÌNH</span>
                 </div>
 
-                <!-- PHIM NGÔN TÌNH (VN) MỚI CẬP NHẬT -->
+                <!-- PHIM NGÔN TÌNH (VN) -->
                 <div class="movie-card" data-category="Ngôn Tình (VN)" data-name="Chồng Tôi Là Cực Phẩm" onclick="playMovie('CHỒNG TÔI LÀ CỰC PHẨM', 'https://youtu.be/D2Y10HFw1sE?si=NeJT3BYnxTUfVuOU', 'Ngôn Tình (VN)', '2026', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s')">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Chồng Tôi Là Cực Phẩm">
                     <h3>Chồng Tôi Là Cực Phẩm</h3>
@@ -541,10 +555,11 @@ function checkAuth() {
 }
 
 // ==================== XỬ LÝ VIDEO YOUTUBE ====================
-let ytPlayer;
 let isWebVideoPlaying = false;
 const overlayBtn = document.getElementById('videoOverlayBtn');
 const playIcon = document.getElementById('webPlayIcon');
+const fallbackBox = document.getElementById('fallbackBox');
+const fallbackLink = document.getElementById('fallbackLink');
 
 function extractYouTubeID(url) {
     const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
@@ -554,21 +569,34 @@ function extractYouTubeID(url) {
 
 function loadYouTubeVideo(url) {
     const videoId = extractYouTubeID(url);
-    if(!videoId) return;
-    
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1&autoplay=1`;
-    
     const iframe = document.getElementById('ytPlayer');
+    
+    // Ẩn nút dự phòng khi mới load
+    fallbackBox.classList.remove('show');
+    iframe.style.display = 'block';
+
+    if(!videoId) {
+        // Nếu link không phải YouTube, hiện nút dự phòng
+        iframe.style.display = 'none';
+        fallbackBox.classList.add('show');
+        fallbackLink.href = url;
+        return;
+    }
+    
+    // Nhúng video với các tham số ẩn thanh điều khiển
+    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1`;
     iframe.src = embedUrl;
     
     // Đặt lại trạng thái nút
-    isWebVideoPlaying = true;
-    overlayBtn.classList.add('playing');
-    playIcon.textContent = '⏸';
+    isWebVideoPlaying = false;
+    overlayBtn.classList.remove('playing');
+    playIcon.textContent = '▶';
+    
+    // Cập nhật link dự phòng
+    fallbackLink.href = url;
 }
 
 function toggleWebVideo() {
-    // Lấy iframe và gửi lệnh postMessage cho YouTube API
     const iframe = document.getElementById('ytPlayer');
     if(!iframe.src) return;
 
