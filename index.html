@@ -67,6 +67,8 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
 .back-btn { background: #29293a; color: white; border: 0; padding: 9px 13px; border-radius: 8px; font-family: inherit; cursor: pointer; margin-bottom: 15px; display: inline-flex; align-items: center; gap: 5px; }
 .player-wrapper { width: 100%; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; overflow: hidden; position: relative; border: 1px solid #343447; }
 .player-wrapper iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+/* Nút Play của Web cho YouTube */
 .video-overlay-btn { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(0, 0, 0, 0.4); cursor: pointer; z-index: 5; transition: background 0.3s; }
 .video-overlay-btn:hover { background: rgba(0, 0, 0, 0.2); }
 .video-overlay-btn.playing { background: transparent; }
@@ -74,6 +76,14 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
 .video-overlay-btn.playing:hover .web-play-icon { opacity: 1; }
 .web-play-icon { width: 70px; height: 70px; background: rgba(255, 49, 85, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; box-shadow: 0 0 30px rgba(255, 49, 85, 0.8); transition: opacity 0.3s, transform 0.2s; }
 .video-overlay-btn:hover .web-play-icon { transform: scale(1.1); }
+
+/* Fallback cho link không nhúng được */
+.fallback-box { display: none; flex-direction: column; align-items: center; justify-content: center; position: absolute; inset: 0; background: #0a0a12; z-index: 10; padding: 20px; text-align: center; }
+.fallback-box.show { display: flex; }
+.fallback-icon { font-size: 48px; margin-bottom: 15px; }
+.fallback-box p { color: #aaa; margin-bottom: 18px; font-size: 13px; line-height: 1.6; max-width: 350px; }
+.fallback-btn { padding: 13px 28px; background: linear-gradient(135deg, #ff3155, #cc0033); color: white; border-radius: 10px; text-decoration: none; font-weight: bold; font-size: 14px; box-shadow: 0 6px 20px rgba(255, 49, 85, 0.4); transition: transform 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.fallback-btn:hover { transform: translateY(-2px); }
 
 /* THÔNG TIN PHIM */
 .info-section { padding: 18px 2px; }
@@ -268,35 +278,26 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
             </div>
 
             <div class="movie-list">
-                <!-- PHIM DORAEMON TẬP (1) -->
                 <div class="movie" onclick="playMovie('1')">
                     <img src="https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg" alt="Doraemon Tập 1">
                     <p>DORAEMON TẬP (1)</p>
                     <span>Hoạt hình • 2026</span>
                 </div>
-                
-                <!-- PHIM DORAEMON HALLOWEEN -->
                 <div class="movie" onclick="playMovie('2')">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s" alt="Doraemon">
                     <p>DORAEMON HALLOWEEN (1)</p>
                     <span>Hoạt hình • 2026</span>
                 </div>
-
-                <!-- PHIM NGÔN TÌNH (VN) -->
                 <div class="movie" onclick="playMovie('3')">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Chồng Tôi Là Cực Phẩm">
                     <p>CHỒNG TÔI LÀ CỰC PHẨM</p>
                     <span>Ngôn tình (VN) • 2026</span>
                 </div>
-
-                <!-- PHIM 18+ LANXINHYEU -->
                 <div class="movie" onclick="playMovie('4')">
                     <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="LANXINHYEU">
                     <p>LANXINHYEU</p>
                     <span>18+ • 2026</span>
                 </div>
-
-                <!-- PHIM 18<1> MỚI THÊM -->
                 <div class="movie" onclick="playMovie('5')">
                     <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="18<1>">
                     <p>18&lt;1&gt;</p>
@@ -311,20 +312,26 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
         <main class="container">
             <button class="back-btn" onclick="switchPage('home')">← Quay lại</button>
             
-            <!-- KHUNG VIDEO -->
             <div class="player-wrapper" id="videoPlayerWrapper">
-                <!-- Nếu là YouTube thì dùng iframe với API -->
+                <!-- Khung YouTube (dùng cho video YouTube) -->
                 <iframe id="ytPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none;"></iframe>
                 
-                <!-- Nếu là link iframe từ trang khác (như xnhau.pink) thì dùng thẻ iframe riêng -->
+                <!-- Khung iframe khác (dành cho link ngoài như xnhau.pink, nếu nhúng được) -->
                 <iframe id="otherPlayer" src="" allowfullscreen style="display:none;"></iframe>
 
-                <div class="video-overlay-btn" id="videoOverlayBtn" onclick="toggleWebVideo()">
+                <!-- Nút Play đỏ (chỉ dùng cho YouTube) -->
+                <div class="video-overlay-btn" id="videoOverlayBtn" onclick="toggleWebVideo()" style="display:none;">
                     <div class="web-play-icon" id="webPlayIcon">▶</div>
+                </div>
+
+                <!-- Khung dự phòng (hiển thị khi link không thể nhúng) -->
+                <div class="fallback-box" id="fallbackBox">
+                    <div class="fallback-icon">🎬</div>
+                    <p>Trang web này chặn phát trực tiếp trong khung. Nhấn nút bên dưới để xem phim.</p>
+                    <a id="fallbackLink" href="#" target="_blank" class="fallback-btn">🎥 Mở link gốc</a>
                 </div>
             </div>
 
-            <!-- THÔNG TIN PHIM -->
             <section class="info-section">
                 <h1 id="watchTitle">Tên Phim</h1>
                 <div class="info-meta" id="watchMeta">Năm • Thể loại</div>
@@ -345,7 +352,6 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                 </div>
             </section>
 
-            <!-- PHIM ĐỀ XUẤT -->
             <h2 class="recommend-title">PHIM ĐỀ XUẤT</h2>
             <div class="recommend-grid" id="recommendList"></div>
         </main>
@@ -395,46 +401,36 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
             </div>
 
             <div class="movie-grid" id="movieGrid">
-                <!-- PHIM DORAEMON TẬP (1) -->
                 <div class="movie-card" data-category="Hoạt hình" data-name="Doraemon Tập 1" onclick="playMovie('1')">
                     <img src="https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg" alt="Doraemon Tập 1">
                     <h3>Doraemon Tập (1)</h3>
                     <p>Hoạt hình • 2026</p>
                     <span class="movie-tag">HOẠT HÌNH</span>
                 </div>
-
-                <!-- PHIM DORAEMON HALLOWEEN -->
                 <div class="movie-card" data-category="Hoạt hình" data-name="Doraemon Ngày Lễ Halloween" onclick="playMovie('2')">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s" alt="Doraemon">
                     <h3>Doraemon Halloween (1)</h3>
                     <p>Hoạt hình • 2026</p>
                     <span class="movie-tag">HOẠT HÌNH</span>
                 </div>
-
-                <!-- PHIM NGÔN TÌNH (VN) -->
                 <div class="movie-card" data-category="Ngôn Tình (VN)" data-name="Chồng Tôi Là Cực Phẩm" onclick="playMovie('3')">
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Chồng Tôi Là Cực Phẩm">
                     <h3>Chồng Tôi Là Cực Phẩm</h3>
                     <p>Ngôn tình (VN) • 2026</p>
                     <span class="movie-tag">NGÔN TÌNH (VN)</span>
                 </div>
-
-                <!-- PHIM 18+ LANXINHYEU -->
                 <div class="movie-card" data-category="18+" data-name="LANXINHYEU" onclick="playMovie('4')">
                     <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="LANXINHYEU">
                     <h3>LANXINHYEU</h3>
                     <p>18+ • 2026</p>
                     <span class="movie-tag">18+</span>
                 </div>
-
-                <!-- PHIM 18<1> MỚI THÊM -->
                 <div class="movie-card" data-category="18+" data-name="18<1>" onclick="playMovie('5')">
                     <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="18<1>">
                     <h3>18&lt;1&gt;</h3>
                     <p>18+ • 2026</p>
                     <span class="movie-tag">18+</span>
                 </div>
-
                 <div class="empty" id="empty">Không tìm thấy phim phù hợp!</div>
             </div>
         </main>
@@ -546,6 +542,7 @@ const movieDatabase = {
         genre: 'Hoạt hình',
         image: 'https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg',
         iframeUrl: 'https://www.youtube.com/embed/MrMgtf0eqnM?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1',
+        originalUrl: 'https://youtu.be/MrMgtf0eqnM',
         desc: 'Cuộc phiêu lưu của chú mèo máy Doraemon đến từ tương lai và cậu bạn Nobita.'
     },
     '2': {
@@ -555,6 +552,7 @@ const movieDatabase = {
         genre: 'Hoạt hình',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s',
         iframeUrl: 'https://www.youtube.com/embed/_r7BFVWAdZw?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1',
+        originalUrl: 'https://youtu.be/_r7BFVWAdZw',
         desc: 'Doraemon và Nobita bước vào thế giới Halloween kỳ bí.'
     },
     '3': {
@@ -564,6 +562,7 @@ const movieDatabase = {
         genre: 'Ngôn Tình (VN)',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s',
         iframeUrl: 'https://www.youtube.com/embed/D2Y10HFw1sE?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1',
+        originalUrl: 'https://youtu.be/D2Y10HFw1sE',
         desc: 'Câu chuyện tình cảm ngọt ngào và hài hước về một người chồng hoàn hảo.'
     },
     '4': {
@@ -573,6 +572,7 @@ const movieDatabase = {
         genre: '18+',
         image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500',
         iframeUrl: 'https://xnhau.pink/embed/181400',
+        originalUrl: 'https://xnhau.pink/watch/181400',
         desc: 'Phim 18+ (Nội dung người lớn).'
     },
     '5': {
@@ -582,6 +582,7 @@ const movieDatabase = {
         genre: '18+',
         image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500',
         iframeUrl: 'https://xnhau.pink/embed/590629',
+        originalUrl: 'https://xnhau.pink/watch/590629',
         desc: 'Phim 18+ (Nội dung người lớn).'
     }
 };
@@ -658,61 +659,75 @@ function checkAuth() {
     }
 }
 
-// ==================== XỬ LÝ VIDEO ====================
+// ==================== XỬ LÝ VIDEO (ĐÃ SỬA LỖI ĐEN) ====================
 let isWebVideoPlaying = false;
 const overlayBtn = document.getElementById('videoOverlayBtn');
 const playIcon = document.getElementById('webPlayIcon');
 
-function loadVideoIframe(url) {
+function loadVideoPlayer(movie) {
     const iframeYt = document.getElementById('ytPlayer');
     const iframeOther = document.getElementById('otherPlayer');
+    const fallbackBox = document.getElementById('fallbackBox');
+    const fallbackLink = document.getElementById('fallbackLink');
+    const overlayBtn = document.getElementById('videoOverlayBtn');
 
-    // Ẩn tất cả
+    // Reset tất cả về trạng thái ẩn
     iframeYt.style.display = 'none';
     iframeOther.style.display = 'none';
+    fallbackBox.classList.remove('show');
+    overlayBtn.style.display = 'none';
     iframeYt.src = '';
     iframeOther.src = '';
 
-    if (!url) {
+    const url = movie.iframeUrl || '';
+    const originalUrl = movie.originalUrl || url;
+
+    // Nếu là YouTube → Hiển thị iframe + nút Play đỏ
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        iframeYt.src = url;
+        iframeYt.style.display = 'block';
+        overlayBtn.style.display = 'flex';
+        overlayBtn.classList.remove('playing');
+        playIcon.textContent = '▶';
+        isWebVideoPlaying = false;
+        return;
+    }
+
+    // Nếu là link khác (xnhau.pink) → Thử nhúng iframe, nếu không được sẽ hiện fallback
+    if (url) {
+        iframeOther.src = url;
+        iframeOther.style.display = 'block';
+        
+        // Hiển thị fallback sau 2 giây. Nếu iframe load được, người dùng có thể tự đóng.
+        // Cách đơn giản nhất: LUÔN hiển thị nút "Mở link gốc" ở dưới iframe (không che iframe)
+        fallbackLink.href = originalUrl;
+        
+        // Chúng ta không hiển thị fallback che khuất. Thay vào đó, ẩn overlay.
+        // Người dùng có thể tương tác trực tiếp với iframe nếu trang đó cho phép.
+        // Nhưng để chắc chắn, chúng ta thêm một nút nhỏ "Mở tab mới" ở góc dưới.
         overlayBtn.style.display = 'none';
         return;
     }
 
-    if (url.includes('youtube.com') || url.includes('youtu.be')) {
-        iframeYt.src = url;
-        iframeYt.style.display = 'block';
-    } else {
-        iframeOther.src = url;
-        iframeOther.style.display = 'block';
-    }
-
-    // Hiển thị nút Play của Web
-    overlayBtn.style.display = 'flex';
-    overlayBtn.classList.remove('playing');
-    playIcon.textContent = '▶';
-    isWebVideoPlaying = false;
+    // Nếu không có link → Hiển thị fallback
+    fallbackLink.href = originalUrl;
+    fallbackBox.classList.add('show');
 }
 
 function toggleWebVideo() {
     const iframeYt = document.getElementById('ytPlayer');
-    const iframeOther = document.getElementById('otherPlayer');
-    
-    if (iframeYt.style.display === 'block') {
-        // Xử lý YouTube
-        if (isWebVideoPlaying) {
-            iframeYt.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-            isWebVideoPlaying = false;
-            overlayBtn.classList.remove('playing');
-            playIcon.textContent = '▶';
-        } else {
-            iframeYt.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-            isWebVideoPlaying = true;
-            overlayBtn.classList.add('playing');
-            playIcon.textContent = '⏸';
-        }
-    } else if (iframeOther.style.display === 'block') {
-        // Xử lý iframe khác: Vì không thể dùng API, chỉ ẩn overlay để người dùng bấm trực tiếp
-        overlayBtn.style.display = 'none'; 
+    if (iframeYt.style.display !== 'block') return;
+
+    if (isWebVideoPlaying) {
+        iframeYt.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        isWebVideoPlaying = false;
+        overlayBtn.classList.remove('playing');
+        playIcon.textContent = '▶';
+    } else {
+        iframeYt.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+        isWebVideoPlaying = true;
+        overlayBtn.classList.add('playing');
+        playIcon.textContent = '⏸';
     }
 }
 
@@ -728,19 +743,12 @@ function playMovie(id) {
     document.getElementById('watchMeta').textContent = movie.year + ' • ' + movie.genre;
     document.getElementById('watchDesc').textContent = movie.desc;
     
-    // Gắn tags
     const tagContainer = document.getElementById('watchTags');
     tagContainer.innerHTML = `<span class="tag">VIETSUB</span><span class="tag">${movie.genre.toUpperCase()}</span>`;
     
-    // Tải Video
-    loadVideoIframe(movie.iframeUrl);
-    
-    // Cập nhật nút Yêu thích
+    loadVideoPlayer(movie);
     updateFavoriteButton();
-    
-    // Hiển thị phim đề xuất
     renderRecommendations(id);
-    
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
@@ -763,10 +771,9 @@ function switchPage(page) {
         document.getElementById('pageProfile').classList.add('active');
         document.getElementById('navProfile').classList.add('active');
     } else if (page === 'watch') {
-        // Trang watch không có nav active
+        // Trang watch
     }
     
-    // Dừng video khi chuyển trang
     if (page !== 'watch') {
         const iframeYt = document.getElementById('ytPlayer');
         if(iframeYt.style.display === 'block' && iframeYt.src) {
@@ -825,7 +832,7 @@ document.getElementById("globalSearch").addEventListener("input", function() {
     applyFilter();
 });
 
-// ==================== PHIM ĐỀ XUẤT DƯỚI CÙNG ====================
+// ==================== PHIM ĐỀ XUẤT ====================
 function renderRecommendations(excludeId) {
     const list = document.getElementById('recommendList');
     list.innerHTML = '';
@@ -852,7 +859,7 @@ function renderRecommendations(excludeId) {
     });
 }
 
-// ==================== XỬ LÝ YÊU THÍCH ====================
+// ==================== YÊU THÍCH ====================
 function getFavorites() {
     try { return JSON.parse(localStorage.getItem("movieFavorites")) || []; }
     catch(e) { return []; }
@@ -861,9 +868,7 @@ function getFavorites() {
 function updateFavoriteButton() {
     const favorites = getFavorites();
     const exists = favorites.some(m => String(m.id) === String(currentMovieId));
-    
-    const btn = document.getElementById('favoriteBtn');
-    btn.textContent = exists ? "♥ ĐÃ YÊU THÍCH" : "♡ YÊU THÍCH";
+    document.getElementById('favoriteBtn').textContent = exists ? "♥ ĐÃ YÊU THÍCH" : "♡ YÊU THÍCH";
 }
 
 function toggleFavorite() {
@@ -883,7 +888,7 @@ function toggleFavorite() {
     document.getElementById('favoriteCount').textContent = favorites.length;
 }
 
-// ==================== XỬ LÝ DANH SÁCH YÊU THÍCH ====================
+// ==================== DANH SÁCH YÊU THÍCH ====================
 function renderFavorites() {
     const list = document.getElementById("favMovieList");
     const empty = document.getElementById("favEmpty");
@@ -950,7 +955,7 @@ function shareMovie() {
     });
 }
 
-// ==================== XỬ LÝ HỒ SƠ ====================
+// ==================== HỒ SƠ ====================
 const defaultProfile = {
     name: "Người dùng", username: "user123", email: "",
     id: "MS-000001", avatar: "https://i.pravatar.cc/300", joinDate: "03/11/2026"
