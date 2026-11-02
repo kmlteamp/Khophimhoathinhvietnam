@@ -75,7 +75,7 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
 .web-play-icon { width: 70px; height: 70px; background: rgba(255, 49, 85, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 30px; color: white; box-shadow: 0 0 30px rgba(255, 49, 85, 0.8); transition: opacity 0.3s, transform 0.2s; }
 .video-overlay-btn:hover .web-play-icon { transform: scale(1.1); }
 
-/* THÔNG TIN PHIM (Giống file bạn gửi) */
+/* THÔNG TIN PHIM */
 .info-section { padding: 18px 2px; }
 .info-section h1 { font-size: 24px; margin-bottom: 10px; }
 .info-meta { color: #aaa; font-size: 13px; margin-bottom: 15px; }
@@ -288,18 +288,37 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                     <p>CHỒNG TÔI LÀ CỰC PHẨM</p>
                     <span>Ngôn tình (VN) • 2026</span>
                 </div>
+
+                <!-- PHIM 18+ LANXINHYEU -->
+                <div class="movie" onclick="playMovie('4')">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="LANXINHYEU">
+                    <p>LANXINHYEU</p>
+                    <span>18+ • 2026</span>
+                </div>
+
+                <!-- PHIM 18<1> MỚI THÊM -->
+                <div class="movie" onclick="playMovie('5')">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="18<1>">
+                    <p>18&lt;1&gt;</p>
+                    <span>18+ • 2026</span>
+                </div>
             </div>
         </main>
     </div>
 
-    <!-- ==================== TRANG XEM PHIM CHI TIẾT (MỚI) ==================== -->
+    <!-- ==================== TRANG XEM PHIM CHI TIẾT ==================== -->
     <div class="page" id="pageWatch">
         <main class="container">
             <button class="back-btn" onclick="switchPage('home')">← Quay lại</button>
             
-            <!-- KHUNG VIDEO YOUTUBE -->
-            <div class="player-wrapper">
-                <iframe id="ytPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <!-- KHUNG VIDEO -->
+            <div class="player-wrapper" id="videoPlayerWrapper">
+                <!-- Nếu là YouTube thì dùng iframe với API -->
+                <iframe id="ytPlayer" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="display:none;"></iframe>
+                
+                <!-- Nếu là link iframe từ trang khác (như xnhau.pink) thì dùng thẻ iframe riêng -->
+                <iframe id="otherPlayer" src="" allowfullscreen style="display:none;"></iframe>
+
                 <div class="video-overlay-btn" id="videoOverlayBtn" onclick="toggleWebVideo()">
                     <div class="web-play-icon" id="webPlayIcon">▶</div>
                 </div>
@@ -355,6 +374,10 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s" alt="Ngôn Tình (VN)">
                     <div class="category-item-title">🌸 NGÔN TÌNH (VN)</div>
                 </div>
+                <div class="category-item" onclick="setFilter('18+')">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=600" alt="18+">
+                    <div class="category-item-title">🔞 18+</div>
+                </div>
             </div>
 
             <div class="section-title">
@@ -368,6 +391,7 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                 <button class="filter" onclick="setFilter('Hành động', this)">Hành động</button>
                 <button class="filter" onclick="setFilter('Phiêu lưu', this)">Phiêu lưu</button>
                 <button class="filter" onclick="setFilter('Ngôn Tình (VN)', this)">Ngôn Tình (VN)</button>
+                <button class="filter" onclick="setFilter('18+', this)">18+</button>
             </div>
 
             <div class="movie-grid" id="movieGrid">
@@ -395,19 +419,22 @@ header { height: 60px; background: #141420; border-bottom: 1px solid #29293a; di
                     <span class="movie-tag">NGÔN TÌNH (VN)</span>
                 </div>
 
-                <!-- Các phim khác -->
-                <div class="movie-card" data-category="Hành động" data-name="Nhiệm vụ bí mật" onclick="alert('Phim đang cập nhật!')">
-                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Nhiệm vụ bí mật">
-                    <h3>Nhiệm vụ bí mật</h3>
-                    <p>Hành động • 2026</p>
-                    <span class="movie-tag">HÀNH ĐỘNG</span>
+                <!-- PHIM 18+ LANXINHYEU -->
+                <div class="movie-card" data-category="18+" data-name="LANXINHYEU" onclick="playMovie('4')">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="LANXINHYEU">
+                    <h3>LANXINHYEU</h3>
+                    <p>18+ • 2026</p>
+                    <span class="movie-tag">18+</span>
                 </div>
-                <div class="movie-card" data-category="Phiêu lưu" data-name="Cuộc phiêu lưu" onclick="alert('Phim đang cập nhật!')">
-                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=500" alt="Cuộc phiêu lưu">
-                    <h3>Cuộc phiêu lưu</h3>
-                    <p>Phiêu lưu • 2026</p>
-                    <span class="movie-tag">PHIÊU LƯU</span>
+
+                <!-- PHIM 18<1> MỚI THÊM -->
+                <div class="movie-card" data-category="18+" data-name="18<1>" onclick="playMovie('5')">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="18<1>">
+                    <h3>18&lt;1&gt;</h3>
+                    <p>18+ • 2026</p>
+                    <span class="movie-tag">18+</span>
                 </div>
+
                 <div class="empty" id="empty">Không tìm thấy phim phù hợp!</div>
             </div>
         </main>
@@ -518,7 +545,7 @@ const movieDatabase = {
         year: '2026',
         genre: 'Hoạt hình',
         image: 'https://cdn2.weeboo.vn/2025/06/hinh-anh_2025-06-14_135026985.jpg',
-        videoUrl: 'https://youtu.be/MrMgtf0eqnM?feature=shared',
+        iframeUrl: 'https://www.youtube.com/embed/MrMgtf0eqnM?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1',
         desc: 'Cuộc phiêu lưu của chú mèo máy Doraemon đến từ tương lai và cậu bạn Nobita.'
     },
     '2': {
@@ -527,7 +554,7 @@ const movieDatabase = {
         year: '2026',
         genre: 'Hoạt hình',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEcOSrZVizKPaXMja7HrZFViS2cXHAnGhZZJFnrM6euQ&s',
-        videoUrl: '', // Bạn có thể điền link video sau
+        iframeUrl: 'https://www.youtube.com/embed/_r7BFVWAdZw?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1',
         desc: 'Doraemon và Nobita bước vào thế giới Halloween kỳ bí.'
     },
     '3': {
@@ -536,8 +563,26 @@ const movieDatabase = {
         year: '2026',
         genre: 'Ngôn Tình (VN)',
         image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtud2obYeFC9WtxmqZprpsFBVVOsUAKNFKJHyBsS4tdw&s',
-        videoUrl: 'https://youtu.be/D2Y10HFw1sE?si=NeJT3BYnxTUfVuOU',
+        iframeUrl: 'https://www.youtube.com/embed/D2Y10HFw1sE?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&playsinline=1',
         desc: 'Câu chuyện tình cảm ngọt ngào và hài hước về một người chồng hoàn hảo.'
+    },
+    '4': {
+        id: '4',
+        name: 'LANXINHYEU',
+        year: '2026',
+        genre: '18+',
+        image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500',
+        iframeUrl: 'https://xnhau.pink/embed/181400',
+        desc: 'Phim 18+ (Nội dung người lớn).'
+    },
+    '5': {
+        id: '5',
+        name: '18<1>',
+        year: '2026',
+        genre: '18+',
+        image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500',
+        iframeUrl: 'https://xnhau.pink/embed/590629',
+        desc: 'Phim 18+ (Nội dung người lớn).'
     }
 };
 
@@ -613,52 +658,61 @@ function checkAuth() {
     }
 }
 
-// ==================== XỬ LÝ VIDEO & YOUTUBE ====================
+// ==================== XỬ LÝ VIDEO ====================
 let isWebVideoPlaying = false;
 const overlayBtn = document.getElementById('videoOverlayBtn');
 const playIcon = document.getElementById('webPlayIcon');
 
-function extractYouTubeID(url) {
-    if (!url) return null;
-    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
-    const match = url.match(regExp);
-    return (match && match[2].length === 11) ? match[2] : null;
-}
+function loadVideoIframe(url) {
+    const iframeYt = document.getElementById('ytPlayer');
+    const iframeOther = document.getElementById('otherPlayer');
 
-function loadYouTubeVideo(url) {
-    const videoId = extractYouTubeID(url);
-    const iframe = document.getElementById('ytPlayer');
-    
-    if(!videoId) {
-        iframe.src = "";
-        isWebVideoPlaying = false;
-        overlayBtn.classList.remove('playing');
-        playIcon.textContent = '▶';
+    // Ẩn tất cả
+    iframeYt.style.display = 'none';
+    iframeOther.style.display = 'none';
+    iframeYt.src = '';
+    iframeOther.src = '';
+
+    if (!url) {
+        overlayBtn.style.display = 'none';
         return;
     }
-    
-    const embedUrl = `https://www.youtube.com/embed/${videoId}?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1`;
-    iframe.src = embedUrl;
-    
-    isWebVideoPlaying = false;
+
+    if (url.includes('youtube.com') || url.includes('youtu.be')) {
+        iframeYt.src = url;
+        iframeYt.style.display = 'block';
+    } else {
+        iframeOther.src = url;
+        iframeOther.style.display = 'block';
+    }
+
+    // Hiển thị nút Play của Web
+    overlayBtn.style.display = 'flex';
     overlayBtn.classList.remove('playing');
     playIcon.textContent = '▶';
+    isWebVideoPlaying = false;
 }
 
 function toggleWebVideo() {
-    const iframe = document.getElementById('ytPlayer');
-    if(!iframe.src || !iframe.src.includes('youtube')) return;
-
-    if (isWebVideoPlaying) {
-        iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
-        isWebVideoPlaying = false;
-        overlayBtn.classList.remove('playing');
-        playIcon.textContent = '▶';
-    } else {
-        iframe.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
-        isWebVideoPlaying = true;
-        overlayBtn.classList.add('playing');
-        playIcon.textContent = '⏸';
+    const iframeYt = document.getElementById('ytPlayer');
+    const iframeOther = document.getElementById('otherPlayer');
+    
+    if (iframeYt.style.display === 'block') {
+        // Xử lý YouTube
+        if (isWebVideoPlaying) {
+            iframeYt.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+            isWebVideoPlaying = false;
+            overlayBtn.classList.remove('playing');
+            playIcon.textContent = '▶';
+        } else {
+            iframeYt.contentWindow.postMessage('{"event":"command","func":"playVideo","args":""}', '*');
+            isWebVideoPlaying = true;
+            overlayBtn.classList.add('playing');
+            playIcon.textContent = '⏸';
+        }
+    } else if (iframeOther.style.display === 'block') {
+        // Xử lý iframe khác: Vì không thể dùng API, chỉ ẩn overlay để người dùng bấm trực tiếp
+        overlayBtn.style.display = 'none'; 
     }
 }
 
@@ -679,7 +733,7 @@ function playMovie(id) {
     tagContainer.innerHTML = `<span class="tag">VIETSUB</span><span class="tag">${movie.genre.toUpperCase()}</span>`;
     
     // Tải Video
-    loadYouTubeVideo(movie.videoUrl);
+    loadVideoIframe(movie.iframeUrl);
     
     // Cập nhật nút Yêu thích
     updateFavoriteButton();
@@ -712,10 +766,11 @@ function switchPage(page) {
         // Trang watch không có nav active
     }
     
+    // Dừng video khi chuyển trang
     if (page !== 'watch') {
-        const iframe = document.getElementById('ytPlayer');
-        if(iframe.src) {
-            iframe.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
+        const iframeYt = document.getElementById('ytPlayer');
+        if(iframeYt.style.display === 'block' && iframeYt.src) {
+            iframeYt.contentWindow.postMessage('{"event":"command","func":"pauseVideo","args":""}', '*');
             isWebVideoPlaying = false;
             overlayBtn.classList.remove('playing');
             playIcon.textContent = '▶';
@@ -826,11 +881,6 @@ function toggleFavorite() {
     updateFavoriteButton();
     renderFavorites();
     document.getElementById('favoriteCount').textContent = favorites.length;
-}
-
-// Hàm cũ để tương thích với nút Xem phim ở trang Yêu thích
-function addToFavoritesAndPlay(name, genre, year, image) {
-    switchPage('home');
 }
 
 // ==================== XỬ LÝ DANH SÁCH YÊU THÍCH ====================
