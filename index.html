@@ -2,1457 +2,901 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
-
-<title>@NCB_STUDIO - KHO PHIM VN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MOVIE STREAM</title>
 
 <style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial,Helvetica,sans-serif;
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+body { background: #090910; color: white; padding-bottom: 75px; -webkit-tap-highlight-color: transparent; overflow-x: hidden; }
+
+/* ==================== GIAO DIỆN ĐĂNG NHẬP ==================== */
+.auth-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: #090910;
+    display: flex; align-items: center; justify-content: center;
+    padding: 20px;
+}
+.auth-overlay.hidden { display: none; }
+.auth-container {
+    width: 100%; max-width: 390px; background: #151520;
+    border: 1px solid #303044; border-radius: 18px;
+    padding: 25px 22px; box-shadow: 0 15px 45px #0009;
+}
+.auth-logo { text-align: center; color: #ff3155; font-size: 27px; font-weight: 900; }
+.auth-sub { text-align: center; color: #9999aa; font-size: 12px; margin: 8px 0 25px; }
+.tabs { display: flex; background: #0d0d16; padding: 5px; border-radius: 9px; margin-bottom: 25px; }
+.tabs button { flex: 1; padding: 12px; border: 0; border-radius: 7px; background: transparent; color: #aaa; font-weight: bold; cursor: pointer; font-family: inherit;}
+.tabs button.active { background: #ff3155; color: white; }
+.auth-container h2 { font-size: 22px; margin-bottom: 8px; }
+.auth-desc { color: #9999aa; font-size: 13px; margin-bottom: 22px; }
+.auth-container label { display: block; font-size: 13px; margin-bottom: 8px; }
+.auth-container input {
+    width: 100%; padding: 14px; background: #20202d;
+    border: 1px solid #353547; border-radius: 9px;
+    color: white; outline: none; margin-bottom: 18px; font-family: inherit;
+}
+.auth-container input:focus { border-color: #ff3155; }
+.submit {
+    width: 100%; padding: 14px; border: 0; border-radius: 9px;
+    background: #ff3155; color: white; font-weight: bold;
+    font-size: 15px; cursor: pointer; font-family: inherit;
+}
+.submit:active { transform: scale(.98); }
+.auth-message { text-align: center; color: #ff7188; font-size: 13px; margin-top: 15px; min-height: 18px; }
+.auth-footer { text-align: center; color: #777; font-size: 11px; margin-top: 24px; }
+.hidden { display: none !important; }
+
+/* ==================== HEADER ==================== */
+header {
+    height: 60px; background: #141420; border-bottom: 1px solid #29293a;
+    display: flex; align-items: center; justify-content: space-between; padding: 0 16px;
+    position: sticky; top: 0; z-index: 100;
+}
+.logo { font-size: 20px; font-weight: 900; color: #ff3155; display: flex; align-items: center; gap: 6px; }
+.search {
+    background: #252535; border: 1px solid #303044; padding: 9px 15px;
+    border-radius: 20px; color: white; width: 150px; outline: none; font-size: 13px; transition: all 0.2s;
+}
+.search:focus { border-color: #ff3155; width: 180px; }
+
+/* CHUYỂN TRANG */
+.page { display: none; animation: fadeIn 0.3s ease; }
+.page.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.container { padding: 16px; max-width: 850px; margin: auto; }
+
+/* ==================== TRANG CHỦ ==================== */
+.section-title { font-size: 17px; font-weight: bold; margin: 8px 0 15px; display: flex; justify-content: space-between; align-items: center; }
+.live-label { color: #ff3155; font-size: 12px; cursor: pointer; }
+
+/* KHUNG VIDEO YOUTUBE */
+.video-wrapper {
+    width: 100%; aspect-ratio: 16 / 9;
+    background: #000; border-radius: 14px; overflow: hidden;
+    position: relative; border: 1px solid #343447;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+.video-wrapper iframe {
+    width: 100%; height: 100%; border: 0; display: block;
 }
 
-html,body{
-    min-height:100%;
-    background:#050505;
-    color:#fff;
+/* LỚP PHỦ BẮT SỰ KIỆN CLICK VÀ NÚT PLAY CỦA WEB */
+.video-overlay-btn {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, 0.4); /* Làm tối nhẹ để nổi bật nút */
+    cursor: pointer; z-index: 5;
+    transition: background 0.3s;
+}
+.video-overlay-btn:hover {
+    background: rgba(0, 0, 0, 0.2);
+}
+.video-overlay-btn.playing {
+    background: transparent; /* Ẩn nền khi video đang chạy */
+}
+.video-overlay-btn.playing .web-play-icon {
+    opacity: 0; /* Ẩn nút Play khi đang chạy */
+}
+.video-overlay-btn.playing:hover .web-play-icon {
+    opacity: 1; /* Chỉ hiện nút Pause khi rê chuột vào */
 }
 
-body{overflow-x:hidden}
-
-header{
-    position:sticky;
-    top:0;
-    z-index:1000;
-    min-height:70px;
-    display:flex;
-    align-items:center;
-    gap:15px;
-    padding:10px 18px;
-    background:rgba(7,7,7,.97);
-    border-bottom:1px solid #222;
+.web-play-icon {
+    width: 70px; height: 70px;
+    background: rgba(255, 49, 85, 0.9);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; color: white;
+    box-shadow: 0 0 30px rgba(255, 49, 85, 0.8);
+    transition: opacity 0.3s, transform 0.2s;
+}
+.video-overlay-btn:hover .web-play-icon {
+    transform: scale(1.1);
 }
 
-.logo{
-    font-size:25px;
-    font-weight:900;
-    white-space:nowrap;
-}
-
-.search-box{
-    flex:1;
-    max-width:600px;
-    margin:auto;
-}
-
-.search-box input{
-    width:100%;
-    height:42px;
-    border-radius:22px;
-    border:1px solid #333;
-    outline:none;
-    background:#151515;
-    color:#fff;
-    padding:0 18px;
-    font-size:15px;
-}
-
-.search-box input::placeholder{color:#888}
-
-.money-box{
-    position:fixed;
-    right:14px;
-    top:14px;
-    z-index:7000;
-    display:flex;
-    align-items:center;
-    gap:7px;
-    padding:5px 10px 5px 5px;
-    background:rgba(10,10,10,.96);
-    border:1px solid #333;
-    border-radius:30px;
-}
-
-.money-logo{
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    object-fit:cover;
-    border:2px solid #fff;
-}
-
-.money-count{
-    min-width:20px;
-    text-align:center;
-    font-size:18px;
-    font-weight:bold;
-}
-
-.rainbow-title{
-    width:100%;
-    text-align:center;
-    margin:18px 0 20px;
-}
-
-.rainbow-sub{
-    display:inline-block;
-    font-size:30px;
-    font-weight:1000;
-    letter-spacing:3px;
-    background:linear-gradient(
-        90deg,
-        #ff0000,#ff7a00,#ffe600,#00d95f,
-        #00aaff,#6c4cff,#ff00a8,#ff0000
-    );
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    background-size:300% 100%;
-    animation:rainbowMove 4s linear infinite;
-}
-
-@keyframes rainbowMove{
-    0%{background-position:0 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0 50%}
-}
-
-main{
-    width:100%;
-    max-width:1200px;
-    margin:auto;
-    padding:0 20px 40px;
-}
-
-.page{display:none}
-.page.active{display:block}
-
-.page-title{
-    margin:15px 0 18px;
-    font-size:24px;
-    font-weight:900;
-}
-
-.back-button{
-    display:inline-block;
-    cursor:pointer;
-}
-
-.categories{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    gap:12px;
-    margin:10px 0 28px;
-}
-
-.category{
-    min-height:80px;
-    border-radius:16px;
-    border:1px solid #292929;
-    background:#111;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.category:hover{
-    background:#1d1d1d;
-    transform:translateY(-2px);
-}
-
-.hero{
-    position:relative;
-    width:100%;
-    border-radius:18px;
-    overflow:hidden;
-    background:#111;
-    border:1px solid #252525;
-    cursor:pointer;
-    margin-bottom:25px;
-}
-
-.hero img{
-    width:100%;
-    aspect-ratio:16/7;
-    display:block;
-    object-fit:cover;
-}
-
-.hero-info{
-    position:absolute;
-    left:0;
-    right:0;
-    bottom:0;
-    padding:50px 22px 20px;
-    background:linear-gradient(transparent,rgba(0,0,0,.96));
-}
-
-.hero-title{
-    font-size:25px;
-    font-weight:bold;
-}
-
-.hero-sub{
-    margin-top:7px;
-    color:#bbb;
-}
-
-.movie-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:16px;
-}
-
-.movie-card{
-    position:relative;
-    background:#111;
-    border:1px solid #292929;
-    border-radius:14px;
-    overflow:hidden;
-    cursor:pointer;
-    transition:.2s;
-}
-
-.movie-card:hover{
-    transform:translateY(-3px);
-    border-color:#555;
-}
-
-.movie-poster{
-    width:100%;
-    aspect-ratio:16/9;
-    object-fit:cover;
-    display:block;
-    background:#000;
-}
-
-.movie-name{
-    padding:13px;
-    font-size:15px;
-    font-weight:bold;
-    line-height:1.35;
-}
-
-.vip-card{border-color:#8d7100}
-
-.vip-card .movie-poster{
-    filter:brightness(.75);
-}
-
-.vip-badge{
-    position:absolute;
-    top:9px;
-    right:9px;
-    padding:6px 10px;
-    border-radius:8px;
-    background:#ffd000;
-    color:#000;
-    font-size:14px;
-    font-weight:1000;
-    z-index:2;
-}
-
-.vip-cost{
-    position:absolute;
-    left:9px;
-    top:9px;
-    padding:5px 8px;
-    border-radius:7px;
-    background:rgba(0,0,0,.88);
-    color:#ffd000;
-    font-size:12px;
-    font-weight:bold;
-    z-index:3;
-}
-
-.player-modal{
-    position:fixed;
-    inset:0;
-    z-index:5000;
-    background:rgba(0,0,0,.97);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:15px;
-}
-
-.player-modal.show{display:flex}
-
-.player-box{
-    width:100%;
-    max-width:1100px;
-    position:relative;
-}
-
-.player-title{
-    color:#fff;
-    font-size:20px;
-    font-weight:bold;
-    margin-bottom:12px;
-    padding-right:60px;
-}
-
-.player-frame{
-    width:100%;
-    aspect-ratio:16/9;
-    border:0;
-    border-radius:12px;
-    background:#000;
-}
-
-.close-player{
-    position:absolute;
-    right:0;
-    top:-5px;
-    width:40px;
-    height:40px;
-    border:0;
-    border-radius:50%;
-    background:#222;
-    color:#fff;
-    font-size:27px;
-    cursor:pointer;
-    z-index:20;
-}
-
-.watch-reward{
-    position:fixed;
-    z-index:6000;
-    top:85px;
-    left:15px;
-    display:none;
-    align-items:center;
-    gap:9px;
-    padding:9px 12px;
-    border-radius:13px;
-    background:rgba(15,15,15,.96);
-    border:1px solid #333;
-}
-
-.watch-reward.show{display:flex}
-
-.watch-reward img{
-    width:35px;
-    height:35px;
-    border-radius:50%;
-    object-fit:cover;
-}
-
-.reward-text{
-    font-weight:bold;
-    font-size:13px;
-}
-
-.reward-time{
-    font-size:18px;
-    font-weight:900;
-    min-width:30px;
-    text-align:center;
-}
-
-.vip-lock{
-    width:100%;
-    aspect-ratio:16/9;
-    border-radius:12px;
-    background:radial-gradient(circle at center,#252525 0,#080808 65%);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    text-align:center;
-}
-
-.vip-lock.show{display:flex}
-
-.vip-lock-title{
-    color:#ffd000;
-    font-size:30px;
-    font-weight:1000;
-    margin-bottom:10px;
-}
-
-.vip-lock-text{
-    color:#ccc;
-    font-size:15px;
-    margin-bottom:17px;
-}
-
-.vip-buy{
-    border:0;
-    border-radius:10px;
-    background:#ffd000;
-    color:#000;
-    padding:12px 20px;
-    font-size:16px;
-    font-weight:1000;
-    cursor:pointer;
-}
-
-.vip-message{
-    position:fixed;
-    z-index:12000;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%) scale(.8);
-    width:calc(100% - 40px);
-    max-width:390px;
-    padding:24px 20px;
-    background:#111;
-    border:2px solid #ffd000;
-    border-radius:18px;
-    text-align:center;
-    opacity:0;
-    pointer-events:none;
-    visibility:hidden;
-    transition:.25s;
-}
-
-.vip-message.show{
-    opacity:1;
-    pointer-events:auto;
-    visibility:visible;
-    transform:translate(-50%,-50%) scale(1);
-}
-
-.vip-message-title{
-    color:#ffd000;
-    font-size:22px;
-    font-weight:1000;
-    margin-bottom:10px;
-}
-
-.vip-message-text{
-    color:#fff;
-    font-size:17px;
-    font-weight:bold;
-}
-
-.vip-message-close{
-    margin-top:17px;
-    border:0;
-    border-radius:9px;
-    padding:10px 24px;
-    background:#ffd000;
-    color:#000;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.reward-popup{
-    position:fixed;
-    z-index:8000;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%) scale(.8);
-    background:#111;
-    border:1px solid #333;
-    border-radius:18px;
-    padding:22px 30px;
-    text-align:center;
-    font-size:21px;
-    font-weight:bold;
-    opacity:0;
-    pointer-events:none;
-    transition:.25s;
-}
-
-.reward-popup.show{
-    opacity:1;
-    transform:translate(-50%,-50%) scale(1);
-}
-
-.flying-money{
-    position:fixed;
-    z-index:9000;
-    left:20px;
-    top:100px;
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    object-fit:cover;
-    opacity:0;
-    pointer-events:none;
-}
-
-.flying-money.fly{
-    opacity:1;
-    animation:flyMoney 1.2s ease-in-out forwards;
-}
-
-@keyframes flyMoney{
-    0%{
-        transform:translate(0,0) scale(1.1);
-        opacity:1;
-    }
-    70%{
-        transform:translate(var(--target-x),var(--target-y)) scale(.65);
-        opacity:1;
-    }
-    100%{
-        transform:translate(var(--target-x),var(--target-y)) scale(.15);
-        opacity:0;
-    }
-}
-
-.shorts-page{
-    position:fixed;
-    inset:0;
-    z-index:4000;
-    background:#000;
-    display:none;
-    flex-direction:column;
-}
-
-.shorts-page.show{display:flex}
-
-.shorts-top{
-    position:absolute;
-    top:12px;
-    left:12px;
-    right:12px;
-    z-index:20;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.back-home,.short-next{
-    border:1px solid #444;
-    background:rgba(0,0,0,.75);
-    color:#fff;
-    border-radius:10px;
-    padding:10px 14px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-.shorts-count{
-    background:rgba(0,0,0,.75);
-    border:1px solid #444;
-    padding:9px 12px;
-    border-radius:10px;
-    font-weight:bold;
-}
-
-.short-view{
-    width:100%;
-    height:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    overflow:hidden;
-}
-
-.short-frame{
-    width:100%;
-    height:100%;
-    border:0;
-    background:#000;
-}
-
-@media(max-width:900px){
-    .categories{
-        grid-template-columns:repeat(3,1fr);
-    }
-
-    .movie-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:600px){
-    header{
-        min-height:65px;
-        padding:10px;
-        gap:9px;
-        flex-wrap:wrap;
-    }
-
-    .logo{font-size:20px}
-
-    .search-box{
-        order:3;
-        flex-basis:100%;
-    }
-
-    main{
-        padding:0 12px 30px;
-    }
-
-    .categories{
-        grid-template-columns:1fr 1fr;
-    }
-
-    .category{
-        min-height:70px;
-        font-size:14px;
-    }
-
-    .hero img{
-        aspect-ratio:16/9;
-    }
-
-    .hero-title{
-        font-size:20px;
-    }
-
-    .rainbow-sub{
-        font-size:25px;
-    }
-}
-
-@media(max-width:420px){
-    .movie-grid{
-        gap:10px;
-    }
-
-    .movie-name{
-        padding:9px;
-        font-size:13px;
-    }
-
-    .money-box{
-        right:8px;
-        top:8px;
-    }
-
-    .money-logo{
-        width:32px;
-        height:32px;
-    }
-
-    .money-count{
-        font-size:16px;
-    }
-
-    .rainbow-sub{
-        font-size:22px;
-        letter-spacing:2px;
-    }
+.live-info { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
+.live-info h3 { font-size: 18px; }
+.live-badge { background: #ff2449; padding: 5px 10px; border-radius: 5px; font-size: 11px; font-weight: bold; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+.description { color: #9292a5; font-size: 13px; margin-top: 8px; line-height: 1.5; }
+
+.category-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.category { position: relative; height: 120px; border-radius: 12px; overflow: hidden; cursor: pointer; background: #202030; }
+.category img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.category:hover img { transform: scale(1.1); }
+.category-name { position: absolute; inset: auto 0 0 0; padding: 30px 12px 12px; font-size: 14px; font-weight: bold; background: linear-gradient(transparent, rgba(0,0,0,0.9)); }
+
+.movie-list { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scrollbar-width: none; }
+.movie-list::-webkit-scrollbar { display: none; }
+.movie { min-width: 130px; width: 130px; cursor: pointer; transition: transform 0.2s; }
+.movie:hover { transform: translateY(-4px); }
+.movie img { width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+.movie p { font-size: 13px; margin-top: 8px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.movie span { font-size: 11px; color: #9292a5; display: block; margin-top: 2px; }
+
+/* ==================== TRANG DANH MỤC ==================== */
+.heading { font-size: 23px; font-weight: bold; margin-bottom: 7px; }
+.subheading { color: #9999aa; font-size: 13px; margin-bottom: 20px; }
+
+.categories { display: grid; grid-template-columns: repeat(2, 1fr); gap: 13px; margin-bottom: 27px; }
+.category-item { position: relative; height: 145px; border-radius: 13px; overflow: hidden; cursor: pointer; border: 1px solid #343448; }
+.category-item img { width: 100%; height: 100%; object-fit: cover; transition: .3s; }
+.category-item:hover img { transform: scale(1.08); }
+.category-item::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent, #000d); }
+.category-item-title { position: absolute; bottom: 13px; left: 12px; z-index: 2; font-size: 15px; font-weight: bold; }
+
+.filter-list { display: flex; gap: 9px; overflow-x: auto; padding-bottom: 12px; scrollbar-width: none; }
+.filter-list::-webkit-scrollbar { display: none; }
+.filter { white-space: nowrap; padding: 9px 15px; border-radius: 20px; background: #202030; color: #aaa; border: 1px solid #353548; cursor: pointer; font-family: inherit; }
+.filter.active { background: #ff3155; color: white; border-color: #ff3155; }
+
+.movie-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 12px; }
+.movie-card { cursor: pointer; min-width: 0; }
+.movie-card img { width: 100%; height: 210px; object-fit: cover; border-radius: 11px; background: #202030; }
+.movie-card h3 { font-size: 14px; margin-top: 8px; }
+.movie-card p { color: #9999aa; font-size: 12px; margin-top: 5px; }
+.movie-tag { display: inline-block; color: #ff6680; font-size: 10px; margin-top: 6px; background: #351522; padding: 4px 7px; border-radius: 5px; }
+.empty { display: none; text-align: center; padding: 35px; color: #999; grid-column: 1 / -1; }
+
+/* ==================== TRANG YÊU THÍCH ==================== */
+.heading-box { display: flex; align-items: center; gap: 10px; margin-bottom: 5px; }
+.heading-box span { font-size: 27px; color: #ff3155; }
+.heading-box h1 { font-size: 23px; }
+.sub { color: #9999aa; font-size: 13px; margin: 9px 0 20px; }
+
+.search-full { width: 100%; padding: 13px 15px; border-radius: 10px; border: 1px solid #333348; background: #191925; color: white; outline: none; margin-bottom: 17px; }
+.count { color: #aaa; font-size: 13px; margin-bottom: 15px; }
+
+.fav-movie { display: flex; gap: 13px; background: #171722; border: 1px solid #29293b; border-radius: 12px; padding: 10px; margin-bottom: 13px; }
+.fav-movie img { width: 105px; height: 145px; object-fit: cover; border-radius: 8px; background: #252535; }
+.fav-info { flex: 1; min-width: 0; padding: 5px 0; }
+.fav-info h3 { font-size: 16px; line-height: 1.4; }
+.fav-info .meta { color: #9999aa; font-size: 12px; margin-top: 8px; }
+.fav-tag { display: inline-block; background: #351522; color: #ff6680; padding: 5px 8px; border-radius: 5px; font-size: 10px; margin-top: 9px; }
+.fav-actions { display: flex; gap: 8px; margin-top: 13px; }
+.fav-actions button { padding: 9px 10px; border: 0; border-radius: 7px; font-size: 12px; cursor: pointer; font-family: inherit; }
+.btn-watch { background: #ff3155; color: white; }
+.btn-remove { background: #29293a; color: #ff7188; }
+.empty-fav { display: none; text-align: center; padding: 55px 15px; color: #9999aa; background: #171722; border-radius: 12px; }
+.empty-fav span { display: block; font-size: 45px; margin-bottom: 12px; }
+
+/* ==================== TRANG HỒ SƠ ==================== */
+.profile-card { background: linear-gradient(145deg, #25182f, #151522); border: 1px solid #393047; border-radius: 18px; padding: 25px 15px; text-align: center; }
+.avatar-box { width: 105px; height: 105px; margin: auto; position: relative; }
+.avatar { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid #ff3155; }
+.change-avatar { position: absolute; bottom: 0; right: 0; width: 32px; height: 32px; border-radius: 50%; background: #ff3155; border: 2px solid #151522; color: white; cursor: pointer; }
+.username { font-size: 23px; margin-top: 15px; }
+.user-id { color: #aaa; margin-top: 7px; font-size: 13px; }
+.status { display: inline-block; margin-top: 12px; background: #173b2b; color: #50e59b; padding: 6px 13px; border-radius: 20px; font-size: 12px; }
+
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 20px; }
+.stat { background: #202033; padding: 15px 5px; border-radius: 12px; text-align: center; }
+.stat h2 { color: #ff5570; font-size: 22px; }
+.stat p { color: #aaa; font-size: 12px; margin-top: 6px; }
+
+.section { margin-top: 25px; }
+.section h3 { font-size: 17px; margin-bottom: 13px; }
+.info-card { background: #171722; border: 1px solid #2b2b3c; border-radius: 13px; padding: 5px 15px; }
+.info-row { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #2b2b3c; gap: 10px; }
+.info-row:last-child { border-bottom: none; }
+.info-row span { color: #9999aa; font-size: 14px; }
+.info-row strong { font-size: 14px; text-align: right; overflow-wrap: anywhere; }
+
+.menu { display: flex; justify-content: space-between; align-items: center; background: #171722; padding: 17px; border-radius: 12px; margin-bottom: 10px; cursor: pointer; border: 1px solid #29293a; }
+.menu:active { background: #29293d; }
+.menu-left { display: flex; gap: 12px; align-items: center; }
+.menu-icon { font-size: 21px; }
+.menu p { font-size: 14px; }
+.arrow { color: #888; }
+
+.logout { width: 100%; margin-top: 20px; padding: 15px; background: #381521; border: 1px solid #8e2941; color: #ff5570; border-radius: 12px; font-weight: bold; cursor: pointer; font-family: inherit; }
+
+/* THANH ĐIỀU HƯỚNG */
+.bottom-nav { position: fixed; bottom: 0; left: 0; right: 0; height: 65px; background: #141420; border-top: 1px solid #303044; display: flex; justify-content: space-around; align-items: center; z-index: 100; padding-bottom: env(safe-area-inset-bottom); }
+.nav-item { color: #9999aa; font-size: 11px; text-align: center; cursor: pointer; transition: color 0.2s; }
+.nav-item span { display: block; font-size: 22px; margin-bottom: 4px; }
+.nav-item.active, .nav-item:hover { color: #ff3155; }
+
+/* MODAL CHỈNH SỬA */
+.modal { display: none; position: fixed; inset: 0; background: #000b; z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+.modal-content { background: #191925; border: 1px solid #39394c; border-radius: 16px; padding: 20px; width: 100%; max-width: 400px; }
+.modal-content h3 { margin-bottom: 18px; }
+.modal-content label { display: block; color: #aaa; font-size: 13px; margin: 12px 0 7px; }
+.modal-content input { width: 100%; padding: 13px; border-radius: 9px; border: 1px solid #39394c; background: #10101a; color: white; outline: none; }
+.modal-buttons { display: flex; gap: 10px; margin-top: 20px; }
+.modal-buttons button { flex: 1; padding: 12px; border: none; border-radius: 9px; cursor: pointer; font-family: inherit; }
+.save { background: #ff3155; color: white; }
+.cancel { background: #303044; color: white; }
+
+@media (min-width: 650px) {
+    .category-grid, .categories { grid-template-columns: repeat(4, 1fr); }
+    .category { height: 140px; }
+    .category-item { height: 180px; }
+    .movie-grid { grid-template-columns: repeat(4, 1fr); }
 }
 </style>
 </head>
 
 <body>
 
-<header>
-    <div class="logo">@NCB_STUDIO</div>
+<!-- KHUNG ĐĂNG NHẬP / ĐĂNG KÝ -->
+<div class="auth-overlay" id="authOverlay">
+    <div class="auth-container">
+        <div class="auth-logo">MOVIE STREAM</div>
+        <div class="auth-sub">THẾ GIỚI PHIM DÀNH RIÊNG CHO BẠN</div>
 
-    <div class="search-box">
-        <input
-            type="text"
-            id="searchInput"
-            placeholder="Tìm kiếm phim..."
-            oninput="searchMovies()"
-        >
+        <div class="tabs">
+            <button id="loginTab" class="active" onclick="showAuthForm('login')">ĐĂNG NHẬP</button>
+            <button id="registerTab" onclick="showAuthForm('register')">ĐĂNG KÝ</button>
+        </div>
+
+        <form id="loginForm">
+            <h2>Chào mừng trở lại!</h2>
+            <p class="auth-desc">Đăng nhập để tiếp tục xem phim.</p>
+            <label>Tên tài khoản</label>
+            <input id="loginName" placeholder="Nhập tên tài khoản..." required>
+            <label>Mật khẩu</label>
+            <input id="loginPassword" type="password" placeholder="Nhập mật khẩu..." required>
+            <button type="submit" class="submit">ĐĂNG NHẬP</button>
+        </form>
+
+        <form id="registerForm" class="hidden">
+            <h2>Tạo tài khoản mới</h2>
+            <p class="auth-desc">Đăng ký để trải nghiệm MOVIE STREAM.</p>
+            <label>Tên tài khoản</label>
+            <input id="registerName" placeholder="Tạo tên tài khoản..." required>
+            <label>Mật khẩu</label>
+            <input id="registerPassword" type="password" placeholder="Tạo mật khẩu..." minlength="6" required>
+            <button type="submit" class="submit">TẠO TÀI KHOẢN</button>
+        </form>
+
+        <div class="auth-message" id="authMessage"></div>
+        <div class="auth-footer">MOVIE STREAM © 2026</div>
     </div>
-</header>
-
-<!-- TIỀN -->
-
-<div class="money-box">
-    <img
-        id="moneyLogo"
-        class="money-logo"
-        src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
-        alt="Doraemon"
-    >
-    <span id="moneyCount">0</span>
 </div>
 
-<div class="rainbow-title">
-    <div class="rainbow-sub">KHO PHIM VN</div>
+<!-- NỘI DUNG CHÍNH CỦA WEB -->
+<div id="mainWebsite" class="hidden">
+    <header>
+        <div class="logo">🎬 MOVIE STREAM</div>
+        <input class="search" id="globalSearch" type="search" placeholder="Tìm phim...">
+    </header>
+
+    <!-- ==================== TRANG CHỦ ==================== -->
+    <div class="page active" id="pageHome">
+        <main class="container">
+            <div class="section-title">
+                <span>PHIM ĐANG CHIẾU</span>
+                <span class="live-label">● ĐANG PHÁT</span>
+            </div>
+
+            <!-- KHUNG VIDEO YOUTUBE ẨN CONTROLS -->
+            <div class="video-wrapper">
+                <!-- ID Video YouTube: _r7BFVWAdZw -->
+                <iframe id="ytPlayer" src="https://www.youtube.com/embed/_r7BFVWAdZw?enablejsapi=1&controls=0&modestbranding=1&rel=0&showinfo=0&iv_load_policy=3&playsinline=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                
+                <!-- Nút Play/Pause của Web đè lên trên -->
+                <div class="video-overlay-btn" id="videoOverlayBtn" onclick="toggleWebVideo()">
+                    <div class="web-play-icon" id="webPlayIcon">▶</div>
+                </div>
+            </div>
+
+            <div class="live-info">
+                <h3>Tên Phim: DORAEMON NGÀY LỄ HALLOWEEN (1)</h3>
+                <span class="live-badge">● HOT</span>
+            </div>
+
+            <p class="description">
+                Xem phim Doraemon Ngày Lễ Halloween chất lượng cao. Nhấn vào khung để phát hoặc tạm dừng video.
+            </p>
+
+            <div class="section-title" style="margin-top:28px">
+                <span>DANH MỤC PHIM</span>
+                <span class="live-label" onclick="switchPage('category')">XEM TẤT CẢ ›</span>
+            </div>
+
+            <div class="category-grid">
+                <div class="category" onclick="filterMoviesFromHome('Hành động')">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Phim hành động">
+                    <div class="category-name">⚔️ Hành động</div>
+                </div>
+                <div class="category" onclick="filterMoviesFromHome('Tình cảm')">
+                    <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=500" alt="Phim tình cảm">
+                    <div class="category-name">❤️ Tình cảm</div>
+                </div>
+                <div class="category" onclick="filterMoviesFromHome('Kinh dị')">
+                    <img src="https://images.unsplash.com/photo-1509248961158-e54f6934749c?w=500" alt="Phim kinh dị">
+                    <div class="category-name">👻 Kinh dị</div>
+                </div>
+                <div class="category" onclick="filterMoviesFromHome('Hoạt hình')">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500" alt="Phim hoạt hình">
+                    <div class="category-name">🎨 Hoạt hình</div>
+                </div>
+            </div>
+
+            <div class="section-title" style="margin-top:28px">
+                <span>PHIM ĐỀ XUẤT</span>
+                <span class="live-label">MỚI NHẤT ›</span>
+            </div>
+
+            <div class="movie-list">
+                <div class="movie" onclick="addToFavoritesAndPlay('DORAEMON NGÀY LỄ HALLOWEEN (1)', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400')">
+                    <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400" alt="Doraemon">
+                    <p>DORAEMON HALLOWEEN</p>
+                    <span>Hoạt hình • 2026</span>
+                </div>
+                <div class="movie" onclick="addToFavoritesAndPlay('Phim nổi bật 02', 'Kinh dị', '2026', 'https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400')">
+                    <img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400" alt="Phim 2">
+                    <p>Phim nổi bật 02</p>
+                    <span>Kinh dị • 2026</span>
+                </div>
+                <div class="movie" onclick="addToFavoritesAndPlay('Phim nổi bật 03', 'Tình cảm', '2026', 'https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400')">
+                    <img src="https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=400" alt="Phim 3">
+                    <p>Phim nổi bật 03</p>
+                    <span>Tình cảm • 2026</span>
+                </div>
+                <div class="movie" onclick="addToFavoritesAndPlay('Phim nổi bật 04', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400')">
+                    <img src="https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400" alt="Phim 4">
+                    <p>Phim nổi bật 04</p>
+                    <span>Hoạt hình • 2026</span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== TRANG DANH MỤC ==================== -->
+    <div class="page" id="pageCategory">
+        <main class="container">
+            <h1 class="heading">Khám phá phim</h1>
+            <p class="subheading">Chọn thể loại phim yêu thích của bạn</p>
+
+            <div class="categories">
+                <div class="category-item" onclick="setFilter('Hoạt hình')">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600" alt="Hoạt hình">
+                    <div class="category-item-title">🎨 HOẠT HÌNH</div>
+                </div>
+                <div class="category-item" onclick="setFilter('Hành động')">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600" alt="Hành động">
+                    <div class="category-item-title">⚔️ HÀNH ĐỘNG</div>
+                </div>
+                <div class="category-item" onclick="setFilter('Phiêu lưu')">
+                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=600" alt="Phiêu lưu">
+                    <div class="category-item-title">🧭 PHIÊU LƯU</div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2 style="font-size:18px">Danh sách phim</h2>
+                <span id="resultCount">TẤT CẢ</span>
+            </div>
+
+            <div class="filter-list">
+                <button class="filter active" onclick="setFilter('Tất cả', this)">Tất cả</button>
+                <button class="filter" onclick="setFilter('Hoạt hình', this)">Hoạt hình</button>
+                <button class="filter" onclick="setFilter('Hành động', this)">Hành động</button>
+                <button class="filter" onclick="setFilter('Phiêu lưu', this)">Phiêu lưu</button>
+            </div>
+
+            <div class="movie-grid" id="movieGrid">
+                <div class="movie-card" data-category="Hoạt hình" data-name="Doraemon Ngày Lễ Halloween" onclick="addToFavoritesAndPlay('DORAEMON NGÀY LỄ HALLOWEEN (1)', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500')">
+                    <img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500" alt="Doraemon">
+                    <h3>Doraemon Halloween (1)</h3>
+                    <p>Hoạt hình • 2026</p>
+                    <span class="movie-tag">HOẠT HÌNH</span>
+                </div>
+                <div class="movie-card" data-category="Hành động" data-name="Nhiệm vụ bí mật" onclick="addToFavoritesAndPlay('Nhiệm vụ bí mật', 'Hành động', '2026', 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500')">
+                    <img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500" alt="Nhiệm vụ bí mật">
+                    <h3>Nhiệm vụ bí mật</h3>
+                    <p>Hành động • 2026</p>
+                    <span class="movie-tag">HÀNH ĐỘNG</span>
+                </div>
+                <div class="movie-card" data-category="Phiêu lưu" data-name="Cuộc phiêu lưu" onclick="addToFavoritesAndPlay('Cuộc phiêu lưu', 'Phiêu lưu', '2026', 'https://images.unsplash.com/photo-1511497584788-876760111969?w=500')">
+                    <img src="https://images.unsplash.com/photo-1511497584788-876760111969?w=500" alt="Cuộc phiêu lưu">
+                    <h3>Cuộc phiêu lưu</h3>
+                    <p>Phiêu lưu • 2026</p>
+                    <span class="movie-tag">PHIÊU LƯU</span>
+                </div>
+                <div class="movie-card" data-category="Hoạt hình" data-name="Vương quốc phép thuật" onclick="addToFavoritesAndPlay('Vương quốc phép thuật', 'Hoạt hình', '2026', 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500')">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" alt="Vương quốc phép thuật">
+                    <h3>Vương quốc phép thuật</h3>
+                    <p>Hoạt hình • 2026</p>
+                    <span class="movie-tag">HOẠT HÌNH</span>
+                </div>
+                <div class="movie-card" data-category="Hành động" data-name="Chiến binh cuối cùng" onclick="addToFavoritesAndPlay('Chiến binh cuối cùng', 'Hành động', '2026', 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500')">
+                    <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=500" alt="Chiến binh cuối cùng">
+                    <h3>Chiến binh cuối cùng</h3>
+                    <p>Hành động • 2026</p>
+                    <span class="movie-tag">HÀNH ĐỘNG</span>
+                </div>
+                <div class="movie-card" data-category="Phiêu lưu" data-name="Bí mật rừng xanh" onclick="addToFavoritesAndPlay('Bí mật rừng xanh', 'Phiêu lưu', '2026', 'https://images.unsplash.com/photo-1448375240586-882707db888b?w=500')">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=500" alt="Bí mật rừng xanh">
+                    <h3>Bí mật rừng xanh</h3>
+                    <p>Phiêu lưu • 2026</p>
+                    <span class="movie-tag">PHIÊU LƯU</span>
+                </div>
+                <div class="empty" id="empty">Không tìm thấy phim phù hợp!</div>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== TRANG YÊU THÍCH ==================== -->
+    <div class="page" id="pageFavorites">
+        <main class="container">
+            <div class="heading-box">
+                <span>♥</span>
+                <h1>Phim yêu thích</h1>
+            </div>
+            <p class="sub">Danh sách những bộ phim bạn đã lưu</p>
+
+            <input class="search-full" id="favSearch" placeholder="🔍 Tìm kiếm phim yêu thích...">
+            <p class="count" id="favCount"></p>
+
+            <div id="favMovieList"></div>
+
+            <div class="empty-fav" id="favEmpty">
+                <span>♡</span>
+                <h3>Chưa có phim yêu thích</h3>
+                <p style="margin-top:8px;font-size:13px">Hãy thêm phim vào danh sách yêu thích nhé!</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- ==================== TRANG HỒ SƠ ==================== -->
+    <div class="page" id="pageProfile">
+        <main class="container">
+            <div class="profile-card">
+                <div class="avatar-box">
+                    <img id="avatar" class="avatar" src="https://i.pravatar.cc/300" alt="Ảnh đại diện">
+                    <button class="change-avatar" onclick="document.getElementById('avatarInput').click()">✎</button>
+                    <input type="file" id="avatarInput" accept="image/*" hidden>
+                </div>
+                <h2 class="username" id="displayName">Người dùng</h2>
+                <p class="user-id" id="displayId">ID: MS-000001</p>
+                <span class="status">● Đang hoạt động</span>
+                <div class="stats">
+                    <div class="stat"><h2 id="movieCount">0</h2><p>Phim đã xem</p></div>
+                    <div class="stat"><h2 id="favoriteCount">0</h2><p>Yêu thích</p></div>
+                    <div class="stat"><h2 id="pointCount">0</h2><p>Điểm</p></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>THÔNG TIN CÁ NHÂN</h3>
+                <div class="info-card">
+                    <div class="info-row"><span>Họ và tên</span><strong id="infoName">Người dùng</strong></div>
+                    <div class="info-row"><span>Tài khoản</span><strong id="infoUsername">user123</strong></div>
+                    <div class="info-row"><span>Email</span><strong id="infoEmail">Chưa cập nhật</strong></div>
+                    <div class="info-row"><span>Ngày tham gia</span><strong id="joinDate">03/11/2026</strong></div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3>QUẢN LÝ TÀI KHOẢN</h3>
+                <div class="menu" onclick="openEdit()">
+                    <div class="menu-left"><span class="menu-icon">✏️</span><p>Chỉnh sửa hồ sơ</p></div><span class="arrow">›</span>
+                </div>
+                <div class="menu" onclick="switchPage('favorites')">
+                    <div class="menu-left"><span class="menu-icon">❤️</span><p>Phim yêu thích</p></div><span class="arrow">›</span>
+                </div>
+                <div class="menu" onclick="alert('Chức năng lịch sử xem đang được cập nhật')">
+                    <div class="menu-left"><span class="menu-icon">🕒</span><p>Lịch sử xem phim</p></div><span class="arrow">›</span>
+                </div>
+                <div class="menu" onclick="alert('Cài đặt tài khoản')">
+                    <div class="menu-left"><span class="menu-icon">⚙️</span><p>Cài đặt</p></div><span class="arrow">›</span>
+                </div>
+                <button class="logout" onclick="logout()">ĐĂNG XUẤT</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- THANH ĐIỀU HƯỚNG -->
+    <nav class="bottom-nav">
+        <div class="nav-item active" id="navHome" onclick="switchPage('home')"><span>⌂</span>Trang chủ</div>
+        <div class="nav-item" id="navCategory" onclick="switchPage('category')"><span>▣</span>Danh mục</div>
+        <div class="nav-item" id="navFavorites" onclick="switchPage('favorites')"><span>♡</span>Yêu thích</div>
+        <div class="nav-item" id="navProfile" onclick="switchPage('profile')"><span>☻</span>Hồ sơ</div>
+    </nav>
 </div>
 
-<main>
-
-<!-- ================= TRANG CHỦ ================= -->
-
-<section id="homePage" class="page active">
-
-    <!-- THỂ LOẠI LUÔN Ở ĐẦU -->
-
-    <h2 class="page-title">THỂ LOẠI</h2>
-
-    <div class="categories">
-
-        <div class="category"
-             onclick="showPage('animationPage')">
-            PHIM HOẠT HÌNH
+<!-- MODAL CHỈNH SỬA -->
+<div class="modal" id="editModal">
+    <div class="modal-content">
+        <h3>✏️ Chỉnh sửa hồ sơ</h3>
+        <label>Họ và tên</label>
+        <input id="editName" placeholder="Nhập họ tên">
+        <label>Tên tài khoản</label>
+        <input id="editUsername" placeholder="Nhập tài khoản">
+        <label>Email</label>
+        <input id="editEmail" type="email" placeholder="Nhập email">
+        <div class="modal-buttons">
+            <button class="cancel" onclick="closeEdit()">Hủy</button>
+            <button class="save" onclick="saveProfile()">Lưu thay đổi</button>
         </div>
-
-        <div class="category"
-             onclick="showPage('actionPage')">
-            HÀNH ĐỘNG
-        </div>
-
-        <div class="category"
-             onclick="showPage('musicPage')">
-            NHẠC
-        </div>
-
-        <div class="category"
-             onclick="openShorts()">
-            PHIM NGẮN
-        </div>
-
-        <div class="category"
-             onclick="showPage('sportPage')">
-            THỂ THAO
-        </div>
-
     </div>
-
-    <!-- VIP HOT -->
-
-    <h2 class="page-title">PHIM HOT</h2>
-
-    <div class="movie-grid">
-
-        <!-- DORAEMON VIP -->
-
-        <div class="movie-card vip-card"
-             onclick="openVipMovie(
-                'DORAEMON_#VIP001',
-                'RylJMmCnPzM',
-                10
-             )"
-             data-name="doraemon vip001">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/RylJMmCnPzM/maxresdefault.jpg">
-
-            <div class="vip-badge">VIP</div>
-            <div class="vip-cost">10 TIỀN</div>
-
-            <div class="movie-name">
-                DORAEMON_#VIP001
-            </div>
-        </div>
-
-        <!-- CÂY ĐA VIP -->
-
-        <div class="movie-card vip-card"
-             onclick="openVipMovie(
-                'CÂY ĐA QUÁN DỐC',
-                'fUuqVfmhXQE',
-                3
-             )"
-             data-name="cây đa quán dốc">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/fUuqVfmhXQE/maxresdefault.jpg">
-
-            <div class="vip-badge">VIP</div>
-            <div class="vip-cost">3 TIỀN</div>
-
-            <div class="movie-name">
-                CÂY ĐA QUÁN DỐC
-            </div>
-        </div>
-
-        <!-- HÀNH ĐỘNG VIP -->
-
-        <div class="movie-card vip-card"
-             onclick="openVipMovie(
-                'MẢNH HỔ TRẢ THÙ #030',
-                'TyaXcmf_mmg',
-                4
-             )"
-             data-name="mảnh hổ trả thù 030">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/TyaXcmf_mmg/maxresdefault.jpg">
-
-            <div class="vip-badge">VIP</div>
-            <div class="vip-cost">4 TIỀN</div>
-
-            <div class="movie-name">
-                MẢNH HỔ TRẢ THÙ #030
-            </div>
-        </div>
-
-        <!-- DORAEMON VIP CŨ -->
-
-        <div class="movie-card vip-card"
-             onclick="openVipMovie(
-                'DORAEMON #119VIP',
-                'Rz2KR7O296Q',
-                5
-             )"
-             data-name="doraemon 119vip">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/Rz2KR7O296Q/maxresdefault.jpg">
-
-            <div class="vip-badge">VIP</div>
-            <div class="vip-cost">5 TIỀN</div>
-
-            <div class="movie-name">
-                DORAEMON #119VIP
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ================= HOẠT HÌNH ================= -->
-
-<section id="animationPage" class="page">
-
-    <div class="page-title back-button"
-         onclick="showPage('homePage')">
-        ← QUAY VỀ TRANG CHÍNH
-    </div>
-
-    <h2 class="page-title">PHIM HOẠT HÌNH</h2>
-
-    <div class="movie-grid">
-
-        <div class="movie-card"
-             onclick="openMovie('DORAMON_#1T','1f31UHe8Pxw')"
-             data-name="doramon 1t">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/1f31UHe8Pxw/maxresdefault.jpg">
-
-            <div class="movie-name">DORAMON_#1T</div>
-        </div>
-
-        <div class="movie-card"
-             onclick="openMovie('DOREMON_#376','Sp6U-jSULkc')"
-             data-name="doremon 376">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/Sp6U-jSULkc/maxresdefault.jpg">
-
-            <div class="movie-name">DOREMON_#376</div>
-        </div>
-
-        <div class="movie-card"
-             onclick="openMovie('DORAEMON_S13#3','OiGgkXJr9ns')"
-             data-name="doraemon s13 3">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/OiGgkXJr9ns/maxresdefault.jpg">
-
-            <div class="movie-name">DORAEMON_S13#3</div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ================= HÀNH ĐỘNG ================= -->
-
-<section id="actionPage" class="page">
-
-    <div class="page-title back-button"
-         onclick="showPage('homePage')">
-        ← QUAY VỀ TRANG CHÍNH
-    </div>
-
-    <h2 class="page-title">HÀNH ĐỘNG</h2>
-
-    <div class="movie-grid">
-
-        <div class="movie-card vip-card"
-             onclick="openVipMovie(
-                'MẢNH HỔ TRẢ THÙ #030',
-                'TyaXcmf_mmg',
-                4
-             )"
-             data-name="mảnh hổ trả thù 030">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/TyaXcmf_mmg/maxresdefault.jpg">
-
-            <div class="vip-badge">VIP</div>
-            <div class="vip-cost">4 TIỀN</div>
-
-            <div class="movie-name">
-                MẢNH HỔ TRẢ THÙ #030
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ================= NHẠC ================= -->
-
-<section id="musicPage" class="page">
-
-    <div class="page-title back-button"
-         onclick="showPage('homePage')">
-        ← QUAY VỀ TRANG CHÍNH
-    </div>
-
-    <h2 class="page-title">NHẠC</h2>
-
-    <div class="movie-grid">
-
-        <div class="movie-card vip-card"
-             onclick="openVipMovie(
-                'CÂY ĐA QUÁN DỐC',
-                'fUuqVfmhXQE',
-                3
-             )"
-             data-name="cây đa quán dốc">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/fUuqVfmhXQE/maxresdefault.jpg">
-
-            <div class="vip-badge">VIP</div>
-            <div class="vip-cost">3 TIỀN</div>
-
-            <div class="movie-name">
-                CÂY ĐA QUÁN DỐC
-            </div>
-        </div>
-
-        <div class="movie-card"
-             onclick="openMovie('CHILL_#13','G1l9hH8HiF8')"
-             data-name="chill 13">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/G1l9hH8HiF8/maxresdefault.jpg">
-
-            <div class="movie-name">
-                CHILL_#13
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ================= THỂ THAO ================= -->
-
-<section id="sportPage" class="page">
-
-    <div class="page-title back-button"
-         onclick="showPage('homePage')">
-        ← QUAY VỀ TRANG CHÍNH
-    </div>
-
-    <h2 class="page-title">THỂ THAO</h2>
-
-    <div class="movie-grid">
-
-        <div class="movie-card"
-             onclick="openMovie('PHÁP VS BỈ','lJKiVq-NWLs')"
-             data-name="pháp vs bỉ">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/lJKiVq-NWLs/maxresdefault.jpg">
-
-            <div class="movie-name">
-                PHÁP VS BỈ
-            </div>
-        </div>
-
-        <div class="movie-card"
-             onclick="openMovie(
-                'TOÀN CẢNH TRAO CUP FIFA ASEEN',
-                'EPpQBwSbA6Q'
-             )"
-             data-name="toàn cảnh trao cup fifa aseen">
-
-            <img class="movie-poster"
-                 src="https://i.ytimg.com/vi/EPpQBwSbA6Q/maxresdefault.jpg">
-
-            <div class="movie-name">
-                TOÀN CẢNH TRAO CUP FIFA ASEEN
-            </div>
-        </div>
-
-    </div>
-
-</section>
-
-</main>
-
-<!-- ================= PLAYER ================= -->
-
-<div id="playerModal" class="player-modal">
-
-    <div class="player-box">
-
-        <button class="close-player"
-                onclick="closePlayer()">
-            ×
-        </button>
-
-        <div id="playerTitle"
-             class="player-title">
-        </div>
-
-        <iframe
-            id="playerFrame"
-            class="player-frame"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-
-    </div>
-
-</div>
-
-<!-- ================= REWARD ================= -->
-
-<div id="watchReward" class="watch-reward">
-
-    <img
-        src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
-        alt="Doraemon">
-
-    <div class="reward-text">
-        XEM PHIM NHẬN TIỀN
-    </div>
-
-    <div id="rewardTime"
-         class="reward-time">
-        60
-    </div>
-
-</div>
-
-<div id="rewardPopup"
-     class="reward-popup">
-</div>
-
-<img
-    id="flyingMoney"
-    class="flying-money"
-    src="https://hoanghamobile.com/tin-tuc/wp-content/webp-express/webp-images/uploads/2024/05/anh-doremon-cute-7-1.jpg.webp"
->
-
-<!-- ================= VIP MESSAGE ================= -->
-
-<div id="vipMessage"
-     class="vip-message">
-
-    <div class="vip-message-title">
-        VIP
-    </div>
-
-    <div id="vipMessageText"
-         class="vip-message-text">
-    </div>
-
-    <button class="vip-message-close"
-            onclick="closeVipMessage()">
-        ĐÓNG
-    </button>
-
-</div>
-
-<!-- ================= SHORTS ================= -->
-
-<div id="shortsPage"
-     class="shorts-page">
-
-    <div class="shorts-top">
-
-        <button class="back-home"
-                onclick="closeShorts()">
-            ← TRANG CHÍNH
-        </button>
-
-        <div id="shortsCount"
-             class="shorts-count">
-            1 / 6
-        </div>
-
-        <button class="short-next"
-                onclick="nextShort()">
-            TIẾP →
-        </button>
-
-    </div>
-
-    <div class="short-view">
-
-        <iframe
-            id="shortFrame"
-            class="short-frame"
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowfullscreen>
-        </iframe>
-
-    </div>
-
 </div>
 
 <script>
-
-/* ================= DỮ LIỆU ================= */
-
-let money = Number(localStorage.getItem("ncb_money") || 0);
-
-let currentVideo = "";
-let currentTitle = "";
-let currentVipCost = 0;
-
-let rewardTimer = null;
-let rewardSeconds = 60;
-let rewardClaimed = false;
-
-let shortIndex = 0;
-
-const shorts = [
-    "6baRkKIfdcs",
-    "d_NXbeXIwcE",
-    "FN0PddMp1pk",
-    "M3h4jsUgMbQ",
-    "8VE9QM7SFM0",
-    "l4tfsZUpWCM"
-];
-
-/* ================= TIỀN ================= */
-
-function updateMoney(){
-
-    document.getElementById("moneyCount").textContent = money;
-
-    localStorage.setItem(
-        "ncb_money",
-        money
-    );
+// ==================== XỬ LÝ ĐĂNG NHẬP / ĐĂNG KÝ ====================
+function showAuthForm(type){
+    const isLogin = type === "login";
+    document.getElementById("loginForm").classList.toggle("hidden", !isLogin);
+    document.getElementById("registerForm").classList.toggle("hidden", isLogin);
+    document.getElementById("loginTab").classList.toggle("active", isLogin);
+    document.getElementById("registerTab").classList.toggle("active", !isLogin);
+    document.getElementById("authMessage").textContent = "";
 }
 
-updateMoney();
-
-/* ================= TRANG ================= */
-
-function showPage(id){
-
-    document
-        .querySelectorAll(".page")
-        .forEach(page => {
-            page.classList.remove("active");
-        });
-
-    const page = document.getElementById(id);
-
-    if(page){
-        page.classList.add("active");
-    }
-
-    window.scrollTo({
-        top:0,
-        behavior:"smooth"
-    });
+function getUsers(){
+    try { return JSON.parse(localStorage.getItem("movieUsers")) || []; }
+    catch(e){ return []; }
 }
 
-/* ================= PHIM ================= */
+document.getElementById("registerForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const name = document.getElementById("registerName").value.trim();
+    const pass = document.getElementById("registerPassword").value;
+    const users = getUsers();
+    const msg = document.getElementById("authMessage");
 
-function openMovie(title,id){
-
-    currentTitle = title;
-    currentVideo = id;
-    currentVipCost = 0;
-
-    document.getElementById("playerTitle")
-        .textContent = title;
-
-    document.getElementById("playerFrame")
-        .src =
-        "https://www.youtube.com/embed/" +
-        id +
-        "?autoplay=1&rel=0";
-
-    document
-        .getElementById("playerModal")
-        .classList.add("show");
-
-    startReward();
-}
-
-/* ================= VIP ================= */
-
-function openVipMovie(title,id,cost){
-
-    currentTitle = title;
-    currentVideo = id;
-    currentVipCost = cost;
-
-    if(money < cost){
-
-        showVipMessage(
-            "Bạn cần " +
-            cost +
-            " tiền để xem phim VIP."
-        );
-
+    if(users.some(u => u.name.toLowerCase() === name.toLowerCase())){
+        msg.textContent = "Tên tài khoản đã tồn tại!";
         return;
     }
 
-    money -= cost;
-    updateMoney();
-
-    document.getElementById("playerTitle")
-        .textContent = title;
-
-    document.getElementById("playerFrame")
-        .src =
-        "https://www.youtube.com/embed/" +
-        id +
-        "?autoplay=1&rel=0";
-
-    document
-        .getElementById("playerModal")
-        .classList.add("show");
-
-    startReward();
-}
-
-/* ================= PLAYER ================= */
-
-function closePlayer(){
-
-    document
-        .getElementById("playerModal")
-        .classList.remove("show");
-
-    document.getElementById("playerFrame").src = "";
-
-    stopReward();
-}
-
-/* ================= XEM 60 GIÂY ================= */
-
-function startReward(){
-
-    stopReward();
-
-    rewardSeconds = 60;
-    rewardClaimed = false;
-
-    document.getElementById("rewardTime")
-        .textContent = rewardSeconds;
-
-    document
-        .getElementById("watchReward")
-        .classList.add("show");
-
-    rewardTimer = setInterval(() => {
-
-        rewardSeconds--;
-
-        document.getElementById("rewardTime")
-            .textContent = rewardSeconds;
-
-        if(rewardSeconds <= 0){
-
-            clearInterval(rewardTimer);
-            rewardTimer = null;
-
-            claimReward();
-        }
-
-    },1000);
-}
-
-function stopReward(){
-
-    if(rewardTimer){
-        clearInterval(rewardTimer);
-        rewardTimer = null;
-    }
-
-    document
-        .getElementById("watchReward")
-        .classList.remove("show");
-}
-
-function claimReward(){
-
-    if(rewardClaimed) return;
-
-    rewardClaimed = true;
-
-    money += 1;
-
-    updateMoney();
-
-    document
-        .getElementById("watchReward")
-        .classList.remove("show");
-
-    showReward(
-        "Bạn đã xem đủ 60 giây<br>+1 tiền"
-    );
-
-    flyMoney();
-}
-
-/* ================= POPUP ================= */
-
-function showReward(text){
-
-    const popup =
-        document.getElementById("rewardPopup");
-
-    popup.innerHTML = text;
-
-    popup.classList.add("show");
-
-    setTimeout(() => {
-        popup.classList.remove("show");
-    },2000);
-}
-
-function flyMoney(){
-
-    const img =
-        document.getElementById("flyingMoney");
-
-    const moneyBox =
-        document.querySelector(".money-box");
-
-    const rect =
-        moneyBox.getBoundingClientRect();
-
-    img.style.setProperty(
-        "--target-x",
-        (rect.left - 20) + "px"
-    );
-
-    img.style.setProperty(
-        "--target-y",
-        (rect.top - 100) + "px"
-    );
-
-    img.classList.remove("fly");
-
-    void img.offsetWidth;
-
-    img.classList.add("fly");
-
-    setTimeout(() => {
-        img.classList.remove("fly");
-    },1300);
-}
-
-/* ================= VIP MESSAGE ================= */
-
-function showVipMessage(text){
-
-    document.getElementById(
-        "vipMessageText"
-    ).textContent = text;
-
-    document
-        .getElementById("vipMessage")
-        .classList.add("show");
-}
-
-function closeVipMessage(){
-
-    document
-        .getElementById("vipMessage")
-        .classList.remove("show");
-}
-
-/* ================= TÌM KIẾM ================= */
-
-function searchMovies(){
-
-    const keyword =
-        document
-        .getElementById("searchInput")
-        .value
-        .toLowerCase()
-        .trim();
-
-    document
-        .querySelectorAll(".movie-card")
-        .forEach(card => {
-
-            const name =
-                (card.dataset.name || "")
-                .toLowerCase();
-
-            card.style.display =
-                name.includes(keyword)
-                ? ""
-                : "none";
-        });
-}
-
-/* ================= PHIM NGẮN ================= */
-
-function openShorts(){
-
-    shortIndex = 0;
-
-    document
-        .getElementById("shortsPage")
-        .classList.add("show");
-
-    loadShort();
-}
-
-function closeShorts(){
-
-    document
-        .getElementById("shortsPage")
-        .classList.remove("show");
-
-    document.getElementById("shortFrame").src = "";
-}
-
-function loadShort(){
-
-    const id = shorts[shortIndex];
-
-    document.getElementById("shortFrame").src =
-        "https://www.youtube.com/embed/" +
-        id +
-        "?autoplay=1&rel=0";
-
-    document.getElementById("shortsCount")
-        .textContent =
-        (shortIndex + 1) +
-        " / " +
-        shorts.length;
-}
-
-function nextShort(){
-
-    shortIndex++;
-
-    if(shortIndex >= shorts.length){
-        shortIndex = 0;
-    }
-
-    loadShort();
-}
-
-/* ================= PHÍM ESC ================= */
-
-document.addEventListener("keydown",function(e){
-
-    if(e.key === "Escape"){
-
-        closePlayer();
-        closeShorts();
-        closeVipMessage();
-
-    }
-
+    users.push({ name: name, password: pass });
+    localStorage.setItem("movieUsers", JSON.stringify(users));
+
+    msg.style.color = "#4ade80";
+    msg.textContent = "Đăng ký thành công! Hãy đăng nhập.";
+    this.reset();
+    showAuthForm("login");
+    document.getElementById("authMessage").style.color = "#4ade80";
+    document.getElementById("authMessage").textContent = "Đăng ký thành công! Hãy đăng nhập.";
 });
 
+document.getElementById("loginForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const name = document.getElementById("loginName").value.trim();
+    const pass = document.getElementById("loginPassword").value;
+    const users = getUsers();
+
+    const user = users.find(u => u.name.toLowerCase() === name.toLowerCase() && u.password === pass);
+
+    if(!user){
+        document.getElementById("authMessage").textContent = "Tên tài khoản hoặc mật khẩu không đúng!";
+        return;
+    }
+
+    localStorage.setItem("movieCurrentUser", user.name);
+    document.getElementById("authOverlay").classList.add("hidden");
+    document.getElementById("mainWebsite").classList.remove("hidden");
+    
+    profile.username = user.name;
+    profile.name = user.name;
+    saveData();
+    renderProfile();
+});
+
+function checkAuth() {
+    const currentUser = localStorage.getItem("movieCurrentUser");
+    if(currentUser) {
+        document.getElementById("authOverlay").classList.add("hidden");
+        document.getElementById("mainWebsite").classList.remove("hidden");
+    } else {
+        document.getElementById("authOverlay").classList.remove("hidden");
+        document.getElementById("mainWebsite").classList.add("hidden");
+    }
+}
+
+// ==================== XỬ LÝ VIDEO YOUTUBE CUSTOM ====================
+let ytPlayer;
+let isWebVideoPlaying = false;
+const overlayBtn = document.getElementById('videoOverlayBtn');
+const playIcon = document.getElementById('webPlayIcon');
+
+// Hàm tải API của YouTube
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function onYouTubeIframeAPIReady() {
+    ytPlayer = new YT.Player('ytPlayer', {
+        events: {
+            'onStateChange': onPlayerStateChange
+        }
+    });
+}
+
+// Cập nhật trạng thái nút bấm khi video chạy/dừng
+function onPlayerStateChange(event) {
+    if (event.data == YT.PlayerState.PLAYING) {
+        isWebVideoPlaying = true;
+        overlayBtn.classList.add('playing');
+        playIcon.textContent = '⏸'; // Đổi thành icon tạm dừng
+    } else {
+        isWebVideoPlaying = false;
+        overlayBtn.classList.remove('playing');
+        playIcon.textContent = '▶'; // Đổi thành icon phát
+    }
+}
+
+// Hàm click để phát hoặc dừng video
+function toggleWebVideo() {
+    if (!ytPlayer) return;
+    if (isWebVideoPlaying) {
+        ytPlayer.pauseVideo();
+    } else {
+        ytPlayer.playVideo();
+    }
+}
+
+// ==================== CHUYỂN TRANG CHÍNH ====================
+function switchPage(page) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+
+    if (page === 'home') {
+        document.getElementById('pageHome').classList.add('active');
+        document.getElementById('navHome').classList.add('active');
+    } else if (page === 'category') {
+        document.getElementById('pageCategory').classList.add('active');
+        document.getElementById('navCategory').classList.add('active');
+    } else if (page === 'favorites') {
+        document.getElementById('pageFavorites').classList.add('active');
+        document.getElementById('navFavorites').classList.add('active');
+        renderFavorites();
+    } else if (page === 'profile') {
+        document.getElementById('pageProfile').classList.add('active');
+        document.getElementById('navProfile').classList.add('active');
+    }
+    
+    // Khi chuyển trang, tạm dừng video YouTube
+    if (page !== 'home' && ytPlayer && isWebVideoPlaying) {
+        ytPlayer.pauseVideo();
+    }
+}
+
+// ==================== XỬ LÝ DANH MỤC ====================
+let currentCategory = "Tất cả";
+
+function setFilter(category, button) {
+    currentCategory = category;
+    document.querySelectorAll(".filter").forEach(btn => btn.classList.remove("active"));
+    
+    if (button) {
+        button.classList.add("active");
+    } else {
+        document.querySelectorAll(".filter").forEach(btn => {
+            if (btn.textContent.trim() === category) btn.classList.add("active");
+        });
+    }
+    applyFilter();
+}
+
+function applyFilter() {
+    const search = document.getElementById("globalSearch").value.toLowerCase().trim();
+    const cards = document.querySelectorAll(".movie-card");
+    let count = 0;
+
+    cards.forEach(card => {
+        const category = card.dataset.category;
+        const name = card.dataset.name.toLowerCase();
+        const matchCategory = currentCategory === "Tất cả" || category === currentCategory;
+        const matchSearch = name.includes(search);
+
+        if (matchCategory && matchSearch) {
+            card.style.display = "block";
+            count++;
+        } else {
+            card.style.display = "none";
+        }
+    });
+
+    document.getElementById("empty").style.display = count === 0 ? "block" : "none";
+    document.getElementById("resultCount").textContent = count + " PHIM";
+}
+
+function filterMoviesFromHome(category) {
+    switchPage('category');
+    setFilter(category);
+}
+
+document.getElementById("globalSearch").addEventListener("input", function() {
+    if(this.value.trim() !== "" && !document.getElementById("pageCategory").classList.contains("active")) {
+        switchPage('category');
+    }
+    applyFilter();
+});
+
+// ==================== XỬ LÝ YÊU THÍCH ====================
+const defaultMovies = [
+    { id: 1, name: "DORAEMON NGÀY LỄ HALLOWEEN (1)", genre: "Hoạt hình", year: "2026", image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400" },
+    { id: 2, name: "Nhiệm Vụ Bí Mật", genre: "Hành động", year: "2026", image: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400" },
+    { id: 3, name: "Bí Mật Rừng Xanh", genre: "Phiêu lưu", year: "2026", image: "https://images.unsplash.com/photo-1511497584788-876760111969?w=400" }
+];
+
+function loadFavorites() {
+    try {
+        const saved = localStorage.getItem("movieFavorites");
+        return saved === null ? defaultMovies : JSON.parse(saved);
+    } catch(e) { return defaultMovies; }
+}
+
+let favorites = loadFavorites();
+
+function saveFavorites() {
+    localStorage.setItem("movieFavorites", JSON.stringify(favorites));
+}
+
+function renderFavorites() {
+    const list = document.getElementById("favMovieList");
+    const empty = document.getElementById("favEmpty");
+    const search = document.getElementById("favSearch").value.toLowerCase();
+
+    list.innerHTML = "";
+    const filtered = favorites.filter(movie => movie.name.toLowerCase().includes(search) || movie.genre.toLowerCase().includes(search));
+
+    document.getElementById("favCount").textContent = filtered.length + " PHIM YÊU THÍCH";
+    empty.style.display = filtered.length === 0 ? "block" : "none";
+
+    filtered.forEach(movie => {
+        const card = document.createElement("div");
+        card.className = "fav-movie";
+
+        const img = document.createElement("img");
+        img.src = movie.image;
+        img.alt = movie.name;
+
+        const info = document.createElement("div");
+        info.className = "fav-info";
+
+        const title = document.createElement("h3");
+        title.textContent = movie.name;
+
+        const meta = document.createElement("p");
+        meta.className = "meta";
+        meta.textContent = movie.genre + " • " + movie.year;
+
+        const tag = document.createElement("span");
+        tag.className = "fav-tag";
+        tag.textContent = "♥ ĐÃ YÊU THÍCH";
+
+        const actions = document.createElement("div");
+        actions.className = "fav-actions";
+
+        const watch = document.createElement("button");
+        watch.className = "btn-watch";
+        watch.textContent = "▶ XEM PHIM";
+        watch.onclick = () => { switchPage('home'); };
+
+        const remove = document.createElement("button");
+        remove.className = "btn-remove";
+        remove.textContent = "♥ BỎ LƯU";
+        remove.onclick = () => removeFavorite(movie.id);
+
+        actions.append(watch, remove);
+        info.append(title, meta, tag, actions);
+        card.append(img, info);
+        list.appendChild(card);
+    });
+}
+
+function removeFavorite(id) {
+    if(!confirm("Bỏ phim này khỏi yêu thích?")) return;
+    favorites = favorites.filter(movie => movie.id !== id);
+    saveFavorites();
+    renderFavorites();
+}
+
+function addToFavoritesAndPlay(name, genre, year, image) {
+    const exists = favorites.find(m => m.name === name);
+    if(!exists) {
+        const newId = favorites.length > 0 ? Math.max(...favorites.map(m => m.id)) + 1 : 1;
+        favorites.push({ id: newId, name, genre, year, image });
+        saveFavorites();
+    }
+    switchPage('home');
+}
+
+document.getElementById("favSearch").addEventListener("input", renderFavorites);
+
+// ==================== XỬ LÝ HỒ SƠ ====================
+const defaultProfile = {
+    name: "Người dùng", username: "user123", email: "",
+    id: "MS-000001", avatar: "https://i.pravatar.cc/300", joinDate: "03/11/2026"
+};
+
+let profile;
+try { profile = JSON.parse(localStorage.getItem("movieProfile")) || defaultProfile; } catch (e) { profile = defaultProfile; }
+
+function renderProfile() {
+    document.getElementById("displayName").textContent = profile.name;
+    document.getElementById("displayId").textContent = "ID: " + profile.id;
+    document.getElementById("infoName").textContent = profile.name;
+    document.getElementById("infoUsername").textContent = profile.username;
+    document.getElementById("infoEmail").textContent = profile.email || "Chưa cập nhật";
+    document.getElementById("joinDate").textContent = profile.joinDate;
+    document.getElementById("avatar").src = profile.avatar;
+    document.getElementById("favoriteCount").textContent = favorites.length;
+}
+
+function saveData() { localStorage.setItem("movieProfile", JSON.stringify(profile)); }
+
+function openEdit() {
+    document.getElementById("editName").value = profile.name;
+    document.getElementById("editUsername").value = profile.username;
+    document.getElementById("editEmail").value = profile.email;
+    document.getElementById("editModal").style.display = "flex";
+}
+
+function closeEdit() { document.getElementById("editModal").style.display = "none"; }
+
+function saveProfile() {
+    const name = document.getElementById("editName").value.trim();
+    const username = document.getElementById("editUsername").value.trim();
+    const email = document.getElementById("editEmail").value.trim();
+
+    if (!name || !username) { alert("Vui lòng nhập họ tên và tài khoản!"); return; }
+
+    profile.name = name;
+    profile.username = username;
+    profile.email = email;
+
+    saveData();
+    renderProfile();
+    closeEdit();
+    alert("Đã lưu hồ sơ!");
+}
+
+document.getElementById("avatarInput").addEventListener("change", function() {
+    const file = this.files[0];
+    if (!file) return;
+    if (!file.type.startsWith("image/")) { alert("Vui lòng chọn file ảnh!"); return; }
+    if (file.size > 2 * 1024 * 1024) { alert("Ảnh phải nhỏ hơn 2MB!"); return; }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        profile.avatar = event.target.result;
+        saveData();
+        renderProfile();
+    };
+    reader.readAsDataURL(file);
+});
+
+function logout() {
+    if (confirm("Bạn có chắc muốn đăng xuất?")) {
+        localStorage.removeItem("movieCurrentUser");
+        document.getElementById("authOverlay").classList.remove("hidden");
+        document.getElementById("mainWebsite").classList.add("hidden");
+        document.getElementById("loginForm").reset();
+    }
+}
+
+// ==================== KHỞI TẠO ====================
+checkAuth();
+renderProfile();
+renderFavorites();
 </script>
 
 </body>
